@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const CONFIG = {
+const CONFIG = {
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
 
@@ -16,3 +16,5 @@ export const CONFIG = {
 
   CORS_ORIGIN: process.env.CORS_ORIGIN,
 };
+
+export default CONFIG

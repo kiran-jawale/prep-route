@@ -1,7 +1,9 @@
+import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import ApiError from "../utils/apiError.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
 import { withMetrics } from "../utils/metricsLogger.js";
+import CONFIG from "../constants/config.js";
 
 class AuthService {
   async register(data) {
@@ -31,9 +33,11 @@ class AuthService {
     });
   }
 
-  async login(userId, password) {
+  async login(identifier, password) {
     return await withMetrics("LOGIN_USER", async () => {
-      const user = await User.findOne({ userId }).select(
+      const user = await User.findOne({
+        $or: [{ userId: identifier }, { email: identifier }]
+      }).select(
         "+password +refreshToken"
       );
 
@@ -98,7 +102,7 @@ class AuthService {
 
     const decoded = jwt.verify(
       incomingRefreshToken,
-      config.REFRESH_TOKEN_SECRET
+      CONFIG.REFRESH_TOKEN_SECRET
     );
 
     const user = await User.findById(decoded._id);

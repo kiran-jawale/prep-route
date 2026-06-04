@@ -1,4 +1,4 @@
-import { Topic } from "../models/topic.model.js";
+import { Topic } from "../models/topic.mode.js";
 import { withMetrics } from "../utils/metricsLogger.js";
 
 class TopicService {

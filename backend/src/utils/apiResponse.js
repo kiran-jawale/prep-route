@@ -1,7 +1,5 @@
 import { deflate } from "zlib";
 
-
-
 class ApiResponse {
   constructor(statusCode, data, message = "Success") {
     this.statusCode = statusCode;
@@ -11,4 +9,5 @@ class ApiResponse {
   }
 }
 
-export default ApiResponse
+export { ApiResponse };
+export default ApiResponse;

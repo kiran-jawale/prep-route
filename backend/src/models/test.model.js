@@ -11,7 +11,6 @@ const testSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
     category: {
       type: String,
@@ -47,6 +46,23 @@ const testSchema = new mongoose.Schema(
       enum: ["draft", "live", "expired"],
       default: "draft",
     },
+    publishMode: {
+      type: String,
+      enum: ["immediate", "scheduled"],
+      default: "immediate",
+    },
+    scheduledAt: {
+      type: Date,
+      default: null,
+    },
+    publishedAt: {
+      type: Date,
+      default: null,
+    },
+    availableUntil: {
+      type: Date,
+      default: null,
+    },
     difficulty: {
       type: String,
       enum: ["easy", "medium", "difficult"],
@@ -71,21 +87,19 @@ const testSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 0,
+      default: 0,
     },
     totalMarks: {
       type: Number,
       required: true,
       min: 0,
+      default: 0,
     },
     totalQuestions: {
       type: Number,
       required: true,
       min: 0,
       default: 0,
-    },
-    publishedAt: {
-      type: Date,
-      default: null,
     },
   },
   {

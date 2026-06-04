@@ -12,16 +12,16 @@ export const register = asyncHandler(async (req, res) => {
 });
 
 export const login = asyncHandler(async (req, res) => {
-  const { userId, password } = req.body;
+  const { identifier, password } = req.body;
 
-  if (!userId || !password) {
+  if (!identifier || !password) {
     return res
       .status(400)
       .json(new ApiResponse(400, null, UX_ERRORS.AUTH.MISSING_FIELDS));
   }
 
   const { user, accessToken, refreshToken } = await authService.login(
-    userId,
+    identifier,
     password
   );
 

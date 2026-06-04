@@ -2,6 +2,9 @@
 
 export const UX_ERRORS = {
   AUTH: {
+    MISSING_FIELDS: "Missing required fields.",
+    ALREADY_EXISTS: "User already exists.",
+    NOT_FOUND: "User not found.",
     INVALID_CREDS: "Invalid user ID or password.",
     SESSION_EXPIRED: "Session expired. Please login again.",
     UNAUTHORIZED: "Authentication required.",

@@ -1,0 +1,128 @@
+{
+  "REGISTER_USER": [
+    {
+      "date": "2026-06-04T17:21:53.971Z",
+      "startMs": 30435.28,
+      "endMs": 30519.65,
+      "durationMs": 84.37
+    },
+    {
+      "date": "2026-06-04T17:23:55.183Z",
+      "startMs": 151646.64,
+      "endMs": 151678.11,
+      "durationMs": 31.47
+    },
+    {
+      "date": "2026-06-04T17:24:42.511Z",
+      "startMs": 198975.47,
+      "endMs": 199006.97,
+      "durationMs": 31.49
+    },
+    {
+      "date": "2026-06-04T17:25:48.054Z",
+      "startMs": 264518.46,
+      "endMs": 264550.9,
+      "durationMs": 32.44
+    },
+    {
+      "date": "2026-06-04T17:26:45.425Z",
+      "startMs": 321888.75,
+      "endMs": 321921.52,
+      "durationMs": 32.77
+    },
+    {
+      "date": "2026-06-04T17:28:46.865Z",
+      "startMs": 443329.19,
+      "endMs": 443419.06,
+      "durationMs": 89.87
+    },
+    {
+      "date": "2026-06-04T17:30:42.848Z",
+      "startMs": 14457.19,
+      "endMs": 14515.86,
+      "durationMs": 58.67
+    },
+    {
+      "date": "2026-06-04T17:31:24.995Z",
+      "startMs": 56604.08,
+      "endMs": 56636.45,
+      "durationMs": 32.37
+    },
+    {
+      "date": "2026-06-04T17:31:59.981Z",
+      "startMs": 91589.91,
+      "endMs": 91624.23,
+      "durationMs": 34.33
+    }
+  ],
+  "LOGIN_USER": [
+    {
+      "date": "2026-06-04T17:30:44.193Z",
+      "startMs": 15801.71,
+      "endMs": 15866.7,
+      "durationMs": 64.99
+    },
+    {
+      "date": "2026-06-04T17:31:25.216Z",
+      "startMs": 56824.4,
+      "endMs": 56868.44,
+      "durationMs": 44.04
+    },
+    {
+      "date": "2026-06-04T17:32:00.128Z",
+      "startMs": 91736.11,
+      "endMs": 91773.01,
+      "durationMs": 36.89
+    }
+  ],
+  "GET_MY_PROFILE": [
+    {
+      "date": "2026-06-04T17:31:26.360Z",
+      "startMs": 57969.02,
+      "endMs": 57972.08,
+      "durationMs": 3.06
+    },
+    {
+      "date": "2026-06-04T17:32:00.630Z",
+      "startMs": 92238.56,
+      "endMs": 92240.24,
+      "durationMs": 1.68
+    }
+  ],
+  "GET_ALL_SUBJECTS": [
+    {
+      "date": "2026-06-04T17:31:26.766Z",
+      "startMs": 58374.68,
+      "endMs": 58382.11,
+      "durationMs": 7.43
+    },
+    {
+      "date": "2026-06-04T17:32:00.421Z",
+      "startMs": 92029.69,
+      "endMs": 92034.01,
+      "durationMs": 4.32
+    }
+  ],
+  "GET_ALL_TESTS": [
+    {
+      "date": "2026-06-04T17:31:27.389Z",
+      "startMs": 58998.14,
+      "endMs": 59010.98,
+      "durationMs": 12.83
+    },
+    {
+      "date": "2026-06-04T17:32:00.534Z",
+      "startMs": 92142.94,
+      "endMs": 92153.63,
+      "durationMs": 10.69
+    }
+  ],
+  "LOGOUT_USER": [
+    {
+      "date": "2026-06-04T17:31:27.629Z",
+      "startMs": 59237.75,
+      "endMs": 59244.04,
+      "durationMs": 6.29
+    }
+  ]
+}

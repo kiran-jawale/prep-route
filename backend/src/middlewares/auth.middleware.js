@@ -3,6 +3,8 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
+import CONFIG from "../constants/config.js";
+import ApiResponse from "../utils/apiResponse.js";
 
 export const isVerified = asyncHandler(async (req, res, next) => {
   try {
@@ -10,7 +12,7 @@ export const isVerified = asyncHandler(async (req, res, next) => {
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
 
-    const decoded = jwt.verify(token, config.ACCESS_TOKEN_SECRET);
+    const decoded = jwt.verify(token, CONFIG.ACCESS_TOKEN_SECRET);
     const user = await User.findById(decoded._id).select(
       "-password -refreshToken"
     );
