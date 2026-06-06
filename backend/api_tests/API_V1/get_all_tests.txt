@@ -1,0 +1,297 @@
+27. get /tests as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": [
+        {
+            "_id": "6a242d42bcf5d5ddb8c963b3",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "test 6",
+            "category": "chapterWise",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "live",
+            "publishMode": "immediate",
+            "scheduledAt": null,
+            "publishedAt": "2026-06-06T14:22:58.204Z",
+            "availableUntil": null,
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:22:58.238Z",
+            "updatedAt": "2026-06-06T14:22:58.238Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a242cbf08ccaaa596f60c59",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "scheduled test 5",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "draft",
+            "publishMode": "scheduled",
+            "scheduledAt": "2026-06-15T14:09:03.806Z",
+            "publishedAt": null,
+            "availableUntil": "2026-06-18T14:09:03.806Z",
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:20:47.427Z",
+            "updatedAt": "2026-06-06T14:20:47.427Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a242cad752cc8d8c29b30a7",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "scheduled test 3",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "draft",
+            "publishMode": "scheduled",
+            "scheduledAt": "2026-06-15T14:09:03.806Z",
+            "publishedAt": null,
+            "availableUntil": "2026-06-17T14:09:03.806Z",
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:20:29.559Z",
+            "updatedAt": "2026-06-06T14:20:29.559Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a242c015f20837e77a6df07",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "scheduled test 4",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "draft",
+            "publishMode": "scheduled",
+            "scheduledAt": "2026-06-15T14:09:03.806Z",
+            "publishedAt": null,
+            "availableUntil": "2026-06-08T14:17:37.419Z",
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:17:37.447Z",
+            "updatedAt": "2026-06-06T14:17:37.447Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a242b0b5fdf3141b06b4224",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "scheduled test 2",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "draft",
+            "publishMode": "scheduled",
+            "scheduledAt": "2026-06-15T14:09:03.806Z",
+            "publishedAt": null,
+            "availableUntil": "2026-06-08T14:13:31.650Z",
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:13:31.682Z",
+            "updatedAt": "2026-06-06T14:13:31.682Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a242a7c6b871caf3df1fe32",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "scheduled test 1",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "draft",
+            "publishMode": "scheduled",
+            "scheduledAt": "2026-06-15T14:09:03.806Z",
+            "publishedAt": null,
+            "availableUntil": null,
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:11:08.568Z",
+            "updatedAt": "2026-06-06T14:11:08.568Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a2429ff9919c13d3bab3c58",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "deleting",
+            "category": "pyq",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "live",
+            "publishMode": "immediate",
+            "scheduledAt": null,
+            "publishedAt": "2026-06-06T14:09:03.777Z",
+            "availableUntil": null,
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:09:03.806Z",
+            "updatedAt": "2026-06-06T14:09:03.806Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a24294889257e7db09bb83c",
+            "userId": "6a241310ebcc481795da98fc",
+            "name": "Interview Preparation",
+            "category": "mockTest",
+            "subjectId": {
+                "_id": "6a241552892aaa66e05bfc44",
+                "name": "System Design"
+            },
+            "topics": [
+                {
+                    "_id": "6a2422991e15140e6f082591",
+                    "name": "API Design"
+                }
+            ],
+            "subTopics": [
+                "6a2422db669389379f0b45e6",
+                "6a241b219b623f856ed24b6f"
+            ],
+            "questions": [],
+            "status": "live",
+            "publishMode": "immediate",
+            "scheduledAt": null,
+            "publishedAt": "2026-06-06T14:06:00.658Z",
+            "availableUntil": null,
+            "difficulty": "easy",
+            "correctMarks": 2,
+            "wrongMarks": -1,
+            "unattemptMarks": 0,
+            "totalTime": 60,
+            "totalMarks": 50,
+            "totalQuestions": 25,
+            "createdAt": "2026-06-06T14:06:00.702Z",
+            "updatedAt": "2026-06-06T14:06:00.702Z",
+            "__v": 0
+        }
+    ],
+    "message": "Tests fetched successfully."
+}
+```

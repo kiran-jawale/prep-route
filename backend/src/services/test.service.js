@@ -40,6 +40,17 @@ class TestService {
     return await withMetrics("CREATE_TEST", async () => {
       const now = new Date();
 
+      const testName = data.name;
+
+      const test = await Test.findOne({
+        name: testName,
+        userId,
+      });
+
+      if (test) {
+        throw new ApiError(404, "Already Exists");
+      }
+
       let status = "draft";
       let publishedAt = null;
       let scheduledAt = null;
@@ -55,8 +66,10 @@ class TestService {
       }
 
       if (data.availabilityDays) {
+        const baseDate = data.publishMode === "scheduled" ? scheduledAt : now;
+
         availableUntil = new Date(
-          now.getTime() + data.availabilityDays * 24 * 60 * 60 * 1000
+          baseDate.getTime() + data.availabilityDays * 24 * 60 * 60 * 1000
         );
       }
 
@@ -64,7 +77,7 @@ class TestService {
         userId,
         name: data.name,
         category: data.category,
-        subjectId: data.subject,
+        subjectId: data.subjectId,
         topics: data.topics || [],
         subTopics: data.subTopics || [],
         correctMarks: data.correctMarks,
@@ -125,6 +138,18 @@ class TestService {
 
       return test;
     });
+  }
+  async deleteTest(testId, userId) {
+    const test = await Test.findOneAndDelete({
+      _id: testId,
+      userId,
+    });
+
+    if (!test) {
+      throw new ApiError(404, UX_ERRORS.TEST.NOT_FOUND);
+    }
+
+    return {};
   }
 }
 

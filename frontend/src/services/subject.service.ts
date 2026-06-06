@@ -1,22 +1,24 @@
-import { AxiosPromise } from "axios";
-import api from "../constants/api";
-import type { SubjectResponse } from "../types/subject.types";
+import api from "./api";
 
-// ============================================================================
-// Subject Service - Type-safe subject/course data operations
-// ============================================================================
-
-/**
- * SubjectService class - retrieves subject/course categories from backend
- * Subjects are top-level organizational units (e.g., "Mathematics", "Physics")
- */
 class SubjectService {
-  /**
-   * Fetch all available subjects for the user
-   * @returns Promise containing array of subjects
-   */
-  getAll(): AxiosPromise<SubjectResponse> {
-    return api.get<SubjectResponse>("/subjects");
+  getAll() {
+    return api.get("/subjects");
+  }
+
+  getById(id: string) {
+    return api.get(`/subjects/${id}`);
+  }
+
+  create(data: any) {
+    return api.post("/subjects", data);
+  }
+
+  update(id: string, data: any) {
+    return api.patch(`/subjects/${id}`, data);
+  }
+
+  delete(id: string) {
+    return api.delete(`/subjects/${id}`);
   }
 }
 

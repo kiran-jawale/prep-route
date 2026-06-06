@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
+import type {ReactNode} from 'react'
 
-import type { Toast, ToastType, AddToastParams } from "../types/toast.types";
+import type { Toast, ToastType } from "../types/toast.types";
 
 import ToastContainer from "../components/ToastContainer";
 import ModalContainer from "../components/ModalContainer";

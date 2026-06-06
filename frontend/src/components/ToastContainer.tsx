@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { Toast } from "../types/toast.types";

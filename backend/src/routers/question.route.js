@@ -1,9 +1,16 @@
 import { Router } from "express";
-import { bulkCreateQuestions } from "../controllers/question.controller.js";
-import { isVerified } from "../middlewares/auth.middleware.js";
+
+import verifyJWT from "../middlewares/auth.middleware.js";
+
+import {
+  bulkCreateQuestions,
+} from "../controllers/question.controller.js";
 
 const router = Router();
 
-router.post("/bulk", isVerified, bulkCreateQuestions);
+router.use(verifyJWT);
+
+router.route("/bulk").post(bulkCreateQuestions);
+
 
 export default router;

@@ -1,17 +1,21 @@
 import { Router } from "express";
+
+import verifyJWT from "../middlewares/auth.middleware.js";
+
 import {
   getAllTests,
   getTestById,
   createTest,
   updateTest,
+  deleteTest,
 } from "../controllers/test.controller.js";
-import { isVerified } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.get("/", isVerified, getAllTests);
-router.get("/:id", isVerified, getTestById);
-router.post("/", isVerified, createTest);
-router.put("/:id", isVerified, updateTest);
+router.use(verifyJWT);
+
+router.route("/").get(getAllTests).post(createTest);
+
+router.route("/:id").get(getTestById).patch(updateTest).delete(deleteTest);
 
 export default router;

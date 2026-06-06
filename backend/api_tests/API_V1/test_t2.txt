@@ -1,0 +1,706 @@
+
+
+1. post register /auth/register on
+```
+{
+  "userId": "vedant-admin",
+  "fullName": "Vedant Admin",
+  "email": "vedant@example.com",
+  "password": "vedant123"
+}```
+as ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "_id": "6a241310ebcc481795da98fc",
+        "userId": "vedant-admin",
+        "email": "vedant@example.com",
+        "fullName": "Vedant Admin",
+        "createdAt": "2026-06-06T12:31:12.881Z",
+        "updatedAt": "2026-06-06T12:31:12.881Z",
+        "__v": 0
+    },
+    "message": "User registered successfully."
+}
+```
+
+2. post login /auth/login on 
+```{
+  "identifier": "vedant-admin",
+  "password": "vedant123"
+}```
+as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "user": {
+            "_id": "6a241310ebcc481795da98fc",
+            "userId": "vedant-admin",
+            "email": "vedant@example.com",
+            "fullName": "Vedant Admin",
+            "createdAt": "2026-06-06T12:31:12.881Z",
+            "updatedAt": "2026-06-06T12:34:13.480Z",
+            "__v": 0
+        },
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTI0MTMxMGViY2M0ODE3OTVkYTk4ZmMiLCJ1c2VySWQiOiJ2ZWRhbnQtYWRtaW4iLCJlbWFpbCI6InZlZGFudEBleGFtcGxlLmNvbSIsImZ1bGxOYW1lIjoiVmVkYW50IEFkbWluIiwiaWF0IjoxNzgwNzQ5MjUzLCJleHAiOjE3ODA4MzU2NTN9.TILZlJNyiYxwS0MRm95Tu2hnILrRfghvHChhFSd2VLg"
+    },
+    "message": "Login successful."
+}```
+
+3. get /auth/me as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241310ebcc481795da98fc",
+        "userId": "vedant-admin",
+        "email": "vedant@example.com",
+        "fullName": "Vedant Admin",
+        "createdAt": "2026-06-06T12:31:12.881Z",
+        "updatedAt": "2026-06-06T12:34:13.480Z",
+        "__v": 0
+    },
+    "message": "Profile fetched successfully."
+}
+```
+
+4. POST /auth/refresh-token as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTI0MTMxMGViY2M0ODE3OTVkYTk4ZmMiLCJ1c2VySWQiOiJ2ZWRhbnQtYWRtaW4iLCJlbWFpbCI6InZlZGFudEBleGFtcGxlLmNvbSIsImZ1bGxOYW1lIjoiVmVkYW50IEFkbWluIiwiaWF0IjoxNzgwNzQ5MzI4LCJleHAiOjE3ODA4MzU3Mjh9.P7LGPBovLG4OnlPT-1KNLiDv3iPTxUETQcF4BzsUPWk"
+    },
+    "message": "Authenticated."
+}``` 
+
+5. Create Subject on ```{
+    "name":"Python Programming"
+}
+``` as ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "name": "Python Programming",
+        "_id": "6a241516a0112f6131ecbbc3",
+        "createdAt": "2026-06-06T12:39:50.599Z",
+        "updatedAt": "2026-06-06T12:39:50.599Z",
+        "__v": 0
+    },
+    "message": "Subject created successfully."
+}
+```
+6. get /subjects/:id as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241516a0112f6131ecbbc3",
+        "name": "Python Programming",
+        "createdAt": "2026-06-06T12:39:50.599Z",
+        "updatedAt": "2026-06-06T12:39:50.599Z",
+        "__v": 0
+    },
+    "message": "Subject fetched successfully."
+}
+```
+
+7. patch /subjects/:subjectId on ```{
+    "subjectId":"6a241516a0112f6131ecbbc3",
+    "data":{
+        "name":"Programming with Python"
+    }
+}``` as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241516a0112f6131ecbbc3",
+        "name": "Python Programming",
+        "createdAt": "2026-06-06T12:39:50.599Z",
+        "updatedAt": "2026-06-06T12:49:15.169Z",
+        "__v": 0
+    },
+    "message": "Subject updated successfully."
+}```
+
+8. Delete /subjects/:subjectId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {},
+    "message": "Subject deleted successfully."
+}
+```
+9. Get /subjects as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": [
+        {
+            "_id": "6a24156bf90bf10fe5357b8c",
+            "name": "Full Stack Web Dev",
+            "createdAt": "2026-06-06T12:41:15.304Z",
+            "updatedAt": "2026-06-06T12:41:15.304Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241516a0112f6131ecbbc3",
+            "name": "Python Programming",
+            "createdAt": "2026-06-06T12:39:50.599Z",
+            "updatedAt": "2026-06-06T12:49:15.169Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241552892aaa66e05bfc44",
+            "name": "System Design",
+            "createdAt": "2026-06-06T12:40:50.308Z",
+            "updatedAt": "2026-06-06T12:40:50.308Z",
+            "__v": 0
+        }
+    ],
+    "message": "Subjects fetched successfully."
+}
+```
+
+10. post /topics on ```{
+    "subjectId":"6a241516a0112f6131ecbbc3",
+    "name":"Fundamentals"
+}``` as ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "subjectId": "6a241516a0112f6131ecbbc3",
+        "name": "Fundamentals",
+        "_id": "6a241b219b623f856ed24b6f",
+        "createdAt": "2026-06-06T13:05:37.025Z",
+        "updatedAt": "2026-06-06T13:05:37.025Z",
+        "__v": 0
+    },
+    "message": "Topic created successfully."
+}
+```
+
+11. get /topics/:id as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241b61b5ee7d936bd18ebe",
+        "subjectId": "6a241516a0112f6131ecbbc3",
+        "name": "Advanced",
+        "createdAt": "2026-06-06T13:06:41.465Z",
+        "updatedAt": "2026-06-06T13:06:41.465Z",
+        "__v": 0
+    },
+    "message": "Topic fetched successfully."
+}
+```
+
+12. Patch /topics/:topicsId on  ```
+{
+    "topicId":"6a241b61b5ee7d936bd18ebe",
+    "name":"Foundations"
+}
+```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241b61b5ee7d936bd18ebe",
+        "subjectId": "6a241516a0112f6131ecbbc3",
+        "name": "Advanced",
+        "createdAt": "2026-06-06T13:06:41.465Z",
+        "updatedAt": "2026-06-06T13:14:52.709Z",
+        "__v": 0
+    },
+    "message": "Topic updated successfully."
+}
+```
+
+13. Get /topics/subject/:subjectId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": [
+        {
+            "_id": "6a241b61b5ee7d936bd18ebe",
+            "subjectId": "6a241516a0112f6131ecbbc3",
+            "name": "Advanced",
+            "createdAt": "2026-06-06T13:06:41.465Z",
+            "updatedAt": "2026-06-06T13:14:52.709Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241b5a5af5374418a26c4b",
+            "subjectId": "6a241516a0112f6131ecbbc3",
+            "name": "Essentials",
+            "createdAt": "2026-06-06T13:06:34.815Z",
+            "updatedAt": "2026-06-06T13:06:34.815Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241b219b623f856ed24b6f",
+            "subjectId": "6a241516a0112f6131ecbbc3",
+            "name": "Fundamentals",
+            "createdAt": "2026-06-06T13:05:37.025Z",
+            "updatedAt": "2026-06-06T13:05:37.025Z",
+            "__v": 0
+        }
+    ],
+    "message": "Topics fetched successfully."
+}
+```
+
+14. delete /topics/:topicId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {},
+    "message": "Topic deleted successfully."
+}
+```
+
+15. post /sub-topics on ```{
+    "topicId":"6a241b219b623f856ed24b6f",
+    "name":"Lists and Tuples"
+}``` as ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "topicId": "6a241b219b623f856ed24b6f",
+        "name": "Lists and Tuples",
+        "_id": "6a241ef8336c53316357ac0d",
+        "createdAt": "2026-06-06T13:22:00.311Z",
+        "updatedAt": "2026-06-06T13:22:00.311Z",
+        "__v": 0
+    },
+    "message": "SubTopic created successfully."
+}
+```
+
+16. get /sub-topics/topic/:topicId as  ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": [
+        {
+            "_id": "6a241faa42d346bede3e8141",
+            "topicId": "6a241b219b623f856ed24b6f",
+            "name": "Deleted",
+            "createdAt": "2026-06-06T13:24:58.380Z",
+            "updatedAt": "2026-06-06T13:24:58.380Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241fa257e0e63fe8d13bdb",
+            "topicId": "6a241b219b623f856ed24b6f",
+            "name": "List Comprehension",
+            "createdAt": "2026-06-06T13:24:50.642Z",
+            "updatedAt": "2026-06-06T13:24:50.642Z",
+            "__v": 0
+        },
+        {
+            "_id": "6a241ef8336c53316357ac0d",
+            "topicId": "6a241b219b623f856ed24b6f",
+            "name": "Lists and Tuples",
+            "createdAt": "2026-06-06T13:22:00.311Z",
+            "updatedAt": "2026-06-06T13:22:00.311Z",
+            "__v": 0
+        }
+    ],
+    "message": "SubTopics fetched successfully."
+}
+``` 
+17. get /sub-topics/:subTopicId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241ef8336c53316357ac0d",
+        "topicId": "6a241b219b623f856ed24b6f",
+        "name": "Lists and Tuples",
+        "createdAt": "2026-06-06T13:22:00.311Z",
+        "updatedAt": "2026-06-06T13:22:00.311Z",
+        "__v": 0
+    },
+    "message": "SubTopic fetched successfully."
+}
+```
+
+18. patch /sub-topics/subTopic on ```{
+    "name":"Dictionaries"
+}``` as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a241ef8336c53316357ac0d",
+        "topicId": "6a241b219b623f856ed24b6f",
+        "name": "Dictionaries",
+        "createdAt": "2026-06-06T13:22:00.311Z",
+        "updatedAt": "2026-06-06T13:31:38.952Z",
+        "__v": 0
+    },
+    "message": "SubTopic updated successfully."
+}
+```
+
+19. Delete /sub-topics/subTopic as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {},
+    "message": "SubTopic deleted successfully."
+}
+```
+
+20. post /tests on ```
+{
+  "name": "Interview Preparation",
+  "category": "mockTest",
+  "subjectId": "{{subject_id}}",
+  "topics": [
+    "{{topic_id}}",
+    "6a241516a0112f6131ecbbc3"
+  ],
+  "subTopics": [
+    "6a2422db669389379f0b45e6",
+    "6a241b219b623f856ed24b6f"
+  ],
+  "difficulty": "easy",
+  "correctMarks": 2,
+  "wrongMarks": -1,
+  "unattemptMarks": 0,
+  "totalTime": 60,
+  "totalMarks": 50,
+  "totalQuestions": 25,
+  "publishMode": "immediate",
+  "availableUntil": null
+}
+``` as response : ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "userId": "6a241310ebcc481795da98fc",
+        "name": "Interview Preparation",
+        "category": "mockTest",
+        "subjectId": "6a241552892aaa66e05bfc44",
+        "topics": [
+            "6a2422991e15140e6f082591",
+            "6a241516a0112f6131ecbbc3"
+        ],
+        "subTopics": [
+            "6a2422db669389379f0b45e6",
+            "6a241b219b623f856ed24b6f"
+        ],
+        "questions": [],
+        "status": "live",
+        "publishMode": "immediate",
+        "scheduledAt": null,
+        "publishedAt": "2026-06-06T14:01:15.481Z",
+        "availableUntil": null,
+        "difficulty": "easy",
+        "correctMarks": 2,
+        "wrongMarks": -1,
+        "unattemptMarks": 0,
+        "totalTime": 60,
+        "totalMarks": 50,
+        "totalQuestions": 25,
+        "_id": "6a24282b938938c9096fd0e9",
+        "createdAt": "2026-06-06T14:01:15.526Z",
+        "updatedAt": "2026-06-06T14:01:15.526Z",
+        "__v": 0
+    },
+    "message": "Test created successfully."
+}
+```
+21. post /tests as ```{
+  "name": "test 6",
+  "category": "chapterWise",
+  "subjectId": "{{subject_id}}",
+  "topics": [
+    "{{topic_id}}",
+    "6a241516a0112f6131ecbbc3"
+  ],
+  "subTopics": [
+    "6a2422db669389379f0b45e6",
+    "6a241b219b623f856ed24b6f"
+  ],
+  "difficulty": "easy",
+  "correctMarks": 2,
+  "wrongMarks": -1,
+  "unattemptMarks": 0,
+  "totalTime": 60,
+  "totalMarks": 50,
+  "totalQuestions": 25,
+  "publishMode": "immediate",
+  "availableUntil": null
+}``` as response ```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "userId": "6a241310ebcc481795da98fc",
+        "name": "test 6",
+        "category": "chapterWise",
+        "subjectId": "6a241552892aaa66e05bfc44",
+        "topics": [
+            "6a2422991e15140e6f082591",
+            "6a241516a0112f6131ecbbc3"
+        ],
+        "subTopics": [
+            "6a2422db669389379f0b45e6",
+            "6a241b219b623f856ed24b6f"
+        ],
+        "questions": [],
+        "status": "live",
+        "publishMode": "immediate",
+        "scheduledAt": null,
+        "publishedAt": "2026-06-06T14:22:58.204Z",
+        "availableUntil": null,
+        "difficulty": "easy",
+        "correctMarks": 2,
+        "wrongMarks": -1,
+        "unattemptMarks": 0,
+        "totalTime": 60,
+        "totalMarks": 50,
+        "totalQuestions": 25,
+        "_id": "6a242d42bcf5d5ddb8c963b3",
+        "createdAt": "2026-06-06T14:22:58.238Z",
+        "updatedAt": "2026-06-06T14:22:58.238Z",
+        "__v": 0
+    },
+    "message": "Test created successfully."
+}
+```
+
+22. post /tests for scheduledAt : ```
+{
+  "name": "scheduled test 1",
+  "category": "pyq",
+  "subjectId": "{{subject_id}}",
+  "topics": [
+    "{{topic_id}}",
+    "6a241516a0112f6131ecbbc3"
+  ],
+  "subTopics": [
+    "6a2422db669389379f0b45e6",
+    "6a241b219b623f856ed24b6f"
+  ],
+  "difficulty": "easy",
+  "correctMarks": 2,
+  "wrongMarks": -1,
+  "unattemptMarks": 0,
+  "totalTime": 60,
+  "totalMarks": 50,
+  "totalQuestions": 25,
+  "publishMode": "scheduled",
+  "availableUntil": null,
+  "scheduledAt":"2026-06-15T14:09:03.806Z"
+}
+```
+as response :```
+{
+    "statusCode": 201,
+    "success": true,
+    "data": {
+        "userId": "6a241310ebcc481795da98fc",
+        "name": "scheduled test 1",
+        "category": "pyq",
+        "subjectId": "6a241552892aaa66e05bfc44",
+        "topics": [
+            "6a2422991e15140e6f082591",
+            "6a241516a0112f6131ecbbc3"
+        ],
+        "subTopics": [
+            "6a2422db669389379f0b45e6",
+            "6a241b219b623f856ed24b6f"
+        ],
+        "questions": [],
+        "status": "draft",
+        "publishMode": "scheduled",
+        "scheduledAt": "2026-06-15T14:09:03.806Z",
+        "publishedAt": null,
+        "availableUntil": null,
+        "difficulty": "easy",
+        "correctMarks": 2,
+        "wrongMarks": -1,
+        "unattemptMarks": 0,
+        "totalTime": 60,
+        "totalMarks": 50,
+        "totalQuestions": 25,
+        "_id": "6a242a7c6b871caf3df1fe32",
+        "createdAt": "2026-06-06T14:11:08.568Z",
+        "updatedAt": "2026-06-06T14:11:08.568Z",
+        "__v": 0
+    },
+    "message": "Test created successfully."
+}
+```
+
+23. post /tests for scheduledAt and availableUntil on : ```
+{
+  "name": "scheduled test 5",
+  "category": "pyq",
+  "subjectId": "{{subject_id}}",
+  "topics": [
+    "{{topic_id}}",
+    "6a241516a0112f6131ecbbc3"
+  ],
+  "subTopics": [
+    "6a2422db669389379f0b45e6",
+    "6a241b219b623f856ed24b6f"
+  ],
+  "difficulty": "easy",
+  "correctMarks": 2,
+  "wrongMarks": -1,
+  "unattemptMarks": 0,
+  "totalTime": 60,
+  "totalMarks": 50,
+  "totalQuestions": 25,
+  "publishMode": "scheduled",
+  "availabilityDays": 3,
+  "scheduledAt":"2026-06-15T14:09:03.806Z"
+}
+``` as response :
+```
+{
+  "name": "scheduled test 5",
+  "category": "pyq",
+  "subjectId": "{{subject_id}}",
+  "topics": [
+    "{{topic_id}}",
+    "6a241516a0112f6131ecbbc3"
+  ],
+  "subTopics": [
+    "6a2422db669389379f0b45e6",
+    "6a241b219b623f856ed24b6f"
+  ],
+  "difficulty": "easy",
+  "correctMarks": 2,
+  "wrongMarks": -1,
+  "unattemptMarks": 0,
+  "totalTime": 60,
+  "totalMarks": 50,
+  "totalQuestions": 25,
+  "publishMode": "scheduled",
+  "availabilityDays": 3,
+  "scheduledAt":"2026-06-15T14:09:03.806Z"
+}
+```
+
+24. delete /tests/:testId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {},
+    "message": "Test deleted successfully."
+}
+```
+
+25. get /tests/:testId as ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": {
+        "_id": "6a24294889257e7db09bb83c",
+        "userId": "6a241310ebcc481795da98fc",
+        "name": "Interview Preparation",
+        "category": "mockTest",
+        "subjectId": {
+            "_id": "6a241552892aaa66e05bfc44",
+            "name": "System Design"
+        },
+        "topics": [
+            {
+                "_id": "6a2422991e15140e6f082591",
+                "name": "API Design"
+            }
+        ],
+        "subTopics": [
+            {
+                "_id": "6a2422db669389379f0b45e6",
+                "name": "Modular Structure"
+            }
+        ],
+        "questions": [],
+        "status": "live",
+        "publishMode": "immediate",
+        "scheduledAt": null,
+        "publishedAt": "2026-06-06T14:06:00.658Z",
+        "availableUntil": null,
+        "difficulty": "easy",
+        "correctMarks": 2,
+        "wrongMarks": -1,
+        "unattemptMarks": 0,
+        "totalTime": 60,
+        "totalMarks": 50,
+        "totalQuestions": 25,
+        "createdAt": "2026-06-06T14:06:00.702Z",
+        "updatedAt": "2026-06-06T14:06:00.702Z",
+        "__v": 0
+    },
+    "message": "Test fetched successfully."
+}
+```
+
+26. create questions : on ```{
+  "testId": "6a24294889257e7db09bb83c",
+  "questions": [
+    {
+      "topicId": "6a2422991e15140e6f082591",
+      "subTopicId": "6a2422db669389379f0b45e6",
+      "type": "mcq",
+      "question": "What is 2 + 2 ?",
+      "option1": "1",
+      "option2": "2",
+      "option3": "3",
+      "option4": "4",
+      "correctOption": "option4",
+      "difficulty": "easy",
+      "explanation": "2 + 2 = 4"
+    }
+  ]
+}
+``` as response ```
+{
+    "statusCode": 200,
+    "success": true,
+    "data": [
+        {
+            "type": "mcq",
+            "testId": "6a24294889257e7db09bb83c",
+            "subjectId": "6a241552892aaa66e05bfc44",
+            "topicId": "6a2422991e15140e6f082591",
+            "subTopicId": "6a2422db669389379f0b45e6",
+            "question": "What is 2 + 2 ?",
+            "option1": "1",
+            "option2": "2",
+            "option3": "3",
+            "option4": "4",
+            "correctOption": "option4",
+            "explanation": "2 + 2 = 4",
+            "difficulty": "easy",
+            "_id": "6a2433ab44c39c5200e8d60c",
+            "__v": 0,
+            "createdAt": "2026-06-06T14:50:19.658Z",
+            "updatedAt": "2026-06-06T14:50:19.658Z"
+        }
+    ],
+    "message": "Questions saved successfully."
+}
+```
+
+27. post /auth/logout as ```{
+    "statusCode": 200,
+    "success": true,
+    "data": {},
+    "message": "Logout successful."
+}```

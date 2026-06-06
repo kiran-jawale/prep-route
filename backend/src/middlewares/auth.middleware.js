@@ -6,7 +6,7 @@ import { UX_ERRORS } from "../constants/uxErrors.js";
 import CONFIG from "../constants/config.js";
 import ApiResponse from "../utils/apiResponse.js";
 
-export const isVerified = asyncHandler(async (req, res, next) => {
+const isVerified = asyncHandler(async (req, res, next) => {
   try {
     const token =
       req.cookies?.accessToken ||
@@ -24,3 +24,7 @@ export const isVerified = asyncHandler(async (req, res, next) => {
     return res.status(401).json(new ApiResponse(401, null, "Unauthorized"));
   }
 });
+
+export {isVerified}
+
+export default isVerified

@@ -9,5 +9,40 @@ export const getSubTopicsByTopic = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, subTopics, "Sub topics fetched successfully."));
+    .json(new ApiResponse(200, subTopics, "SubTopics fetched successfully."));
+});
+
+export const getSubTopicById = asyncHandler(async (req, res) => {
+  const subTopic = await subTopicService.getSubTopicById(req.params.id);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, subTopic, "SubTopic fetched successfully."));
+});
+
+export const createSubTopic = asyncHandler(async (req, res) => {
+  const subTopic = await subTopicService.createSubTopic(req.body);
+
+  return res
+    .status(201)
+    .json(new ApiResponse(201, subTopic, "SubTopic created successfully."));
+});
+
+export const updateSubTopic = asyncHandler(async (req, res) => {
+  const subTopic = await subTopicService.updateSubTopic(
+    req.params.id,
+    req.body
+  );
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, subTopic, "SubTopic updated successfully."));
+});
+
+export const deleteSubTopic = asyncHandler(async (req, res) => {
+  await subTopicService.deleteSubTopic(req.params.id);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "SubTopic deleted successfully."));
 });

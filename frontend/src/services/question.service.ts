@@ -1,26 +1,20 @@
-import { AxiosPromise } from "axios";
-import api from "../constants/api";
-import type {
-  BulkCreateQuestionsPayload,
-  QuestionResponse
-} from "../types/question.types";
+import api from "./api";
 
-// ============================================================================
-// Question Service - Type-safe question data operations
-// ============================================================================
-
-/**
- * QuestionService class - handles question data operations
- * Focuses on batch operations for efficiently managing multiple questions
- */
 class QuestionService {
-  /**
-   * Create multiple questions in a single API call
-   * @param payload - Contains array of questions and test ID
-   * @returns Promise containing created questions
-   */
-  bulkCreate(payload: BulkCreateQuestionsPayload): AxiosPromise<QuestionResponse> {
-    return api.post<QuestionResponse>("/questions/bulk", payload);
+  getByTest(testId: string) {
+    return api.get(`/questions/test/${testId}`);
+  }
+
+  bulkCreate(data: any) {
+    return api.post("/questions/bulk", data);
+  }
+
+  update(id: string, data: any) {
+    return api.patch(`/questions/${id}`, data);
+  }
+
+  delete(id: string) {
+    return api.delete(`/questions/${id}`);
   }
 }
 

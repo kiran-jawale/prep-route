@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes, ChangeEvent } from "react";
+import type { SelectHTMLAttributes, ChangeEvent } from "react";
 
 // ============================================================================
 // Dropdown/Select Component - Type-safe selection input

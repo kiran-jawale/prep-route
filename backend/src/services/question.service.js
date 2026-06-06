@@ -1,31 +1,52 @@
 import { Question } from "../models/question.model.js";
 import { Test } from "../models/test.model.js";
+
+import ApiError from "../utils/apiError.js";
 import { withMetrics } from "../utils/metricsLogger.js";
 
 class QuestionService {
-  async bulkCreateQuestions(questions) {
-    return await withMetrics("BULK_CREATE_QUESTIONS", async () => {
-      const createdQuestions = await Question.insertMany(questions);
+  async saveQuestions(testId, questions) {
+    return await withMetrics("SAVE_QUESTIONS", async () => {
+      const test = await Test.findById(testId).select("subjectId");
 
-      const groupedTests = {};
+      if (!test) {
+        throw new ApiError(404, "Test not found.");
+      }
 
-      createdQuestions.forEach((question) => {
-        if (!groupedTests[question.testId]) {
-          groupedTests[question.testId] = [];
-        }
+      const questionsToInsert = questions.map((question) => ({
+        testId,
+        subjectId: test.subjectId,
 
-        groupedTests[question.testId].push(question._id);
+        topicId: question.topicId,
+        subTopicId: question.subTopicId,
+
+        type: question.type,
+        question: question.question,
+
+        option1: question.option1,
+        option2: question.option2,
+        option3: question.option3,
+        option4: question.option4,
+
+        correctOption: question.correctOption,
+
+        difficulty: question.difficulty,
+
+        explanation: question.explanation,
+      }));
+
+      await Question.deleteMany({
+        testId,
       });
 
-      for (const testId in groupedTests) {
-        await Test.findByIdAndUpdate(testId, {
-          $push: {
-            questions: {
-              $each: groupedTests[testId],
-            },
-          },
-        });
-      }
+      const createdQuestions = await Question.insertMany(questionsToInsert);
+
+      const questionIds = createdQuestions.map((question) => question._id);
+
+      await Test.findByIdAndUpdate(testId, {
+        questions: questionIds,
+        totalQuestions: createdQuestions.length,
+      });
 
       return createdQuestions;
     });

@@ -7,47 +7,23 @@ export const getAllTests = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        tests,
-        "Tests fetched successfully."
-      )
-    );
+    .json(new ApiResponse(200, tests, "Tests fetched successfully."));
 });
 
 export const getTestById = asyncHandler(async (req, res) => {
-  const test = await testService.getTestById(
-    req.params.id,
-    req.user._id
-  );
+  const test = await testService.getTestById(req.params.id, req.user._id);
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        test,
-        "Test fetched successfully."
-      )
-    );
+    .json(new ApiResponse(200, test, "Test fetched successfully."));
 });
 
 export const createTest = asyncHandler(async (req, res) => {
-  const test = await testService.createTest(
-    req.user._id,
-    req.body
-  );
+  const test = await testService.createTest(req.user._id, req.body);
 
   return res
     .status(201)
-    .json(
-      new ApiResponse(
-        201,
-        test,
-        "Test created successfully."
-      )
-    );
+    .json(new ApiResponse(201, test, "Test created successfully."));
 });
 
 export const updateTest = asyncHandler(async (req, res) => {
@@ -59,11 +35,13 @@ export const updateTest = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        test,
-        "Test updated successfully."
-      )
-    );
+    .json(new ApiResponse(200, test, "Test updated successfully."));
+});
+
+export const deleteTest = asyncHandler(async (req, res) => {
+  await testService.deleteTest(req.params.id, req.user._id);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Test deleted successfully."));
 });

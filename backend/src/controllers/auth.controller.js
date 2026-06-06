@@ -2,6 +2,8 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/apiResponse.js";
 import authService from "../services/auth.service.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
+import { ref } from "process";
+import { COOKIE_OPTIONS } from "../constants/config.js";
 
 export const register = asyncHandler(async (req, res) => {
   const user = await authService.register(req.body);
@@ -14,12 +16,6 @@ export const register = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
   const { identifier, password } = req.body;
 
-  if (!identifier || !password) {
-    return res
-      .status(400)
-      .json(new ApiResponse(400, null, UX_ERRORS.AUTH.MISSING_FIELDS));
-  }
-
   const { user, accessToken, refreshToken } = await authService.login(
     identifier,
     password
@@ -27,8 +23,8 @@ export const login = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", accessToken)
-    .cookie("refreshToken", refreshToken)
+    .cookie("accessToken", accessToken, COOKIE_OPTIONS)
+    .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
     .json(
       new ApiResponse(
         200,
@@ -41,24 +37,6 @@ export const login = asyncHandler(async (req, res) => {
     );
 });
 
-export const logout = asyncHandler(async (req, res) => {
-  await authService.logout(req.user._id);
-
-  return res
-    .clearCookie("accessToken")
-    .clearCookie("refreshToken")
-    .status(200)
-    .json(new ApiResponse(200, {}, "Logout successful."));
-});
-
-export const getMyProfile = asyncHandler(async (req, res) => {
-  const user = await authService.getMyProfile(req.user._id);
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Profile fetched successfully."));
-});
-
 export const refreshToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken = req.cookies.refreshToken;
 
@@ -69,5 +47,31 @@ export const refreshToken = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, COOKIE_OPTIONS)
     .cookie("refreshToken", refreshToken, COOKIE_OPTIONS)
-    .json(new ApiResponse(200, {}, "Authenticated"));
+    .json(
+      new ApiResponse(
+        200,
+        {
+          accessToken,
+        },
+        "Authenticated."
+      )
+    );
+});
+
+export const logout = asyncHandler(async (req, res) => {
+  await authService.logout(req.user._id);
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", COOKIE_OPTIONS)
+    .clearCookie("refreshToken", COOKIE_OPTIONS)
+    .json(new ApiResponse(200, {}, "Logout successful."));
+});
+
+export const getMyProfile = asyncHandler(async (req, res) => {
+  const user = await authService.getMyProfile(req.user._id);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Profile fetched successfully."));
 });

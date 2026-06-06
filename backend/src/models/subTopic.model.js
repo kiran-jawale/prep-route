@@ -30,4 +30,6 @@ subTopicSchema.index(
   }
 );
 
-export const SubTopic = mongoose.model("SubTopic", subTopicSchema);
+const SubTopic = mongoose.model("SubTopic", subTopicSchema);
+export {SubTopic}
+export default SubTopic

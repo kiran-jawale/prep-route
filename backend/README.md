@@ -1,25 +1,38 @@
 # TestDash Backend API
 
-A robust and scalable Node.js/Express backend service for the TestDash application - a comprehensive online testing platform for creating, managing, and taking quizzes.
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Environment Configuration](#environment-configuration)
-- [Running the Application](#running-the-application)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-- [Authentication](#authentication)
-- [Error Handling](#error-handling)
-- [Database](#database)
-- [Contributing](#contributing)
-- [License](#license)
+A scalable Node.js and Express.js backend powering the TestDash platform for creating, managing, publishing, scheduling, and tracking online tests.
 
 ---
+## 📋 Table of Contents
+
+* [Overview](#-overview)
+* [Features](#-features)
+  * [Authentication](#authentication)
+  * [Subject Hierarchy](#subject-hierarchy)
+  * [Test Management](#test-management)
+  * [Publishing Workflow](#publishing-workflow)
+  * [Question Management](#question-management)
+  * [Monitoring](#monitoring)
+* [Technology Stack](#-technology-stack)
+* [Architecture](#-architecture)
+* [Prerequisites](#-prerequisites)
+* [Installation](#-installation)
+* [Environment Configuration](#-environment-configuration)
+* [Running the Application](#️-running-the-application)
+* [Project Structure](#-project-structure)
+* [Publishing Workflow](#-publishing-workflow)
+* [API Documentation](#-api-documentation)
+* [Authentication](#-authentication)
+* [Error Handling](#-error-handling)
+* [Database Design](#-database-design)
+* [Metrics & Insights](#-metrics--insights)
+* [API Testing](#-api-testing)
+* [Logging](#-logging)
+* [Troubleshooting](#-troubleshooting)
+* [Backend Status](#-backend-status)
+
+---
+
 
 ## 🎯 Overview
 
@@ -34,45 +47,147 @@ The API follows RESTful principles and implements industry best practices for se
 
 ---
 
-## ✨ Features
 
-- ✅ **JWT Authentication** - Secure token-based authentication
-- ✅ **Role-Based Access Control** - Support for different user roles
-- ✅ **Input Validation** - Comprehensive request validation
-- ✅ **Error Handling** - Standardized error responses
-- ✅ **MongoDB Integration** - Document-based data persistence
-- ✅ **Middleware Pipeline** - Request processing and validation
-- ✅ **Async Utilities** - Promise-based request handling
-- ✅ **CORS Support** - Cross-origin resource sharing
-- ✅ **Request Logging** - Morgan HTTP request logger
-- ✅ **Environment Configuration** - Secure environment variable management
+
+
+# ✨ Features
+
+## Authentication
+
+✅ User Registration
+
+✅ User Login
+
+✅ Current User Profile
+
+✅ Refresh Token Rotation
+
+✅ Logout
+
+✅ JWT Authentication
+
+## Subject Hierarchy
+
+✅ Subject CRUD
+
+✅ Topic CRUD
+
+✅ SubTopic CRUD
+
+## Test Management
+
+✅ Create Test
+
+✅ Update Test
+
+✅ Delete Test
+
+✅ Get Single Test
+
+✅ Get All Tests
+
+## Publishing Workflow
+
+✅ Draft Tests
+
+✅ Immediate Publishing
+
+✅ Scheduled Publishing
+
+✅ Automatic Expiry
+
+## Question Management
+
+✅ Bulk Question Creation
+
+✅ Test Question Linking
+
+## Monitoring
+
+✅ Request Metrics
+
+✅ Database Metrics
+
+✅ Service Metrics
+
+✅ Insights Export
 
 ---
 
-## 🛠️ Technology Stack
+# 🛠 Technology Stack
 
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| **Runtime** | Node.js | 18+ |
-| **Framework** | Express.js | 4.x |
-| **Database** | MongoDB | 5.0+ |
-| **Authentication** | JWT (jsonwebtoken) | 9.x |
-| **Password Hashing** | bcrypt | 5.x |
-| **Validation** | Custom middleware | - |
-| **HTTP Logger** | Morgan | 1.x |
-| **Environment** | dotenv | 16.x |
-| **CORS** | cors | 2.x |
+| Component        | Technology            |
+| ---------------- | --------------------- |
+| Runtime          | Node.js               |
+| Framework        | Express.js            |
+| Database         | MongoDB               |
+| ODM              | Mongoose              |
+| Authentication   | JWT                   |
+| Password Hashing | bcrypt                |
+| Environment      | dotenv                |
+| Cookies          | cookie-parser         |
+| Logging          | Custom Metrics Logger |
+| Validation       | Custom Utilities      |
 
 ---
+
+# 🏗 Architecture
+
+The backend follows a layered architecture.
+
+```text
+Client
+  │
+  ▼
+Router
+  │
+  ▼
+Controller
+  │
+  ▼
+Service
+  │
+  ▼
+Model
+  │
+  ▼
+MongoDB
+```
+
+### Router Layer
+
+Maps HTTP endpoints to controllers.
+
+### Controller Layer
+
+Handles requests and responses.
+
+### Service Layer
+
+Contains business rules and application logic.
+
+### Model Layer
+
+Handles MongoDB persistence.
+
+### Middleware Layer
+
+Responsible for:
+
+* Authentication
+* Error Handling
+* Request Processing
+
+---
+
 
 ## 📦 Prerequisites
 
 Before running the application, ensure you have:
 
-- **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
-- **npm** (v8 or higher) - Comes with Node.js
-- **MongoDB** (Local or Cloud) - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or local instance
-- **Git** - Version control [Download](https://git-scm.com/)
+- **Node.js**
+- **npm** 
+- **MongoDB** (Local or Cloud)
 
 ---
 
@@ -95,7 +210,7 @@ This installs all required packages from `package.json`:
 - Express.js for server framework
 - MongoDB driver and Mongoose for database
 - JWT and bcrypt for authentication
-- Validation and middleware utilities
+- Logging and middleware utilities
 
 ### 3. Verify Installation
 
@@ -111,38 +226,19 @@ Create a `.env` file in the `backend` directory with the following variables:
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=3000
+CORS_ORIGIN="*"
+MONGODB_URI=<mongodb-uri>
+
+
+ACCESS_TOKEN_SECRET=secret_access
+ACCESS_TOKEN_EXPIRY=1d
+REFRESH_TOKEN_SECRET=secret_refrsh
+REFRESH_TOKEN_EXPIRY=10d
+
 NODE_ENV=development
-
-# Database Configuration
-MONGODB_URI=mongodb://localhost:27017/testdash
-# For MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/testdash
-
-# JWT Configuration
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
-JWT_EXPIRY=7d
-
-# CORS Configuration
-CLIENT_URL=http://localhost:5173
-
-# API Configuration
-API_VERSION=v1
-LOG_LEVEL=debug
 ```
 
-### Environment Variables Explanation
-
-| Variable | Purpose | Example |
-|----------|---------|---------|
-| `PORT` | Server port | `5000` |
-| `NODE_ENV` | Runtime environment | `development` \| `production` |
-| `MONGODB_URI` | Database connection string | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
-| `JWT_SECRET` | JWT signing secret (change in production!) | `your_secret_key` |
-| `JWT_EXPIRY` | Token expiration time | `7d` \| `24h` |
-| `CLIENT_URL` | Frontend URL for CORS | `http://localhost:5173` |
-
----
 
 ## ▶️ Running the Application
 
@@ -152,24 +248,12 @@ LOG_LEVEL=debug
 npm run dev
 ```
 
-The server starts on `http://localhost:5000` with hot-reload enabled.
+The server starts on `http://localhost:3000` with hot-reload enabled.
 
 ### Production Mode
 
 ```bash
 npm start
-```
-
-### Run Tests (if configured)
-
-```bash
-npm test
-```
-
-### Check Linting
-
-```bash
-npm run lint
 ```
 
 ---
@@ -179,35 +263,33 @@ npm run lint
 ```
 backend/
 ├── src/
-│   ├── app.js                    # Express app initialization
-│   ├── server.js                 # Server entry point
+│   ├── app.js                 # Express app initialization
+│   ├── server.js              # Server entry point
+│   │ 
+│   ├── constants/             # Application constants
+│   │   ├── config.js         
+│   │   └── ...
 │   │
-│   ├── config/
-│   │   └── database.js           # MongoDB connection configuration
-│   │
-│   ├── constants/
-│   │   ├── config.js             # Application constants
-│   │   └── uxErrors.js           # User-friendly error messages
-│   │
-│   ├── controllers/              # Route handlers and business logic
+│   ├── controllers/           # Route handlers and business logic
 │   │   ├── auth.controller.js
 │   │   ├── test.controller.js
 │   │   ├── question.controller.js
 │   │   └── ...
 │   │
-│   ├── models/                   # Database schemas and models
+│   ├── models/                # Database connection and models
+│   │   ├── index.js
 │   │   ├── user.model.js
 │   │   ├── test.model.js
 │   │   └── ...
 │   │
-│   ├── services/                 # Business logic layer
+│   ├── services/              # Business logic layer
 │   │   ├── auth.service.js
 │   │   ├── test.service.js
 │   │   └── ...
 │   │
-│   ├── middlewares/              # Express middleware
+│   ├── middlewares/              # Express middlewares
 │   │   ├── auth.middleware.js    # JWT verification
-│   │   ├── errorHandler.js       # Global error handling
+│   │   ├── error.middleware.js       # Global error handling
 │   │   └── ...
 │   │
 │   ├── routers/                  # Route definitions
@@ -220,12 +302,10 @@ backend/
 │   │   ├── apiError.js           # Custom error class
 │   │   ├── apiResponse.js        # Standard response wrapper
 │   │   └── ...
-│   │
-│   └── insights/                 # Analytics and data insights
-│       └── insights.json
-│
+├── insights/insights.json        # Analytics and data insights
+│       
 ├── .env                          # Environment variables (gitignored)
-├── .env.example                  # Example environment template
+├── sample.env                    # Example environment template
 ├── package.json                  # Dependencies and scripts
 ├── package-lock.json             # Locked dependency versions
 └── README.md                     # This file
@@ -236,393 +316,608 @@ backend/
 - **controllers/** - Handle HTTP requests and responses
 - **models/** - Define MongoDB schemas
 - **services/** - Encapsulate business logic
-- **middlewares/** - Request processing (auth, validation, error handling)
+- **middlewares/** - Request processing (auth,  any validation, error handling)
 - **routers/** - Map routes to controllers
 - **utils/** - Reusable helper functions
 - **constants/** - Application-wide constants
 
 ---
 
-## 🔌 API Documentation
 
-### Authentication Endpoints
+# 🚀 Publishing Workflow
 
-#### Register New User
-```http
-POST /api/v1/auth/register
-Content-Type: application/json
+## Draft
 
-{
-  "email": "user@example.com",
-  "password": "securePassword123",
-  "fullName": "John Doe"
-}
+```text
+status = draft
 ```
 
-**Response (201):**
+Test is not available to candidates.
+
+---
+
+## Immediate Publish
+
+```text
+publishMode = immediate
+```
+
+Results:
+
+```text
+status = live
+
+publishedAt = current time
+```
+
+---
+
+## Scheduled Publish
+
+```text
+publishMode = scheduled
+```
+
+Results:
+
+```text
+status = draft
+
+scheduledAt = future datetime
+```
+
+---
+
+## Availability
+
+```text
+availabilityDays
+```
+
+Automatically generates:
+
+```text
+availableUntil
+```
+
+---
+
+## Status Lifecycle
+
+```text
+Draft
+  ↓
+Live
+  ↓
+Expired
+```
+
+---
+
+## Automatic Synchronization
+
+Helper Service:
+
+```text
+testSync.service.js
+```
+
+Automatically updates:
+
+```text
+Draft → Live
+
+Live → Expired
+```
+
+---
+
+# 🔌 API Documentation
+
+## Health
+
+```http
+GET /health
+```
+
+---
+
+## Authentication
+
+```http
+POST /auth/register
+POST /auth/login
+POST /auth/refresh-token
+POST /auth/logout
+GET  /auth/me
+```
+
+---
+
+## Subjects
+
+```http
+GET    /subjects
+GET    /subjects/:id
+POST   /subjects
+PATCH  /subjects/:id
+DELETE /subjects/:id
+```
+
+---
+
+## Topics
+
+```http
+GET    /topics
+GET    /topics/:id
+GET    /topics/subject/:subjectId
+POST   /topics
+PATCH  /topics/:id
+DELETE /topics/:id
+```
+
+---
+
+## SubTopics
+
+```http
+GET    /sub-topics
+GET    /sub-topics/:id
+GET    /sub-topics/topic/:topicId
+POST   /sub-topics
+PATCH  /sub-topics/:id
+DELETE /sub-topics/:id
+```
+
+---
+
+## Tests
+
+```http
+GET    /tests
+GET    /tests/:id
+POST   /tests
+PATCH  /tests/:id
+DELETE /tests/:id
+```
+
+---
+
+## Questions
+
+```http
+POST /questions/bulk
+```
+
+---
+
+# 🔐 Authentication
+
+Authentication uses:
+
+* Access Tokens
+* Refresh Tokens
+* HttpOnly Cookies
+* JWT
+
+---
+
+## Login
+
+Returns:
+
+* User Information
+* Access Token
+
+Sets:
+
+```text
+accessToken cookie
+
+refreshToken cookie
+```
+
+---
+
+## Refresh Token Rotation
+
+Every refresh request:
+
+```text
+Old Refresh Token
+        ↓
+Invalidate
+        ↓
+Generate New Refresh Token
+        ↓
+Store In Database
+        ↓
+Send New Cookie
+```
+
+---
+
+## Logout
+
+Logout performs:
+
+```text
+Clear Cookies
+
+Remove Refresh Token
+
+Invalidate Session
+```
+
+---
+
+# ⚠ Error Handling
+
+All API responses follow a consistent structure.
+
+## Success
+
 ```json
 {
+  "statusCode": 200,
   "success": true,
-  "message": "User registered successfully",
-  "data": {
-    "user": {
-      "_id": "507f1f77bcf86cd799439011",
-      "email": "user@example.com",
-      "fullName": "John Doe"
-    },
-    "token": "eyJhbGciOiJIUzI1NiIs..."
-  }
+  "data": {},
+  "message": "Success"
 }
 ```
 
-#### Login
-```http
-POST /api/v1/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "securePassword123"
-}
-```
-
-#### Get Current User
-```http
-GET /api/v1/auth/me
-Authorization: Bearer <token>
-```
-
-#### Logout
-```http
-POST /api/v1/auth/logout
-Authorization: Bearer <token>
-```
-
-### Test Endpoints
-
-#### Get All Tests
-```http
-GET /api/v1/tests
-Authorization: Bearer <token>
-```
-
-#### Get Test by ID
-```http
-GET /api/v1/tests/:id
-Authorization: Bearer <token>
-```
-
-#### Create Test
-```http
-POST /api/v1/tests
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Mathematics Quiz",
-  "category": "Math",
-  "difficulty": "medium",
-  "totalQuestions": 10,
-  "totalMarks": 100,
-  "totalTime": 60
-}
-```
-
-#### Update Test
-```http
-PUT /api/v1/tests/:id
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Updated Quiz Name",
-  "status": "published"
-}
-```
-
-### Questions Endpoints
-
-#### Create Questions (Bulk)
-```http
-POST /api/v1/questions/bulk
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "questions": [
-    {
-      "question": "What is 2+2?",
-      "option1": "3",
-      "option2": "4",
-      "option3": "5",
-      "option4": "6",
-      "correctOption": "option2"
-    }
-  ],
-  "testId": "507f1f77bcf86cd799439011"
-}
-```
-
-### Subject & Topic Endpoints
-
-#### Get All Subjects
-```http
-GET /api/v1/subjects
-Authorization: Bearer <token>
-```
-
-#### Get Topics by Subject
-```http
-GET /api/v1/topics/subject/:subjectId
-Authorization: Bearer <token>
-```
-
-#### Get SubTopics by Topic
-```http
-GET /api/v1/sub-topics/topic/:topicId
-Authorization: Bearer <token>
-```
-
----
-
-## 🔐 Authentication
-
-### JWT (JSON Web Tokens)
-
-The API uses JWT for stateless authentication:
-
-1. **Token Generation**: User receives JWT after login
-2. **Token Storage**: Frontend stores token in memory/localStorage
-3. **Token Verification**: Auth middleware validates token on protected routes
-4. **Token Refresh**: Implement refresh token mechanism for longer sessions
-
-### Auth Middleware Flow
-
-```
-Request → Auth Header → Extract Token → Verify JWT → Attach User → Next Middleware
-```
-
-### Protected Routes
-
-All routes starting with `/api/v1/` (except auth endpoints) require valid JWT:
-
-```javascript
-// Protected route example
-router.get("/dashboard", authMiddleware, (req, res) => {
-  // req.user contains decoded JWT payload
-  res.json({ user: req.user });
-});
-```
-
----
-
-## ⚠️ Error Handling
-
-### Standardized Error Response
-
-All errors follow this format:
+## Error
 
 ```json
 {
-  "success": false,
-  "message": "User-friendly error message",
   "statusCode": 400,
-  "errors": [
-    {
-      "field": "email",
-      "message": "Email is required"
-    }
-  ]
+  "success": false,
+  "data": null,
+  "message": "Error Message"
 }
 ```
 
-### HTTP Status Codes
-
-| Code | Meaning | Example |
-|------|---------|---------|
-| `200` | OK | Successful request |
-| `201` | Created | Resource created successfully |
-| `400` | Bad Request | Invalid input data |
-| `401` | Unauthorized | Missing or invalid token |
-| `403` | Forbidden | User lacks permission |
-| `404` | Not Found | Resource not found |
-| `500` | Server Error | Internal server error |
-
-### Common Error Messages
-
-- `"Invalid credentials"` - Wrong email or password
-- `"Email already exists"` - User already registered
-- `"Unauthorized access"` - Invalid or expired token
-- `"Test not found"` - Referenced test doesn't exist
-- `"Server error occurred"` - Internal server issue
-
 ---
 
-## 🗄️ Database
+# 🗄 Database Design
 
-### MongoDB Collections
+## Users
 
-#### Users Collection
 ```javascript
 {
-  _id: ObjectId,
-  email: String,
-  fullName: String,
-  password: String (hashed),
-  createdAt: Date,
-  updatedAt: Date
+  userId,
+  email,
+  fullName,
+  password,
+  refreshToken
 }
 ```
 
-#### Tests Collection
+---
+
+## Subjects
+
 ```javascript
 {
-  _id: ObjectId,
-  name: String,
-  category: String,
-  difficulty: String, // "easy" | "medium" | "hard"
-  status: String,     // "draft" | "published" | "archived"
-  totalQuestions: Number,
-  totalMarks: Number,
-  totalTime: Number,   // in minutes
-  createdBy: ObjectId, // Reference to User
-  createdAt: Date,
-  updatedAt: Date
+  name
 }
 ```
 
-#### Questions Collection
+---
+
+## Topics
+
 ```javascript
 {
-  _id: ObjectId,
-  question: String,
-  option1: String,
-  option2: String,
-  option3: String,
-  option4: String,
-  correctOption: String,
-  testId: ObjectId,    // Reference to Test
-  createdAt: Date
+  subjectId,
+  name
 }
 ```
 
-### Indexing Strategy
+---
 
-Create indexes for frequently queried fields:
+## SubTopics
 
-```bash
-# In MongoDB shell
-db.users.createIndex({ "email": 1 }, { unique: true })
-db.tests.createIndex({ "createdBy": 1 })
-db.questions.createIndex({ "testId": 1 })
-db.topics.createIndex({ "subjectId": 1 })
+```javascript
+{
+  topicId,
+  name
+}
 ```
 
 ---
 
-## 📝 Logging
+## Tests
 
-The application uses Morgan for HTTP request logging:
+```javascript
+{
+  userId,
 
+  name,
+
+  category,
+
+  subjectId,
+
+  topics[],
+
+  subTopics[],
+
+  questions[],
+
+  status,
+
+  publishMode,
+
+  scheduledAt,
+
+  publishedAt,
+
+  availableUntil,
+
+  difficulty,
+
+  correctMarks,
+
+  wrongMarks,
+
+  unattemptMarks,
+
+  totalTime,
+
+  totalMarks,
+
+  totalQuestions
+}
 ```
-[timestamp] METHOD /api/route HTTP/1.1 STATUS_CODE - RESPONSE_TIME ms
-```
-
-Log levels in development:
-- `debug` - Detailed debugging information
-- `info` - General informational messages
-- `warn` - Warning messages
-- `error` - Error messages
 
 ---
 
-## 🤝 Contributing
+## Questions
 
-### Development Workflow
+```javascript
+{
+  testId,
 
-1. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/new-feature
-   ```
+  topicId,
 
-2. **Make Your Changes**
-   - Follow the existing code structure
-   - Add comments for complex logic
-   - Write meaningful commit messages
+  subTopicId,
 
-3. **Test Your Changes**
-   ```bash
-   npm test
-   ```
+  type,
 
-4. **Submit a Pull Request**
-   - Describe changes clearly
-   - Reference related issues
-   - Ensure all tests pass
+  question,
 
-### Code Standards
+  option1,
 
-- **Style**: Follow existing code patterns
-- **Naming**: Use camelCase for variables/functions
-- **Structure**: Keep functions focused and single-responsibility
-- **Errors**: Use custom error handling (apiError.js)
-- **Validation**: Validate all user inputs
+  option2,
+
+  option3,
+
+  option4,
+
+  correctOption,
+
+  difficulty,
+
+  explanation
+}
+```
 
 ---
 
-## 🐛 Troubleshooting
 
-### Common Issues
+# 📊 Metrics & Insights
 
-#### MongoDB Connection Failed
-```
-Error: connect ECONNREFUSED 127.0.0.1:27017
-```
-**Solution**: Ensure MongoDB is running locally or update `MONGODB_URI` in `.env`
+Metrics collected through:
 
-#### JWT Token Expired
+```text
+src/utils/metricsLogger.js
 ```
-Error: jwt expired
-```
-**Solution**: User needs to login again to get a new token
 
-#### CORS Errors
-```
-Error: Access to XMLHttpRequest blocked by CORS policy
-```
-**Solution**: Update `CLIENT_URL` in `.env` to match frontend URL
+Output:
 
-#### Port Already in Use
+```text
+insights/insights.json
 ```
-Error: listen EADDRINUSE: address already in use :::5000
-```
-**Solution**: Change `PORT` in `.env` or kill process using port 5000
+
+Tracked Operations:
+
+* API Requests
+* Database Reads
+* Database Writes
+* Service Execution Time
+* Response Time
+
+Used For:
+
+* Performance Analysis
+* Backend Evaluation
+* Optimization Reports
 
 ---
 
-## 📚 Additional Resources
+# 🧪 API Testing
 
-- [Express.js Documentation](https://expressjs.com/)
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [JWT Guide](https://jwt.io/introduction)
-- [RESTful API Best Practices](https://restfulapi.net/)
-- [Node.js Security Best Practices](https://nodejs.org/en/docs/guides/security/)
+Manual testing completed using Postman.
 
----
+Testing Artifacts:
 
-## 📄 License
+```text
+api_tests/API_V1/API_V1_REQ_RES.md
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+api_tests/API_V1/API_V1_TEST_RES.md
 
----
+api_tests/API_V1/get_all_tests.txt
 
-## 👨‍💻 Author
-
-**TestDash Development Team**
-
-For questions or support, please contact the development team or open an issue on GitHub.
+api_tests/API_V1/test_t2.txt
+```
 
 ---
 
-**Last Updated:** June 2026  
+## Modules Tested
+
+✅ Authentication
+
+✅ Subjects
+
+✅ Topics
+
+✅ SubTopics
+
+✅ Tests
+
+✅ Questions
+
+---
+
+## Routes Tested
+
+| Module         | Status |
+| -------------- | ------ |
+| Authentication | ✅ PASS |
+| Subjects       | ✅ PASS |
+| Topics         | ✅ PASS |
+| SubTopics      | ✅ PASS |
+| Tests          | ✅ PASS |
+| Questions      | ✅ PASS |
+
+---
+
+## Verification
+
+Validated:
+
+* Request Payloads
+* Response Payloads
+* JWT Authentication
+* Refresh Token Rotation
+* MongoDB Persistence
+* Publishing Workflow
+* Error Handling
+
+---
+
+## Result
+
+```text
+Passed Routes : 100%
+
+Failed Routes : 0
+
+Status : Frontend Ready
+```
+
+---
+
+# 📝 Logging
+
+Example:
+
+```text
+[API LOG] POST /api/v1/tests | 201 | 52.341 ms
+```
+
+Logged Information:
+
+* Route
+* Method
+* Status Code
+* Execution Time
+
+---
+
+# 🐛 Troubleshooting
+
+## MongoDB Connection Failed
+
+```text
+ECONNREFUSED
+```
+
+Verify:
+
+```env
+MONGODB_URI
+```
+
+---
+
+## Invalid JWT
+
+```text
+Authentication required
+```
+
+Verify:
+
+```env
+ACCESS_TOKEN_SECRET
+```
+
+---
+
+## Refresh Token Failure
+
+Verify:
+
+```text
+refreshToken exists in database
+
+refreshToken cookie exists
+
+refreshToken secrets match
+```
+
+---
+
+## CORS Errors
+
+Verify:
+
+```env
+CORS_ORIGIN
+```
+
+---
+
+# ✅ Backend Status
+
+Authentication ............ Complete
+
+Subject Hierarchy ......... Complete
+
+Topic Hierarchy ........... Complete
+
+SubTopic Hierarchy ........ Complete
+
+Test Management ........... Complete
+
+Question Management ....... Complete
+
+Publishing Workflow ....... Complete
+
+Refresh Token Rotation .... Complete
+
+Metrics Collection ........ Complete
+
+Insights Export ........... Complete
+
+API Testing ............... Complete
+
+---
+
+## Final Status
+
+✅ Stable Backend API
+
+✅ API V1 Complete
+
+✅ Frontend Integration Ready
+
+
+---
+
 **Version:** 1.0.0
+
+**Last Updated:** June 2026

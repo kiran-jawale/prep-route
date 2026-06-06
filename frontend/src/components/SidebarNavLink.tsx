@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { NavLink, NavLinkProps } from "react-router-dom";
+import type { FC } from "react";
+import { NavLink } from "react-router-dom";
+import type { NavLinkProps } from "react-router-dom";
 
 // ============================================================================
 // SidebarNavLink Component - Navigation link with active state styling
@@ -7,7 +8,7 @@ import { NavLink, NavLinkProps } from "react-router-dom";
 
 // Props interface extending NavLink properties
 interface SidebarNavLinkProps extends Omit<NavLinkProps, "children"> {
-  label: string;   // Display text for the link
+  label: string; // Display text for the link
 }
 
 /**
@@ -19,7 +20,7 @@ const SidebarNavLink: FC<SidebarNavLinkProps> = ({ to, label, ...rest }) => {
   return (
     <NavLink
       to={to}
-      className={({ isActive }) =>
+      className={({ isActive }: any) =>
         // Use ternary operator for conditional classes
         // isActive is type-safe from NavLink's callback parameter
         `block px-4 py-3 rounded-xl transition ${

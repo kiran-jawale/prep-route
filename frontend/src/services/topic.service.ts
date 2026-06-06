@@ -1,23 +1,24 @@
-import { AxiosPromise } from "axios";
-import api from "../constants/api";
-import type { TopicResponse } from "../types/topic.types";
+import api from "./api";
 
-// ============================================================================
-// Topic Service - Type-safe topic data operations
-// ============================================================================
-
-/**
- * TopicService class - retrieves topics within a specific subject
- * Part of hierarchy: Subject > Topic > SubTopic
- */
 class TopicService {
-  /**
-   * Fetch all topics belonging to a specific subject
-   * @param subjectId - MongoDB ID of the parent subject
-   * @returns Promise containing array of topics
-   */
-  getBySubject(subjectId: string): AxiosPromise<TopicResponse> {
-    return api.get<TopicResponse>(`/topics/subject/${subjectId}`);
+  getBySubject(subjectId: string) {
+    return api.get(`/topics/subject/${subjectId}`);
+  }
+
+  getById(id: string) {
+    return api.get(`/topics/${id}`);
+  }
+
+  create(data: any) {
+    return api.post("/topics", data);
+  }
+
+  update(id: string, data: any) {
+    return api.patch(`/topics/${id}`, data);
+  }
+
+  delete(id: string) {
+    return api.delete(`/topics/${id}`);
   }
 }
 

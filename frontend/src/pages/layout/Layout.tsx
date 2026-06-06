@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import type { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AxiosError } from "axios";
 
 import { login, logout } from "../../redux/slices/authSlice";
 import type { RootState, AppDispatch } from "../../redux/redux";
@@ -50,7 +50,6 @@ const Layout: FC = () => {
         }
       } catch (error) {
         // Properly typed error - clear auth on any error
-        const axiosError = error as AxiosError<ApiErrorResponse>;
 
         // Logout on error (could be 401 Unauthorized, network error, etc.)
         dispatch(logout());

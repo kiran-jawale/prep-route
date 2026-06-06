@@ -4,75 +4,78 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const INSIGHTS_FILE = path.join(__dirname, "../../insights/insights.json");
 
-export const withMetrics = async (operationName, asyncFunction) => {
-  const startTime = performance.now();
-  const timestamp = new Date().toISOString();
+const INSIGHTS_FILE = path.resolve(__dirname, "../../insights/insights.json");
 
+const getInsights = () => {
   try {
-    const result = await asyncFunction();
-    const endTime = performance.now();
-    const duration = (endTime - startTime).toFixed(2);
+    if (!fs.existsSync(INSIGHTS_FILE)) {
+      fs.writeFileSync(INSIGHTS_FILE, JSON.stringify({}, null, 2));
 
-    let data = {};
-    if (fs.existsSync(INSIGHTS_FILE)) {
-      const fileContent = fs.readFileSync(INSIGHTS_FILE, "utf-8");
-      if (fileContent) data = JSON.parse(fileContent);
+      return {};
     }
 
-    if (!data[operationName]) data[operationName] = [];
-    if (data[operationName].length >= 50) data[operationName].shift();
+    const content = fs.readFileSync(INSIGHTS_FILE, "utf8");
 
-    data[operationName].push({
-      date: timestamp,
-      startMs: Number(startTime.toFixed(2)),
-      endMs: Number(endTime.toFixed(2)),
-      durationMs: Number(duration),
-    });
+    if (!content.trim()) {
+      return {};
+    }
 
-    fs.writeFileSync(INSIGHTS_FILE, JSON.stringify(data, null, 2));
-    return result;
+    return JSON.parse(content);
   } catch (error) {
-    console.error(
-      `\n[Metrics Error] Failed on ${operationName}:`,
-      error.message,
-      `\n`
-    );
-    throw error;
+    console.error("[INSIGHTS FILE ERROR]", error.message);
+
+    return {};
+  }
+};
+
+const saveInsights = (data) => {
+  try {
+    fs.writeFileSync(INSIGHTS_FILE, JSON.stringify(data, null, 2), "utf8");
+  } catch (error) {
+    console.error("[INSIGHTS SAVE ERROR]", error.message);
   }
 };
 
 export const morganStream = {
   write: (message) => {
-    // Remove Morgan's default trailing newline so we can control the spacing
-    const cleanMessage = message.trim();
+    const insights = getInsights();
 
-    // Print to console with empty newlines before and after
-    console.log(`\n[MORGAN API LOG] ${cleanMessage}\n`);
-
-    try {
-      let data = {};
-      if (fs.existsSync(INSIGHTS_FILE)) {
-        const fileContent = fs.readFileSync(INSIGHTS_FILE, "utf-8");
-        if (fileContent) data = JSON.parse(fileContent);
-      }
-
-      if (!data["API_Requests"]) data["API_Requests"] = [];
-
-      // Keep only the last 50 API logs to prevent the JSON file from bloating
-      if (data["API_Requests"].length >= 50) {
-        data["API_Requests"].shift();
-      }
-
-      data["API_Requests"].push(cleanMessage);
-      fs.writeFileSync(INSIGHTS_FILE, JSON.stringify(data, null, 2));
-    } catch (err) {
-      console.error(
-        `\n[Metrics Error] Failed to write Morgan log to insights.json:`,
-        err.message,
-        `\n`
-      );
+    if (!insights.API_Requests) {
+      insights.API_Requests = [];
     }
+
+    insights.API_Requests.push({
+      timestamp: new Date().toISOString(),
+      log: message.trim(),
+    });
+
+    saveInsights(insights);
+
+    console.log(`\n[API LOG] ${message.trim()}\n`);
   },
+};
+
+export const withMetrics = async (operationName, asyncFunction) => {
+  const start = performance.now();
+
+  try {
+    return await asyncFunction();
+  } finally {
+    const end = performance.now();
+
+    const insights = getInsights();
+
+    if (!insights.Metrics) {
+      insights.Metrics = [];
+    }
+
+    insights.Metrics.push({
+      operationName,
+      durationMs: Number((end - start).toFixed(2)),
+      timestamp: new Date().toISOString(),
+    });
+
+    saveInsights(insights);
+  }
 };

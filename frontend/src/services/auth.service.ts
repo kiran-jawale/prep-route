@@ -1,52 +1,25 @@
+import api from "./api";
 
-import { AxiosPromise } from "axios";
-import api from "../constants/api";
-import type { User, AuthCredentials, AuthResponse } from "../types/auth.types";
-
-// ============================================================================
-// Authentication Service - Type-safe auth API calls
-// ============================================================================
-
-/**
- * AuthService class - handles all authentication-related API calls
- * Uses proper TypeScript typing for all methods and return values
- */
 class AuthService {
-  /**
-   * Register a new user account
-   * @param credentials - Email, password, and name for registration
-   * @returns Promise with auth response containing user and optional token
-   */
-  register(credentials: AuthCredentials): AxiosPromise<AuthResponse> {
-    return api.post<AuthResponse>("/auth/register", credentials);
+  register(data: any) {
+    return api.post("/auth/register", data);
   }
 
-  /**
-   * Authenticate user with email and password
-   * @param credentials - User's login credentials
-   * @returns Promise with authenticated user data and token
-   */
-  login(credentials: Omit<AuthCredentials, "fullName">): AxiosPromise<AuthResponse> {
-    return api.post<AuthResponse>("/auth/login", credentials);
+  login(data: any) {
+    return api.post("/auth/login", data);
   }
 
-  /**
-   * Clear user session and remove authentication token
-   * @returns Promise indicating successful logout
-   */
-  logout(): AxiosPromise<{ success: boolean; message: string }> {
+  logout() {
     return api.post("/auth/logout");
   }
 
-  /**
-   * Fetch currently authenticated user's profile information
-   * Used on app initialization to restore user session
-   * @returns Promise with current user data
-   */
-  getMe(): AxiosPromise<{ success: boolean; data: User }> {
+  getCurrentUser() {
     return api.get("/auth/me");
+  }
+
+  refreshToken() {
+    return api.post("/auth/refresh-token");
   }
 }
 
-// Export singleton instance to ensure only one AuthService is used app-wide
 export default new AuthService();

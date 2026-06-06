@@ -1,15 +1,15 @@
-import { FC, ReactNode } from "react";
+
+
+// ModalContainer Component - Animated modal dialog
+
+import type { FC, ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-// ============================================================================
-// ModalContainer Component - Animated modal dialog
-// ============================================================================
 
-// Props interface for ModalContainer
 interface ModalContainerProps {
-  isOpen: boolean;        // Whether modal should be visible
-  onClose: () => void;    // Callback when user closes modal
-  children: ReactNode;    // Modal content to display
+  isOpen: boolean;  //should modal be visible
+  onClose: () => void;  
+  children: ReactNode;  // Modal content to display
 }
 
 /**
