@@ -2,33 +2,62 @@ import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <aside className="fixed left-0 top-0 hidden h-screen w-72 border-r bg-white lg:block">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold">TestDash</h2>
+    <aside className="fixed left-0 top-0 h-screen w-72 border-r bg-white">
+      <div className="border-b p-6">
+        <h1 className="text-3xl font-semibold">TestDash</h1>
+
+        <p className="mt-1 text-sm text-zinc-500">Test Management System</p>
       </div>
 
-      <nav className="space-y-2 px-4">
+      <div className="space-y-2 p-4">
         <NavLink
           to="/dashboard"
-          className="block rounded-xl px-4 py-3 hover:bg-zinc-100"
+          className={({ isActive }:any) =>
+            `
+            block
+            rounded-xl
+            px-4
+            py-3
+            transition
+            ${isActive ? "bg-[#6475F7] text-white" : "hover:bg-zinc-100"}
+          `
+          }
         >
           Dashboard
         </NavLink>
 
         <NavLink
           to="/tracking"
-          className="block rounded-xl px-4 py-3 hover:bg-zinc-100"
+          className={({ isActive }:any) =>
+            `
+            block
+            rounded-xl
+            px-4
+            py-3
+            transition
+            ${isActive ? "bg-[#6475F7] text-white" : "hover:bg-zinc-100"}
+          `
+          }
         >
           Test Tracking
         </NavLink>
 
         <NavLink
           to="/tests/create"
-          className="block rounded-xl px-4 py-3 hover:bg-zinc-100"
+          className={({ isActive }:any) =>
+            `
+            block
+            rounded-xl
+            px-4
+            py-3
+            transition
+            ${isActive ? "bg-[#6475F7] text-white" : "hover:bg-zinc-100"}
+          `
+          }
         >
           Create Test
         </NavLink>
-      </nav>
+      </div>
     </aside>
   );
 }

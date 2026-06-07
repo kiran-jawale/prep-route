@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 
 import type { Toast, ToastType } from "../types/toast.types";
 
-import ToastContainer from "../components/ToastContainer";
-import ModalContainer from "../components/ModalContainer";
+import ToastContainer from "../components/ui/ToastContainer";
+import ModalContainer from "../components/ui/ModalContainer";
 
 interface DomContextType {
   addToast: (message: string, type?: ToastType) => void;

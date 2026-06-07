@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { Outlet } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
-
 import authService from "../../services/auth.service";
-
 import { login, logout } from "../../state/slices/authSlice";
-
 import Sidebar from "./parts/Sidebar";
 
 import type { AppDispatch } from "../../state/store";

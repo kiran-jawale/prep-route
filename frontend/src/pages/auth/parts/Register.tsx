@@ -4,9 +4,14 @@ import { AxiosError } from "axios";
 
 import authService from "../../../services/auth.service";
 
-import Button from "../../../components/ui/Button";
-
 import { useDom } from "../../../contexts/domContext";
+
+import Button from "../../../components/ui/Button";
+import Input from "../../../components/ui/Input";
+
+interface ApiError {
+  message?: string;
+}
 
 export default function Register() {
   const { addToast } = useDom();
@@ -14,12 +19,8 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
-    userId: "",
-
     fullName: "",
-
     email: "",
-
     password: "",
   });
 
@@ -31,14 +32,11 @@ export default function Register() {
 
       await authService.register(form);
 
-      addToast("User registered successfully");
+      addToast("Account Created Successfully", "success");
     } catch (error) {
-      const axiosError = error as AxiosError<any>;
+      const err = error as AxiosError<ApiError>;
 
-      addToast(
-        axiosError.response?.data?.message || "Registration failed",
-        "error"
-      );
+      addToast(err.response?.data?.message || "Registration Failed", "error");
     } finally {
       setLoading(false);
     }
@@ -46,21 +44,8 @@ export default function Register() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        placeholder="User ID"
-        className="w-full rounded-xl border px-4 py-3"
-        value={form.userId}
-        onChange={(e) =>
-          setForm({
-            ...form,
-            userId: e.target.value,
-          })
-        }
-      />
-
-      <input
+      <Input
         placeholder="Full Name"
-        className="w-full rounded-xl border px-4 py-3"
         value={form.fullName}
         onChange={(e) =>
           setForm({
@@ -70,9 +55,8 @@ export default function Register() {
         }
       />
 
-      <input
+      <Input
         placeholder="Email"
-        className="w-full rounded-xl border px-4 py-3"
         value={form.email}
         onChange={(e) =>
           setForm({
@@ -82,10 +66,9 @@ export default function Register() {
         }
       />
 
-      <input
+      <Input
         type="password"
         placeholder="Password"
-        className="w-full rounded-xl border px-4 py-3"
         value={form.password}
         onChange={(e) =>
           setForm({

@@ -1,68 +1,39 @@
-import type { FC, ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
+
+import { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
 
 import authService from "../../../services/auth.service";
-import { login } from "../../../redux/slices/authSlice";
-import Button from "../../../components/Button";
+
+import { login } from "../../../state/slices/authSlice";
+
 import { useDom } from "../../../contexts/domContext";
 
-import type { AppDispatch } from "../../../redux/redux";
+import Button from "../../../components/ui/Button";
+import Input from "../../../components/ui/Input";
 
-// ============================================================================
-// Login Component - Authentication form with proper TypeScript typing
-// ============================================================================
+import type { AppDispatch } from "../../../state/store";
 
-// Form state interface
-interface LoginFormState {
-  identifier: string;
-  password: string;
-}
-
-// API Error response structure
-interface ApiErrorResponse {
+interface ApiError {
   message?: string;
-  [key: string]: unknown;
 }
 
-/**
- * Login component - user authentication form
- * Handles login submission, error handling, and navigation
- */
-const Login: FC = () => {
-  // Properly typed dispatch with AppDispatch
+export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
 
   const { addToast } = useDom();
 
-  // Form state with explicit type
-  const [form, setForm] = useState<LoginFormState>({
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState({
     identifier: "",
     password: "",
   });
 
-  const [loading, setLoading] = useState<boolean>(false);
-
-  /**
-   * Handle form input changes
-   * @param e - Input change event
-   */
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.currentTarget;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  /**
-   * Handle form submission with error handling
-   * @param e - Form submission event
-   */
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -73,19 +44,15 @@ const Login: FC = () => {
         password: form.password,
       });
 
-      // Dispatch login action with proper typing
       dispatch(login(response.data.data.user));
 
       addToast("Login Successful", "success");
 
       navigate("/dashboard");
     } catch (error) {
-      // Properly typed error handling
-      const axiosError = error as AxiosError<ApiErrorResponse>;
-      const errorMessage =
-        axiosError?.response?.data?.message || "Login Failed";
+      const err = error as AxiosError<ApiError>;
 
-      addToast(errorMessage, "error");
+      addToast(err.response?.data?.message || "Login Failed", "error");
     } finally {
       setLoading(false);
     }
@@ -93,24 +60,27 @@ const Login: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        name="identifier"
-        placeholder="User ID"
+      <Input
+        placeholder="Email"
         value={form.identifier}
-        onChange={handleInputChange}
-        className="w-full border rounded-xl px-4 py-3"
-        required
+        onChange={(e) =>
+          setForm({
+            ...form,
+            identifier: e.target.value,
+          })
+        }
       />
 
-      <input
+      <Input
         type="password"
-        name="password"
         placeholder="Password"
         value={form.password}
-        onChange={handleInputChange}
-        className="w-full border rounded-xl px-4 py-3"
-        required
+        onChange={(e) =>
+          setForm({
+            ...form,
+            password: e.target.value,
+          })
+        }
       />
 
       <Button type="submit" disabled={loading} className="w-full">
@@ -118,6 +88,4 @@ const Login: FC = () => {
       </Button>
     </form>
   );
-};
-
-export default Login;
+}

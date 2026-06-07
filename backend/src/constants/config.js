@@ -4,6 +4,7 @@ dotenv.config();
 
 const CONFIG = {
   PORT: process.env.PORT,
+  APP_NAME: process.env.APP_NAME,
   NODE_ENV: process.env.NODE_ENV ?? "development",
   API_VERSION: process.env.API_VERSION ?? "/api/v1",
 
@@ -26,3 +27,4 @@ export const COOKIE_OPTIONS = {
 };
 
 export default CONFIG
+export {CONFIG}

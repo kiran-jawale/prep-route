@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import { morganStream } from "./utils/metricsLogger.js";
 
 import errorMiddleware from "./middlewares/error.middleware.js";
+import healthController from "./routers/health.route.js";
 
 import authRouter from "./routers/auth.route.js";
 import subjectRouter from "./routers/subject.route.js";
@@ -16,9 +17,6 @@ import CONFIG from "./constants/config.js";
 import ApiResponse from "./utils/apiResponse.js";
 
 const app = express();
-const healthController = (req, res) => {
-  return res.json(new ApiResponse(200,{message:"Server is listening..."}))
-}
 
 app.use(
   cors({

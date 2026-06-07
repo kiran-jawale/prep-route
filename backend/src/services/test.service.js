@@ -140,16 +140,18 @@ class TestService {
     });
   }
   async deleteTest(testId, userId) {
-    const test = await Test.findOneAndDelete({
-      _id: testId,
-      userId,
+    return await withMetrics("DELETE_TEST", async () => {
+      const test = await Test.findOneAndDelete({
+        _id: testId,
+        userId,
+      });
+
+      if (!test) {
+        throw new ApiError(404, UX_ERRORS.TEST.NOT_FOUND);
+      }
+
+      return {};
     });
-
-    if (!test) {
-      throw new ApiError(404, UX_ERRORS.TEST.NOT_FOUND);
-    }
-
-    return {};
   }
 }
 
