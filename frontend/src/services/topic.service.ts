@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "./axios";
 
 class TopicService {
   getBySubject(subjectId: string) {

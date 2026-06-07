@@ -1,4 +1,3 @@
-
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
@@ -6,58 +5,49 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+
+
 import { Provider } from "react-redux";
-
 import "./index.css";
-
-// Redux store for global state management
-import { store } from "./redux/redux";
-
-// Context providers for theme and DOM utilities
+import { store } from "./state/store.ts";
 import { ThemeProvider } from "./contexts/themeContext";
 import { DomProvider } from "./contexts/domContext";
 
-// Layout components
 import Layout from "./pages/layout/Layout";
 import AuthLayout from "./pages/AuthLayout";
 
-// Page components
 import Auth from "./pages/auth/Auth";
+import Documentation from "./pages/doc/Doc";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Test from "./pages/test/Test";
 import Question from "./pages/question/Question";
 import Publish from "./pages/publish/Publish";
 
-// ============================================================================
-// Application Entry Point - Type-safe routing configuration
-// ============================================================================
-
-// Configure routing structure with proper TypeScript typing
-// Routes are organized by authentication requirement via AuthLayout wrapper
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      {/* Public routes - no authentication required */}
       <Route element={<AuthLayout authenticationRequired={false} />}>
-        <Route path="" element={<Auth />} /> {/* Login/Register page */}
+        <Route index element={<Auth />} />
       </Route>
 
-      {/* Protected routes - authentication required to access */}
-      <Route element={<AuthLayout authenticationRequired={true} />}>
-        <Route path="dashboard" element={<Dashboard />} /> {/* Main dashboard */}
-        <Route path="tests/create" element={<Test />} /> {/* Create new test */}
-        <Route path="tests/:id/questions" element={<Question />} /> {/* Manage questions */}
-        <Route path="tests/:id/publish" element={<Publish />} /> {/* Publish test */}
+      <Route path="doc" element={<Documentation />} />
+
+      <Route element={<AuthLayout authenticationRequired />}>
+        <Route path="dashboard" element={<Dashboard />} />
+
+        <Route path="tracking" element={<Tracking />} />
+
+        <Route path="tests/create" element={<Test />} />
+
+        <Route path="tests/:id/questions" element={<Question />} />
+
+        <Route path="tests/:id/publish" element={<Publish />} />
       </Route>
     </Route>
   )
 );
 
-// Mount React app to DOM
-// Wrapped with providers in order: Redux store -> Theme context -> DOM utilities -> Router
-const root = ReactDOM.createRoot(document.getElementById("root")!);
-
-root.render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <ThemeProvider>
       <DomProvider>

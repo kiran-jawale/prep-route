@@ -1,8 +1,4 @@
-// ============================================================================
-// Authentication Types - Comprehensive typing for auth features
-// ============================================================================
 
-// User data structure - represents authenticated user from backend
 export interface User {
   _id: string;
   userId: string;
@@ -10,25 +6,28 @@ export interface User {
   email: string;
 }
 
-// Authentication state in Redux store
 export interface AuthState {
   status: boolean;
   user: User | null;
 }
 
-// Login/Register request payload - what user sends to backend
-export interface AuthCredentials {
-  email: string;
+export interface LoginPayload {
+  identifier: string;
   password: string;
-  fullName?: string; // Optional for login, required for register
 }
 
-// API response from auth endpoints
+export interface RegisterPayload {
+  userId: string;
+  fullName: string;
+  email: string;
+  password: string;
+}
+
 export interface AuthResponse {
   success: boolean;
   message: string;
   data: {
     user: User;
-    token?: string; // Optional auth token if returned
+    accessToken?: string;
   };
 }

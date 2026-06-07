@@ -12,27 +12,20 @@ api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
 
-  console.log("REQUEST:", config);
-
   return config;
 });
 
 api.interceptors.response.use(
-  (response) => {
-    console.log("RESPONSE:", response);
+  (response) => response,
 
-    return response;
-  },
   async (error) => {
-    console.log("ERROR:", error);
-
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        const refreshResponse = await axios.post(
+        const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/auth/refresh-token`,
           {},
           {
@@ -40,12 +33,10 @@ api.interceptors.response.use(
           }
         );
 
-        const accessToken = refreshResponse.data.data.accessToken;
+        const accessToken = response.data.data.accessToken;
 
         localStorage.setItem("accessToken", accessToken);
-
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-
         return api(originalRequest);
       } catch {
         localStorage.removeItem("accessToken");

@@ -1,74 +1,66 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type {ReactNode} from 'react'
-// ============================================================================
-// Theme Context - Type-safe dark/light mode management
-// ============================================================================
+import type { ReactNode } from "react";
 
-// Valid theme values
 export type Theme = "light" | "dark";
 
-// Context value interface - defines what's available in context
+export type Font = "inter" | "poppins";
+
 interface ThemeContextType {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  font: Font;
   toggleTheme: () => void;
+  toggleFont: () => void;
 }
 
-// Create context with proper typing instead of `any`
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextType | null>(null);
 
-// Provider props interface
-interface ThemeProviderProps {
-  children: ReactNode;
-}
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>(
+    (localStorage.getItem("theme") as Theme) || "light"
+  );
 
-/**
- * ThemeProvider component - wraps app to provide theme functionality
- * Manages dark/light mode preference and persists to localStorage
- */
-export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  // Load theme from localStorage on mount, default to "light" if not set
-  // Type assertion: we know localStorage returns string or null, but we validate
-  const getInitialTheme = (): Theme => {
-    const stored = localStorage.getItem("theme");
-    return (stored === "dark" || stored === "light") ? stored : "light";
-  };
+  const [font, setFont] = useState<Font>(
+    (localStorage.getItem("font") as Font) || "inter"
+  );
 
-  const [theme, setTheme] = useState<Theme>(getInitialTheme());
-
-  // Persist theme changes to localStorage so preference survives page refresh
   useEffect(() => {
+    document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Toggle between light and dark themes with proper typing
-  const toggleTheme = (): void => {
+  useEffect(() => {
+    document.documentElement.dataset.font = font;
+    localStorage.setItem("font", font);
+  }, [font]);
+
+  const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  const value: ThemeContextType = {
-    theme,
-    setTheme,
-    toggleTheme,
+  const toggleFont = () => {
+    setFont((prev) => (prev === "inter" ? "poppins" : "inter"));
   };
 
   return (
-    <ThemeContext.Provider value={value}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        font,
+        toggleTheme,
+        toggleFont,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 };
 
-/**
- * Custom hook - use this in components to access theme state and controls
- * Example: const { theme, toggleTheme } = useTheme();
- *
- * Throws error if used outside ThemeProvider (good practice for context hooks)
- */
-export const useTheme = (): ThemeContextType => {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+
+  if (!context) {
+    throw new Error("useTheme must be used inside ThemeProvider");
   }
+
   return context;
 };

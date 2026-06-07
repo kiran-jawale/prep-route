@@ -1,6 +1,8 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+
 import { useSelector } from "react-redux";
-import type { RootState } from "../redux/redux";
+
+import type { RootState } from "../state/store";
 
 interface Props {
   authenticationRequired: boolean;
@@ -9,23 +11,15 @@ interface Props {
 const AuthLayout = ({ authenticationRequired }: Props) => {
   const authStatus = useSelector((state: RootState) => state.auth.status);
 
-  const location = useLocation();
-
-  if (authenticationRequired) {
-    return authStatus ? (
-      <Outlet />
-    ) : (
-      <Navigate
-        to="/"
-        replace
-        state={{
-          from: location,
-        }}
-      />
-    );
+  if (authenticationRequired && !authStatus) {
+    return <Navigate to="/" replace />;
   }
 
-  return authStatus ? <Navigate to="/dashboard" replace /> : <Outlet />;
+  if (!authenticationRequired && authStatus) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <Outlet />;
 };
 
 export default AuthLayout;
