@@ -13,8 +13,12 @@ import subTopicRouter from "./routers/subTopic.route.js";
 import testRouter from "./routers/test.route.js";
 import questionRouter from './routers/question.route.js'
 import CONFIG from "./constants/config.js";
+import ApiResponse from "./utils/apiResponse.js";
 
 const app = express();
+const healthController = (req, res) => {
+  return res.json(new ApiResponse(200,{message:"Server is listening..."}))
+}
 
 app.use(
   cors({
@@ -30,11 +34,7 @@ app.use(
   morgan(":method :url | :status | :response-time ms", { stream: morganStream })
 );
 
-app.get("/health", (req, res) => {
-  return res.status(200).json({
-    success: true,
-  });
-});
+app.get("/api/v1",healthController).get('/api/v1/health',healthController)
 
 app.use(CONFIG.API_VERSION+ "/auth", authRouter);
 

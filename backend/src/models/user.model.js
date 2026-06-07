@@ -1,4 +1,4 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/apiError.js";
@@ -37,6 +37,24 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+  }
+);
+
+userSchema.index(
+  {
+    userId: 1,
+  },
+  {
+    unique: true,
+  }
+);
+
+userSchema.index(
+  {
+    email: 1,
+  },
+  {
+    unique: true,
   }
 );
 
@@ -79,5 +97,5 @@ userSchema.methods.generateRefreshToken = async function () {
 };
 
 const User = mongoose.model("User", userSchema);
-export default User
-export {User}
+export default User;
+export { User };
