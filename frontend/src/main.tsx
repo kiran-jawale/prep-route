@@ -36,7 +36,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route element={<AuthLayout authenticationRequired={false} />}>
-        <Route index element={<Auth />} /> //cant access if logged in
+        <Route  path="" element={<Auth />} />
       </Route>
 
       <Route element={<AuthLayout authenticationRequired />}>
@@ -47,19 +47,18 @@ const router = createBrowserRouter(
         <Route path="tests/:id/publish" element={<Publish />} />
       </Route>
 
-     
+      <Route path="doc" element={<Doc />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="doc" element={<Doc />} /> {/* Assignment Docn */}
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <ErrorBoundary> //for err
-    <Provider store={store}> //state
+  <ErrorBoundary> 
+    <Provider store={store}>
       <ThemeProvider> 
-        <DomProvider> //for toast messages
-          <TestProvider> //context for current test
+        <DomProvider>
+          <TestProvider> 
             <RouterProvider router={router} />
           </TestProvider>
         </DomProvider>

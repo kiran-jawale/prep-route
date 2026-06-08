@@ -10,6 +10,8 @@ import Sidebar from "./parts/Sidebar";
 export default function Layout() {
   const dispatch = useDispatch<AppDispatch>();
   const authStatus = useSelector((state: RootState) => state.auth.status);
+
+  console.log("LAYOUT AUTH STATUS:", authStatus);
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
@@ -37,17 +39,11 @@ export default function Layout() {
     );
   }
 
-  const protectedRoutes = [
-  "/dashboard",
-  "/tracking",
-  "/tests",
-];
+  const protectedRoutes = ["/dashboard", "/tracking", "/tests"];
 
-const showSidebar =
-  authStatus &&
-  protectedRoutes.some((route) =>
-    location.pathname.startsWith(route)
-  );
+  const showSidebar =
+    authStatus &&
+    protectedRoutes.some((route) => location.pathname.startsWith(route));
 
   return (
     <div className="min-h-screen bg-zinc-50">
