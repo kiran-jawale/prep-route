@@ -1,6 +1,7 @@
 import Subject from "../models/subject.model.js";
 import ApiError from "../utils/apiError.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
+import { withMetrics } from "../utils/metricsLogger.js";
 
 class SubjectService {
   async getAllSubjects() {
@@ -36,17 +37,18 @@ class SubjectService {
       const subject = await Subject.findByIdAndUpdate(
         subjectId,
         {
-          $set: {
-            name: data.name,
-          },
+          $set: data.data,
         },
         {
           new: true,
+          runValidators: true,
         }
       );
+
       if (!subject) {
         throw new ApiError(404, UX_ERRORS.SUBJECT.NOT_FOUND);
       }
+
       return subject;
     });
   }

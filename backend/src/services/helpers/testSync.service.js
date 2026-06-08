@@ -1,4 +1,6 @@
+import CONFIG from "../../constants/config.js";
 import { Test } from "../../models/test.model.js";
+import {withMetrics} from '../../utils/metricsLogger.js'
 
 export const syncTestStatuses = async () => {
   return await withMetrics("SYNC_TEST_STATUSES", async () => {
@@ -34,5 +36,5 @@ export const syncTestStatuses = async () => {
         },
       }
     );
-  });
+  }, CONFIG.NODE_ENV !== "development"); //no logs on dev, due to nodemon restarts
 };

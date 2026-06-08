@@ -1,0 +1,127 @@
+{
+  "API_REQUESTS": [
+    {
+      "timestamp": "2026-06-08T06:59:03.815Z",
+      "log": "GET /api/v1/tests/6a24294889257e7db09bb83c | 401 | 8.224 ms"
+    },
+    {
+      "timestamp": "2026-06-08T06:59:12.511Z",
+      "log": "POST /api/v1/auth/login | 200 | 168.466 ms"
+    },
+    {
+      "timestamp": "2026-06-08T06:59:22.989Z",
+      "log": "GET /api/v1/tests/6a24294889257e7db09bb83c | 200 | 120.134 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:00:49.547Z",
+      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 43.414 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:01:53.509Z",
+      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 51.420 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:03:26.337Z",
+      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 46.761 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:03:57.251Z",
+      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 23.776 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:04:25.536Z",
+      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 200 | 88.403 ms"
+    },
+    {
+      "timestamp": "2026-06-08T07:04:37.606Z",
+      "log": "PATCH /api/v1/subjects/6a241552892aaa66e05bfc44 | 200 | 68.080 ms"
+    }
+  ],
+  "DB_OPS": {
+    "SYNC_TEST_STATUSES": [
+      {
+        "timestamp": "2026-06-08T06:16:17.812Z",
+        "latencyMs": 63.79
+      },
+      {
+        "timestamp": "2026-06-08T06:16:18.971Z",
+        "latencyMs": 39.41
+      },
+      {
+        "timestamp": "2026-06-08T06:16:20.002Z",
+        "latencyMs": 39.3
+      },
+      {
+        "timestamp": "2026-06-08T06:16:21.088Z",
+        "latencyMs": 51.95
+      },
+      {
+        "timestamp": "2026-06-08T06:16:22.232Z",
+        "latencyMs": 38.95
+      },
+      {
+        "timestamp": "2026-06-08T06:16:23.348Z",
+        "latencyMs": 34.45
+      },
+      {
+        "timestamp": "2026-06-08T06:16:24.545Z",
+        "latencyMs": 39.71
+      },
+      {
+        "timestamp": "2026-06-08T06:16:25.779Z",
+        "latencyMs": 38.98
+      },
+      {
+        "timestamp": "2026-06-08T06:16:26.985Z",
+        "latencyMs": 44.75
+      },
+      {
+        "timestamp": "2026-06-08T06:16:28.441Z",
+        "latencyMs": 40.54
+      },
+      {
+        "timestamp": "2026-06-08T06:16:29.974Z",
+        "latencyMs": 92.78
+      },
+      {
+        "timestamp": "2026-06-08T06:16:31.060Z",
+        "latencyMs": 34.87
+      },
+      {
+        "timestamp": "2026-06-08T06:16:32.206Z",
+        "latencyMs": 44.52
+      },
+      {
+        "timestamp": "2026-06-08T06:16:33.442Z",
+        "latencyMs": 35.63
+      },
+      {
+        "timestamp": "2026-06-08T06:16:34.814Z",
+        "latencyMs": 72.55
+      },
+      {
+        "timestamp": "2026-06-08T06:16:36.396Z",
+        "latencyMs": 40.8
+      }
+    ],
+    "GET_TEST_BY_ID": [
+      {
+        "timestamp": "2026-06-08T06:59:22.944Z",
+        "latencyMs": 73.8
+      }
+    ],
+    "UPDATE_TOPIC": [
+      {
+        "timestamp": "2026-06-08T07:04:25.500Z",
+        "latencyMs": 33.19
+      }
+    ],
+    "UPDATE_SUBJECT": [
+      {
+        "timestamp": "2026-06-08T07:04:37.576Z",
+        "latencyMs": 24.54
+      }
+    ]
+  },
+  "OTHER_LOGS": {}
+}

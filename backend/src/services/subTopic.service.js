@@ -1,6 +1,7 @@
 import SubTopic from "../models/subTopic.model.js";
 import ApiError from "../utils/apiError.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
+import { withMetrics } from "../utils/metricsLogger.js";
 
 class SubTopicService {
   async getSubTopicsByTopic(topicId) {

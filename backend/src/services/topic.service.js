@@ -1,6 +1,7 @@
 import Topic from "../models/topic.model.js";
 import ApiError from "../utils/apiError.js";
 import { UX_ERRORS } from "../constants/uxErrors.js";
+import { withMetrics } from "../utils/metricsLogger.js";
 
 class TopicService {
   async getTopicsBySubject(subjectId) {
@@ -36,18 +37,24 @@ class TopicService {
 
   async updateTopic(topicId, data) {
     return await withMetrics("UPDATE_TOPIC", async () => {
+      
       const topic = await Topic.findByIdAndUpdate(
         topicId,
         {
-          $set: data,
+          $set: {
+            name: data.name,
+          },
         },
         {
           new: true,
+          runValidators: true,
         }
       );
+
       if (!topic) {
         throw new ApiError(404, UX_ERRORS.TOPIC.NOT_FOUND);
       }
+
       return topic;
     });
   }

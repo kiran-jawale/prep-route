@@ -14,14 +14,6 @@ const subjectSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-subjectSchema.index(
-  {
-    name: 1,
-  },
-  {
-    unique: true,
-  }
-);
 
 const Subject = mongoose.model("Subject", subjectSchema);
 export { Subject };

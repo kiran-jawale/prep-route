@@ -1,42 +1,62 @@
-import type { ButtonHTMLAttributes } from "react";
-
-type Variant = "primary" | "secondary" | "danger";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
+  children: ReactNode;
+  loading?: boolean;
+  variant?: "primary" | "secondary" | "danger";
 }
 
-const Button = ({
+export default function Button({
   children,
+  loading = false,
   variant = "primary",
   className = "",
+  disabled,
   ...props
-}: Props) => {
+}: Props) {
   const variants = {
-    primary: "bg-[#6475F7] hover:bg-[#5868F0] text-white",
+    primary: "bg-emerald-600 hover:bg-emerald-700 text-white",
 
-    secondary: "bg-zinc-100 hover:bg-zinc-200 text-zinc-800",
+    secondary: "bg-zinc-900 hover:bg-black text-white",
 
-    danger: "bg-red-500 hover:bg-red-600 text-white",
+    danger: "bg-red-600 hover:bg-red-700 text-white",
   };
 
   return (
     <button
-      {...props}
+      disabled={disabled || loading}
       className={`
-        h-12
-        px-6
+        inline-flex
+        items-center
+        justify-center
+        gap-2
         rounded-xl
+        px-5
+        py-3
         font-medium
-        transition
-        disabled:opacity-50
+        transition-all
+        disabled:cursor-wait
+        disabled:opacity-60
         ${variants[variant]}
         ${className}
       `}
+      {...props}
     >
+      {loading && (
+        <span
+          className="
+            h-4
+            w-4
+            animate-spin
+            rounded-full
+            border-2
+            border-white
+            border-t-transparent
+          "
+        />
+      )}
+
       {children}
     </button>
   );
-};
-
-export default Button;
+}

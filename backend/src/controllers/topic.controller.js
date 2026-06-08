@@ -27,6 +27,7 @@ export const createTopic = asyncHandler(async (req, res) => {
 });
 
 export const updateTopic = asyncHandler(async (req, res) => {
+ 
   const topic = await topicService.updateTopic(req.params.id, req.body);
 
   return res

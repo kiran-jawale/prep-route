@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Outlet, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import authService from "../../services/auth.service";
 import { login, logout } from "../../state/slices/authSlice";
+import type { AppDispatch, RootState } from "../../state/store";
 import Sidebar from "./parts/Sidebar";
-
-import type { AppDispatch } from "../../state/store";
 
 export default function Layout() {
   const dispatch = useDispatch<AppDispatch>();
-
+  const authStatus = useSelector((state: RootState) => state.auth.status);
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,11 +37,23 @@ export default function Layout() {
     );
   }
 
+  const protectedRoutes = [
+  "/dashboard",
+  "/tracking",
+  "/tests",
+];
+
+const showSidebar =
+  authStatus &&
+  protectedRoutes.some((route) =>
+    location.pathname.startsWith(route)
+  );
+
   return (
     <div className="min-h-screen bg-zinc-50">
-      <Sidebar />
+      {showSidebar && <Sidebar />}
 
-      <main className="lg:ml-72">
+      <main className={showSidebar ? "lg:ml-72" : ""}>
         <Outlet />
       </main>
     </div>

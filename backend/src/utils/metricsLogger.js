@@ -2,42 +2,54 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { CONFIG } from "../constants/config.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const INSIGHTS_FILE = path.join(__dirname, "../../insights/insights.json");
 
+const DEFAULT_INSIGHTS = {
+  API_REQUESTS: [],
+  DB_OPS: {},
+  OTHER_LOGS: {},
+};
+
 const loadInsights = () => {
   if (!fs.existsSync(INSIGHTS_FILE)) {
-    return {
-      API_REQUESTS: [],
-      DB_OPS: {},
-      OTHER_LOGS: {},
-    };
+    return DEFAULT_INSIGHTS;
   }
 
   const content = fs.readFileSync(INSIGHTS_FILE, "utf-8");
 
   if (!content) {
-    return {
-      API_REQUESTS: [],
-      DB_OPS: {},
-      OTHER_LOGS: {},
-    };
+    return DEFAULT_INSIGHTS;
   }
 
-  return JSON.parse(content);
+  try {
+    return JSON.parse(content);
+  } catch {
+    return DEFAULT_INSIGHTS;
+  }
 };
 
 const saveInsights = (data) => {
   fs.writeFileSync(INSIGHTS_FILE, JSON.stringify(data, null, 2));
 };
 
-export const withMetrics = async (operationName, asyncFunction) => {
+export const withMetrics = async (
+  operationName,
+  asyncFunction,
+  enabled = CONFIG.GET_METRICS
+) => {
   const start = performance.now();
 
   try {
     const result = await asyncFunction();
+
+    if (!enabled) {
+      return result;
+    }
 
     const end = performance.now();
 
@@ -66,11 +78,19 @@ export const withMetrics = async (operationName, asyncFunction) => {
   }
 };
 
-export const withOtherMetrics = async (operationName, asyncFunction) => {
+export const withOtherMetrics = async (
+  operationName,
+  asyncFunction,
+  enabled = CONFIG.GET_METRICS
+) => {
   const start = performance.now();
 
   try {
     const result = await asyncFunction();
+
+    if (!enabled) {
+      return result;
+    }
 
     const end = performance.now();
 
@@ -103,7 +123,11 @@ export const morganStream = {
   write: (message) => {
     const cleanMessage = message.trim();
 
-    console.log(`\n[API LOG] ${cleanMessage}\n`);
+    console.log(`[API LOG] ${cleanMessage}`);
+
+    if (!CONFIG.GET_METRICS) {
+      return;
+    }
 
     try {
       const data = loadInsights();

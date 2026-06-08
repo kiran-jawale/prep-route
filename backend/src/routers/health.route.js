@@ -1,4 +1,4 @@
-import {CONFIG} from '../constants/config'
+import {CONFIG} from '../constants/config.js'
 
 const formatUptime = (seconds) => {
   const days = Math.floor(seconds / 86400);
