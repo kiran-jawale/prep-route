@@ -49,7 +49,7 @@ const testSchema = new mongoose.Schema(
     publishMode: {
       type: String,
       enum: ["immediate", "scheduled"],
-      default: "immediate",
+      default: null,
     },
     scheduledAt: {
       type: Date,

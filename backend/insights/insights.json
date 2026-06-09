@@ -1,40 +1,404 @@
 {
   "API_REQUESTS": [
     {
-      "timestamp": "2026-06-08T06:59:03.815Z",
-      "log": "GET /api/v1/tests/6a24294889257e7db09bb83c | 401 | 8.224 ms"
+      "timestamp": "2026-06-08T09:51:53.436Z",
+      "log": "GET /favicon.ico | 404 | 2.987 ms"
     },
     {
-      "timestamp": "2026-06-08T06:59:12.511Z",
-      "log": "POST /api/v1/auth/login | 200 | 168.466 ms"
+      "timestamp": "2026-06-08T09:52:45.010Z",
+      "log": "GET /api/v1 | 200 | 6.149 ms"
     },
     {
-      "timestamp": "2026-06-08T06:59:22.989Z",
-      "log": "GET /api/v1/tests/6a24294889257e7db09bb83c | 200 | 120.134 ms"
+      "timestamp": "2026-06-08T10:27:27.745Z",
+      "log": "GET /api/v1/auth/me | 401 | 120.698 ms"
     },
     {
-      "timestamp": "2026-06-08T07:00:49.547Z",
-      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 43.414 ms"
+      "timestamp": "2026-06-08T10:34:07.810Z",
+      "log": "GET /api/v1/auth/me | 401 | 57.947 ms"
     },
     {
-      "timestamp": "2026-06-08T07:01:53.509Z",
-      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 51.420 ms"
+      "timestamp": "2026-06-08T10:34:34.676Z",
+      "log": "GET /api/v1/auth/me | 401 | 36.045 ms"
     },
     {
-      "timestamp": "2026-06-08T07:03:26.337Z",
-      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 46.761 ms"
+      "timestamp": "2026-06-08T10:35:03.130Z",
+      "log": "GET /api/v1/auth/me | 401 | 6.478 ms"
     },
     {
-      "timestamp": "2026-06-08T07:03:57.251Z",
-      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 500 | 23.776 ms"
+      "timestamp": "2026-06-08T10:35:14.948Z",
+      "log": "GET /api/v1/auth/me | 401 | 20.102 ms"
     },
     {
-      "timestamp": "2026-06-08T07:04:25.536Z",
-      "log": "PATCH /api/v1/topics/6a2422991e15140e6f082591 | 200 | 88.403 ms"
+      "timestamp": "2026-06-08T10:35:15.129Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 3.053 ms"
     },
     {
-      "timestamp": "2026-06-08T07:04:37.606Z",
-      "log": "PATCH /api/v1/subjects/6a241552892aaa66e05bfc44 | 200 | 68.080 ms"
+      "timestamp": "2026-06-08T10:35:30.299Z",
+      "log": "POST /api/v1/auth/login | 200 | 95.671 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:36:39.733Z",
+      "log": "GET /api/v1/auth/me | 200 | 43.817 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:36:46.535Z",
+      "log": "GET /api/v1/auth/me | 304 | 82.262 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:36:58.467Z",
+      "log": "GET /api/v1/auth/me | 304 | 66.487 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:38:19.029Z",
+      "log": "GET /api/v1/auth/me | 304 | 98.938 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:38:32.847Z",
+      "log": "GET /api/v1/auth/me | 401 | 2.953 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:38:32.888Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 1.327 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:38:48.548Z",
+      "log": "GET /api/v1/auth/me | 401 | 3.652 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:38:48.585Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 1.422 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:40:31.237Z",
+      "log": "GET /api/v1/auth/me | 304 | 70.991 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:42:38.466Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.210 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:42:59.998Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.818 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:44:43.543Z",
+      "log": "GET /api/v1/auth/me | 304 | 25.456 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:44:55.504Z",
+      "log": "GET /api/v1/auth/me | 304 | 14.321 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:45:26.397Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.976 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:45:34.660Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.264 ms"
+    },
+    {
+      "timestamp": "2026-06-08T10:52:39.480Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.851 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:25:40.119Z",
+      "log": "GET /api/v1/auth/me | 304 | 32.673 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:25:44.381Z",
+      "log": "GET /api/v1/auth/me | 304 | 22.485 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:25:45.674Z",
+      "log": "GET /api/v1/auth/me | 304 | 17.584 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:25:55.588Z",
+      "log": "GET /api/v1/auth/me | 401 | 7.765 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:25:55.653Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 1.371 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:26:02.334Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.165 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:26:28.318Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.939 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:28:52.886Z",
+      "log": "GET /api/v1/auth/me | 304 | 30.999 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:29:00.983Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.997 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:29:02.273Z",
+      "log": "GET /api/v1/auth/me | 200 | 36.216 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:29:02.360Z",
+      "log": "GET /api/v1/auth/me | 200 | 12.727 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:29:03.937Z",
+      "log": "GET /api/v1/auth/me | 304 | 16.055 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:34:34.413Z",
+      "log": "GET /api/v1/auth/me | 304 | 42.047 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:34:36.804Z",
+      "log": "GET /api/v1/auth/me | 304 | 22.117 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:34:40.411Z",
+      "log": "POST /api/v1/auth/logout | 200 | 37.746 ms"
+    },
+    {
+      "timestamp": "2026-06-08T13:34:52.803Z",
+      "log": "POST /api/v1/auth/login | 200 | 67.800 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:27:48.369Z",
+      "log": "GET /api/v1/auth/me | 200 | 33.181 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:28:32.694Z",
+      "log": "POST /api/v1/auth/logout | 200 | 38.412 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:28:42.377Z",
+      "log": "POST /api/v1/auth/login | 200 | 71.497 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:29:58.523Z",
+      "log": "GET /api/v1/auth/me | 200 | 23.486 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:31:14.916Z",
+      "log": "GET /api/v1/auth/me | 304 | 19.064 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:37:27.703Z",
+      "log": "GET /api/v1/auth/me | 304 | 54.410 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:38:12.555Z",
+      "log": "GET /api/v1/auth/me | 304 | 17.809 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:53:45.785Z",
+      "log": "GET /api/v1/auth/me | 304 | 76.642 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:56:55.941Z",
+      "log": "GET /api/v1/auth/me | 304 | 35.515 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:58:51.608Z",
+      "log": "GET /api/v1/auth/me | 304 | 101.048 ms"
+    },
+    {
+      "timestamp": "2026-06-08T14:58:55.732Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.652 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:00:10.926Z",
+      "log": "GET /api/v1/auth/me | 304 | 20.401 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:00:35.011Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.629 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:02:12.681Z",
+      "log": "GET /api/v1/auth/me | 304 | 16.351 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:42:50.160Z",
+      "log": "GET /api/v1/auth/me | 304 | 92.845 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:43:02.680Z",
+      "log": "GET /api/v1/auth/me | 304 | 17.357 ms"
+    },
+    {
+      "timestamp": "2026-06-08T15:43:34.351Z",
+      "log": "POST /api/v1/auth/logout | 200 | 38.609 ms"
+    },
+    {
+      "timestamp": "2026-06-09T09:48:16.311Z",
+      "log": "GET /api/v1/auth/me | 401 | 7.746 ms"
+    },
+    {
+      "timestamp": "2026-06-09T09:48:16.347Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 2.338 ms"
+    },
+    {
+      "timestamp": "2026-06-09T09:48:27.356Z",
+      "log": "POST /api/v1/auth/login | 200 | 77.651 ms"
+    },
+    {
+      "timestamp": "2026-06-09T09:48:40.105Z",
+      "log": "GET /api/v1/auth/me | 200 | 16.997 ms"
+    },
+    {
+      "timestamp": "2026-06-09T09:52:32.885Z",
+      "log": "GET /api/v1/auth/me | 304 | 17.501 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:05:26.023Z",
+      "log": "GET /api/v1/auth/me | 304 | 46.389 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:05:31.928Z",
+      "log": "GET /api/v1/auth/me | 304 | 22.695 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:05:36.237Z",
+      "log": "GET /api/v1/auth/me | 304 | 40.844 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:05:40.879Z",
+      "log": "GET /api/v1/auth/me | 304 | 20.263 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:05:45.428Z",
+      "log": "GET /api/v1/auth/me | 304 | 24.202 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:15:22.567Z",
+      "log": "GET /api/v1/auth/me | 304 | 25.169 ms"
+    },
+    {
+      "timestamp": "2026-06-09T10:17:31.338Z",
+      "log": "GET /api/v1/auth/me | 304 | 25.249 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:32:25.343Z",
+      "log": "GET /api/v1/auth/me | 304 | 99.768 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:39:22.218Z",
+      "log": "GET /api/v1/auth/me | - | - ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:39:22.445Z",
+      "log": "GET /api/v1/auth/me | 200 | 8.464 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:39:24.127Z",
+      "log": "GET /api/v1/auth/me | 304 | 23.266 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:56:41.889Z",
+      "log": "GET /api/v1/auth/me | 304 | 83.400 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:56:45.490Z",
+      "log": "POST /api/v1/auth/logout | 200 | 26.757 ms"
+    },
+    {
+      "timestamp": "2026-06-09T11:56:55.344Z",
+      "log": "POST /api/v1/auth/login | 200 | 58.428 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:30.304Z",
+      "log": "GET /api/v1/auth/me | 200 | 51.961 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:43.603Z",
+      "log": "GET /api/v1/auth/me | 304 | 16.049 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:51.632Z",
+      "log": "GET /api/v1/auth/me | 304 | 26.441 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:52.950Z",
+      "log": "GET /api/v1/auth/me | 304 | 23.843 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:54.099Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.715 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:00:55.645Z",
+      "log": "GET /api/v1/auth/me | 304 | 26.761 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:01:01.649Z",
+      "log": "GET /api/v1/auth/me | 304 | 16.553 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:01:03.612Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.133 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:01:05.230Z",
+      "log": "GET /api/v1/auth/me | 304 | 23.460 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:01:15.629Z",
+      "log": "GET /api/v1/auth/me | 304 | 32.734 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:01:32.616Z",
+      "log": "GET /api/v1/auth/me | 304 | 21.318 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:02:58.522Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.704 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:15:39.639Z",
+      "log": "GET /api/v1/auth/me | 304 | 26.124 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:17:52.654Z",
+      "log": "GET /api/v1/auth/me | 304 | 36.798 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:31.614Z",
+      "log": "GET /api/v1/auth/me | 304 | 19.931 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:34.429Z",
+      "log": "GET /api/v1/auth/me | 304 | 36.624 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:38.687Z",
+      "log": "GET /api/v1/auth/me | 304 | 36.387 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:44.603Z",
+      "log": "GET /api/v1/auth/me | 304 | 14.091 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:51.620Z",
+      "log": "GET /api/v1/auth/me | 304 | 18.059 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:18:59.148Z",
+      "log": "GET /api/v1/auth/me | 304 | 24.343 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:19:25.649Z",
+      "log": "GET /api/v1/auth/me | 304 | 26.686 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:19:33.704Z",
+      "log": "GET /api/v1/auth/me | 304 | 23.855 ms"
+    },
+    {
+      "timestamp": "2026-06-09T12:19:36.591Z",
+      "log": "GET /api/v1/auth/me | 304 | 15.091 ms"
     }
   ],
   "DB_OPS": {
@@ -108,6 +472,10 @@
       {
         "timestamp": "2026-06-08T06:59:22.944Z",
         "latencyMs": 73.8
+      },
+      {
+        "timestamp": "2026-06-08T09:11:34.627Z",
+        "latencyMs": 103.82
       }
     ],
     "UPDATE_TOPIC": [
@@ -120,6 +488,338 @@
       {
         "timestamp": "2026-06-08T07:04:37.576Z",
         "latencyMs": 24.54
+      }
+    ],
+    "GET_MY_PROFILE": [
+      {
+        "timestamp": "2026-06-08T09:04:35.582Z",
+        "latencyMs": 2.08
+      },
+      {
+        "timestamp": "2026-06-08T10:36:39.698Z",
+        "latencyMs": 2.9
+      },
+      {
+        "timestamp": "2026-06-08T10:36:46.471Z",
+        "latencyMs": 6.02
+      },
+      {
+        "timestamp": "2026-06-08T10:36:58.441Z",
+        "latencyMs": 4.43
+      },
+      {
+        "timestamp": "2026-06-08T10:38:18.968Z",
+        "latencyMs": 6.08
+      },
+      {
+        "timestamp": "2026-06-08T10:40:31.136Z",
+        "latencyMs": 14.14
+      },
+      {
+        "timestamp": "2026-06-08T10:42:38.460Z",
+        "latencyMs": 1.51
+      },
+      {
+        "timestamp": "2026-06-08T10:42:59.982Z",
+        "latencyMs": 1.68
+      },
+      {
+        "timestamp": "2026-06-08T10:44:43.528Z",
+        "latencyMs": 2.06
+      },
+      {
+        "timestamp": "2026-06-08T10:44:55.498Z",
+        "latencyMs": 1.77
+      },
+      {
+        "timestamp": "2026-06-08T10:45:26.386Z",
+        "latencyMs": 2.16
+      },
+      {
+        "timestamp": "2026-06-08T10:45:34.650Z",
+        "latencyMs": 3.01
+      },
+      {
+        "timestamp": "2026-06-08T10:52:39.474Z",
+        "latencyMs": 3.92
+      },
+      {
+        "timestamp": "2026-06-08T13:25:40.113Z",
+        "latencyMs": 1.64
+      },
+      {
+        "timestamp": "2026-06-08T13:25:44.362Z",
+        "latencyMs": 2.48
+      },
+      {
+        "timestamp": "2026-06-08T13:25:45.669Z",
+        "latencyMs": 1.64
+      },
+      {
+        "timestamp": "2026-06-08T13:26:02.320Z",
+        "latencyMs": 2.11
+      },
+      {
+        "timestamp": "2026-06-08T13:26:28.304Z",
+        "latencyMs": 1.76
+      },
+      {
+        "timestamp": "2026-06-08T13:28:52.874Z",
+        "latencyMs": 1.77
+      },
+      {
+        "timestamp": "2026-06-08T13:29:00.973Z",
+        "latencyMs": 1.55
+      },
+      {
+        "timestamp": "2026-06-08T13:29:02.240Z",
+        "latencyMs": 3.55
+      },
+      {
+        "timestamp": "2026-06-08T13:29:02.353Z",
+        "latencyMs": 5.7
+      },
+      {
+        "timestamp": "2026-06-08T13:29:03.930Z",
+        "latencyMs": 1.95
+      },
+      {
+        "timestamp": "2026-06-08T13:34:34.404Z",
+        "latencyMs": 1.85
+      },
+      {
+        "timestamp": "2026-06-08T13:34:36.796Z",
+        "latencyMs": 3.81
+      },
+      {
+        "timestamp": "2026-06-08T14:27:48.362Z",
+        "latencyMs": 1.89
+      },
+      {
+        "timestamp": "2026-06-08T14:29:58.508Z",
+        "latencyMs": 3.36
+      },
+      {
+        "timestamp": "2026-06-08T14:31:14.908Z",
+        "latencyMs": 3.65
+      },
+      {
+        "timestamp": "2026-06-08T14:37:27.684Z",
+        "latencyMs": 2.05
+      },
+      {
+        "timestamp": "2026-06-08T14:38:12.542Z",
+        "latencyMs": 1.8
+      },
+      {
+        "timestamp": "2026-06-08T14:53:45.772Z",
+        "latencyMs": 2.68
+      },
+      {
+        "timestamp": "2026-06-08T14:56:55.933Z",
+        "latencyMs": 3.87
+      },
+      {
+        "timestamp": "2026-06-08T14:58:51.591Z",
+        "latencyMs": 1.78
+      },
+      {
+        "timestamp": "2026-06-08T14:58:55.718Z",
+        "latencyMs": 1.87
+      },
+      {
+        "timestamp": "2026-06-08T15:00:10.921Z",
+        "latencyMs": 1.86
+      },
+      {
+        "timestamp": "2026-06-08T15:00:35.005Z",
+        "latencyMs": 1.68
+      },
+      {
+        "timestamp": "2026-06-08T15:02:12.676Z",
+        "latencyMs": 1.81
+      },
+      {
+        "timestamp": "2026-06-08T15:42:50.145Z",
+        "latencyMs": 5.55
+      },
+      {
+        "timestamp": "2026-06-08T15:43:02.671Z",
+        "latencyMs": 1.42
+      },
+      {
+        "timestamp": "2026-06-09T09:48:40.091Z",
+        "latencyMs": 1.62
+      },
+      {
+        "timestamp": "2026-06-09T09:52:32.879Z",
+        "latencyMs": 1.62
+      },
+      {
+        "timestamp": "2026-06-09T10:05:26.014Z",
+        "latencyMs": 2.05
+      },
+      {
+        "timestamp": "2026-06-09T10:05:31.923Z",
+        "latencyMs": 1.83
+      },
+      {
+        "timestamp": "2026-06-09T10:05:36.203Z",
+        "latencyMs": 4.75
+      },
+      {
+        "timestamp": "2026-06-09T10:05:40.874Z",
+        "latencyMs": 1.72
+      },
+      {
+        "timestamp": "2026-06-09T10:05:45.414Z",
+        "latencyMs": 1.82
+      },
+      {
+        "timestamp": "2026-06-09T10:15:22.555Z",
+        "latencyMs": 1.82
+      },
+      {
+        "timestamp": "2026-06-09T10:17:31.326Z",
+        "latencyMs": 1.65
+      },
+      {
+        "timestamp": "2026-06-09T11:32:25.327Z",
+        "latencyMs": 2.12
+      },
+      {
+        "timestamp": "2026-06-09T11:39:22.290Z",
+        "latencyMs": 13.81
+      },
+      {
+        "timestamp": "2026-06-09T11:39:22.430Z",
+        "latencyMs": 1.92
+      },
+      {
+        "timestamp": "2026-06-09T11:39:24.111Z",
+        "latencyMs": 1.68
+      },
+      {
+        "timestamp": "2026-06-09T11:56:41.873Z",
+        "latencyMs": 3.71
+      },
+      {
+        "timestamp": "2026-06-09T12:00:30.283Z",
+        "latencyMs": 2.56
+      },
+      {
+        "timestamp": "2026-06-09T12:00:43.599Z",
+        "latencyMs": 1.75
+      },
+      {
+        "timestamp": "2026-06-09T12:00:51.615Z",
+        "latencyMs": 3.15
+      },
+      {
+        "timestamp": "2026-06-09T12:00:52.939Z",
+        "latencyMs": 1.65
+      },
+      {
+        "timestamp": "2026-06-09T12:00:54.092Z",
+        "latencyMs": 3.04
+      },
+      {
+        "timestamp": "2026-06-09T12:00:55.635Z",
+        "latencyMs": 1.91
+      },
+      {
+        "timestamp": "2026-06-09T12:01:01.644Z",
+        "latencyMs": 1.82
+      },
+      {
+        "timestamp": "2026-06-09T12:01:03.604Z",
+        "latencyMs": 1.63
+      },
+      {
+        "timestamp": "2026-06-09T12:01:05.220Z",
+        "latencyMs": 2.45
+      },
+      {
+        "timestamp": "2026-06-09T12:01:15.603Z",
+        "latencyMs": 3.47
+      },
+      {
+        "timestamp": "2026-06-09T12:01:32.610Z",
+        "latencyMs": 3.52
+      },
+      {
+        "timestamp": "2026-06-09T12:02:58.506Z",
+        "latencyMs": 1.79
+      },
+      {
+        "timestamp": "2026-06-09T12:15:39.631Z",
+        "latencyMs": 1.86
+      },
+      {
+        "timestamp": "2026-06-09T12:17:52.648Z",
+        "latencyMs": 1.69
+      },
+      {
+        "timestamp": "2026-06-09T12:18:31.609Z",
+        "latencyMs": 3.46
+      },
+      {
+        "timestamp": "2026-06-09T12:18:34.414Z",
+        "latencyMs": 2.3
+      },
+      {
+        "timestamp": "2026-06-09T12:18:38.679Z",
+        "latencyMs": 6.55
+      },
+      {
+        "timestamp": "2026-06-09T12:18:44.599Z",
+        "latencyMs": 1.54
+      },
+      {
+        "timestamp": "2026-06-09T12:18:51.614Z",
+        "latencyMs": 1.7
+      },
+      {
+        "timestamp": "2026-06-09T12:18:59.137Z",
+        "latencyMs": 1.59
+      },
+      {
+        "timestamp": "2026-06-09T12:19:25.637Z",
+        "latencyMs": 2.02
+      },
+      {
+        "timestamp": "2026-06-09T12:19:33.685Z",
+        "latencyMs": 2.49
+      },
+      {
+        "timestamp": "2026-06-09T12:19:36.584Z",
+        "latencyMs": 1.55
+      }
+    ],
+    "GET_ALL_TESTS": [
+      {
+        "timestamp": "2026-06-08T09:11:10.632Z",
+        "latencyMs": 35.99
+      }
+    ],
+    "CREATE_TEST": [
+      {
+        "timestamp": "2026-06-08T09:12:31.109Z",
+        "latencyMs": 18.1
+      },
+      {
+        "timestamp": "2026-06-08T09:13:02.458Z",
+        "latencyMs": 32.84
+      },
+      {
+        "timestamp": "2026-06-08T09:13:20.951Z",
+        "latencyMs": 12.36
+      }
+    ],
+    "SAVE_QUESTIONS": [
+      {
+        "timestamp": "2026-06-08T09:14:12.717Z",
+        "latencyMs": 38.99
       }
     ]
   },

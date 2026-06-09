@@ -15,7 +15,7 @@ export default function Button({
   ...props
 }: Props) {
   const variants = {
-    primary: "bg-emerald-600 hover:bg-emerald-700 text-white",
+    primary: "bg-[#6475F7] hover:bg-[#5455FF] text-white",
 
     secondary: "bg-zinc-900 hover:bg-black text-white",
 

@@ -37,7 +37,6 @@ export default function Login() {
 
     if (!result.success) {
       addToast(result.error.issues[0]?.message || "Validation Failed", "error");
-
       return;
     }
 
@@ -66,33 +65,59 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input
-        placeholder="User ID or Email"
-        value={form.identifier}
-        onChange={(e) =>
-          setForm({
-            ...form,
-            identifier: e.target.value,
-          })
-        }
-      />
+    <>
+      <div className="mb-10">
+        <img src="/company-logo.png" alt="PrepRoute" className="h-18 ml-0 w-auto" />
 
-      <Input
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={(e) =>
-          setForm({
-            ...form,
-            password: e.target.value,
-          })
-        }
-      />
+        <h2 className="mt-8 text-3xl font-semibold text-zinc-800">Login</h2>
 
-      <Button type="submit" loading={loading} className="w-full">
-        Login
-      </Button>
-    </form>
+        <p className="mt-3 text-zinc-500">
+          Use your company provided login credentials
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label className="mb-2 block font-medium text-zinc-700">
+            User ID
+          </label>
+
+          <Input
+            placeholder="Enter User ID"
+            value={form.identifier}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                identifier: e.target.value,
+              })
+            }
+          />
+        </div>
+
+        <div>
+          <label className="mb-2 block font-medium text-zinc-700">
+            Password
+          </label>
+
+          <Input
+            type="password"
+            placeholder="Enter Password"
+            value={form.password}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                password: e.target.value,
+              })
+            }
+          />
+        </div>
+
+        {/* <p className="text-sm text-[#6475F7]">Registered?</p> */}
+
+        <Button type="submit" loading={loading} className="w-full">
+          Login
+        </Button>
+      </form>
+    </>
   );
 }

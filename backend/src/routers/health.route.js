@@ -15,7 +15,7 @@ const healthController = (req, res) => {
     success: true,
     message: "Server healthy",
     data: {
-      appName: APP_NAME,
+      appName: CONFIG.APP_NAME,
       apiVersion: CONFIG.API_VERSION,
       environment: process.env.NODE_ENV,
       uptimeSeconds: Math.floor(uptime),

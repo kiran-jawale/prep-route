@@ -36,109 +36,94 @@ class TestService {
     });
   }
 
-  async createTest(userId, data) {
-    return await withMetrics("CREATE_TEST", async () => {
-      const now = new Date();
-
-      const testName = data.name;
-
-      const test = await Test.findOne({
-        name: testName,
-        userId,
-      });
-
-      if (test) {
-        throw new ApiError(404, "Already Exists");
-      }
-
-      let status = "draft";
-      let publishedAt = null;
-      let scheduledAt = null;
-      let availableUntil = null;
-
-      if (data.publishMode === "immediate") {
-        status = "live";
-        publishedAt = now;
-      }
-
-      if (data.publishMode === "scheduled") {
-        scheduledAt = new Date(data.scheduledAt);
-      }
-
-      if (data.availabilityDays) {
-        const baseDate = data.publishMode === "scheduled" ? scheduledAt : now;
-
-        availableUntil = new Date(
-          baseDate.getTime() + data.availabilityDays * 24 * 60 * 60 * 1000
-        );
-      }
-
-      return await Test.create({
-        userId,
-        name: data.name,
-        category: data.category,
-        subjectId: data.subjectId,
-        topics: data.topics || [],
-        subTopics: data.subTopics || [],
-        correctMarks: data.correctMarks,
-        wrongMarks: data.wrongMarks,
-        unattemptMarks: data.unattemptMarks,
-        difficulty: data.difficulty,
-        totalTime: data.totalTime || 0,
-        totalMarks: data.totalMarks || 0,
-        totalQuestions: data.totalQuestions || 0,
-        publishMode: data.publishMode,
-        scheduledAt,
-        publishedAt,
-        availableUntil,
-        status,
-      });
+async createTest(userId, data) {
+  return await withMetrics("CREATE_TEST", async () => {
+    const existingTest = await Test.findOne({
+      name: data.name,
+      userId,
     });
-  }
 
-  async updateTest(testId, userId, data) {
-    return await withMetrics("UPDATE_TEST", async () => {
-      const updateData = { ...data };
+    if (existingTest) {
+      throw new ApiError(409, "Already Exists");
+    }
 
-      if (data.availabilityDays) {
-        updateData.availableUntil = new Date(
-          Date.now() + data.availabilityDays * 24 * 60 * 60 * 1000
-        );
-      }
+    return await Test.create({
+      userId,
+      name: data.name,
+      category: data.category,
+      subjectId: data.subjectId,
+      topics: data.topics || [],
+      subTopics: data.subTopics || [],
+      correctMarks: data.correctMarks,
+      wrongMarks: data.wrongMarks,
+      unattemptMarks: data.unattemptMarks,
+      difficulty: data.difficulty,
+      totalTime: data.totalTime || 0,
+      totalMarks: data.totalMarks || 0,
+      totalQuestions: data.totalQuestions || 0,
 
-      if (data.publishMode === "scheduled") {
-        updateData.status = "draft";
-        updateData.scheduledAt = new Date(data.scheduledAt);
-      }
+      status: "draft",
 
-      if (data.publishMode === "immediate") {
-        updateData.status = "live";
+      publishMode: null,
+      scheduledAt: null,
+      publishedAt: null,
+      availableUntil: null,
+    });
+  });
+}
 
-        if (!updateData.publishedAt) {
-          updateData.publishedAt = new Date();
-        }
-      }
+async updateTest(testId, userId, data) {
+  return await withMetrics("UPDATE_TEST", async () => {
+    const updateData = {
+      ...data,
+    };
 
-      const test = await Test.findOneAndUpdate(
-        {
-          _id: testId,
-          userId,
-        },
-        {
-          $set: updateData,
-        },
-        {
-          new: true,
-        }
+    if (data.publishMode === "immediate") {
+      updateData.status = "live";
+      updateData.publishMode = "immediate";
+      updateData.publishedAt = new Date();
+      updateData.scheduledAt = null;
+    }
+
+    if (data.publishMode === "scheduled") {
+      updateData.status = "draft";
+      updateData.publishMode = "scheduled";
+      updateData.scheduledAt = new Date(data.scheduledAt);
+    }
+
+    if (data.availabilityDays) {
+      const baseDate =
+        updateData.publishMode === "scheduled"
+          ? new Date(updateData.scheduledAt)
+          : new Date();
+
+      updateData.availableUntil = new Date(
+        baseDate.getTime() +
+          data.availabilityDays * 24 * 60 * 60 * 1000
       );
+    }
 
-      if (!test) {
-        throw new ApiError(404, UX_ERRORS.TEST.NOT_FOUND);
+    const test = await Test.findOneAndUpdate(
+      {
+        _id: testId,
+        userId,
+      },
+      {
+        $set: updateData,
+      },
+      {
+        new: true,
       }
+    );
 
-      return test;
-    });
-  }
+    if (!test) {
+      throw new ApiError(404, UX_ERRORS.TEST.NOT_FOUND);
+    }
+
+    return test;
+  });
+}
+
   async deleteTest(testId, userId) {
     return await withMetrics("DELETE_TEST", async () => {
       const test = await Test.findOneAndDelete({

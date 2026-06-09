@@ -10,20 +10,12 @@ interface Props {
 
 const AuthLayout = ({ authenticationRequired }: Props) => {
   const authStatus = useSelector((state: RootState) => state.auth.status);
-
-  console.log("AUTH LAYOUT:", {
-    authenticationRequired,
-    authStatus,
-  });
-
   if (authenticationRequired && !authStatus) {
     return <Navigate to="/" replace />;
   }
-
   if (!authenticationRequired && authStatus) {
     return <Navigate to="/dashboard" replace />;
   }
-
   return <Outlet />;
 };
 

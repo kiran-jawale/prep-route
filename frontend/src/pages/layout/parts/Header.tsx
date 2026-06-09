@@ -1,61 +1,56 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import authService from "../../../services/auth.service";
+import { useSelector } from "react-redux";
 
-import { logout } from "../../../state/slices/authSlice";
+import { useDom } from "../../../contexts/domContext";
+import type { RootState } from "../../../state/store";
 
-import Button from "../../../components/ui/Button";
-
-import { useTheme } from "../../../contexts/themeContext";
+import UserMenu from "./../../../components/ui/UserMenu";
 
 export default function Header() {
-  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
-  const { theme, font, toggleTheme, toggleFont } = useTheme();
-
-  const handleLogout = async () => {
-    try {
-      await authService.logout();
-    } catch {}
-
-    dispatch(logout());
-
-    localStorage.removeItem("accessToken");
-
-    navigate("/");
-  };
+  const { toggleNotifications } = useDom();
 
   return (
-    <header
-      className="
-        flex
-        h-20
-        items-center
-        justify-between
-        border-b
-        bg-white
-        px-8
-      "
-    >
-      <div>
-        <h2 className="text-xl font-semibold">TestDash</h2>
-      </div>
+    <header className="w-full sticky top-0 z-30 flex h-24 items-center justify-end border-b border-zinc-200 bg-white px-10">
+      <div
+        className="relative flex items-center gap-5"
+        onMouseLeave={() => setOpen(false)}
+      >
+        <button
+          onClick={toggleNotifications}
+          className="relative flex h-12 w-12 items-center justify-center rounded-full border border-zinc-200 bg-white text-lg text-zinc-600 transition hover:bg-zinc-50"
+        >
+          🔔
+          <span className="absolute right-3 top-3 h-2 w-2 rounded-full bg-green-500" />
+        </button>
 
-      <div className="flex gap-3">
-        <Button variant="secondary" onClick={toggleTheme}>
-          {theme}
-        </Button>
+        <button
+          onMouseEnter={() => setOpen(true)}
+          onClick={() => setOpen((prev) => !prev)}
+          className="flex items-center gap-3"
+        >
+          <div className="h-12 w-12 overflow-hidden rounded-full ring-2 ring-amber-400 ring-offset-1">
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-[#FFF6E8] text-xl">
+              👤
+            </div>
+          </div>
 
-        <Button variant="secondary" onClick={toggleFont}>
-          {font}
-        </Button>
+          <div className="text-left">
+            <p className="text-[15px] font-semibold text-zinc-800">
+              {user?.fullName || "User"}
+            </p>
 
-        <Button variant="danger" onClick={handleLogout}>
-          Logout
-        </Button>
+            <p className="text-xs text-zinc-400">Admin</p>
+          </div>
+
+          <span className="text-[10px] text-zinc-400">▼</span>
+        </button>
+
+        <UserMenu open={open} onClose={() => setOpen(false)} />
       </div>
     </header>
   );

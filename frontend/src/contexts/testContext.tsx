@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 import type { ReactNode } from "react";
 
 interface CurrentTest {
@@ -30,12 +29,18 @@ interface CurrentTest {
   scheduledAt?: string | null;
 
   availableUntil?: string | null;
+
+  activeQuestion: number | null;
 }
 
 interface TestContextType {
   test: CurrentTest | null;
 
   setTest: (test: CurrentTest | null) => void;
+
+  activeQuestion: number | null;
+
+  setActiveQuestion: (question: number) => void;
 }
 
 const TestContext = createContext<TestContextType | null>(null);
@@ -43,11 +48,15 @@ const TestContext = createContext<TestContextType | null>(null);
 export const TestProvider = ({ children }: { children: ReactNode }) => {
   const [test, setTest] = useState<CurrentTest | null>(null);
 
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
+
   return (
     <TestContext.Provider
       value={{
         test,
         setTest,
+        activeQuestion,
+        setActiveQuestion,
       }}
     >
       {children}

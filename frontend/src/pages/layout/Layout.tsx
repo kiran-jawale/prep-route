@@ -6,12 +6,12 @@ import authService from "../../services/auth.service";
 import { login, logout } from "../../state/slices/authSlice";
 import type { AppDispatch, RootState } from "../../state/store";
 import Sidebar from "./parts/Sidebar";
+import Header from "./parts/Header";
 
 export default function Layout() {
   const dispatch = useDispatch<AppDispatch>();
   const authStatus = useSelector((state: RootState) => state.auth.status);
 
-  console.log("LAYOUT AUTH STATUS:", authStatus);
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
@@ -45,13 +45,21 @@ export default function Layout() {
     authStatus &&
     protectedRoutes.some((route) => location.pathname.startsWith(route));
 
-  return (
-    <div className="min-h-screen bg-zinc-50">
-      {showSidebar && <Sidebar />}
+ return (
+  <div className="flex min-h-screen bg-zinc-50">
+    {showSidebar && <Sidebar />}
 
-      <main className={showSidebar ? "lg:ml-72" : ""}>
+    <main
+      className={` flex flex-1 flex-col
+        ${showSidebar ? "ml-[286px]" : ""}
+      `}
+    >
+      {authStatus && <Header />}
+
+      <div className="flex-1 overflow-auto">
         <Outlet />
-      </main>
-    </div>
-  );
+      </div>
+    </main>
+  </div>
+);
 }

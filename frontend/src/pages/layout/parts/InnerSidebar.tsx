@@ -1,50 +1,37 @@
-import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import DashboardNav from "./DashboardNav";
+import QuestionsNav from "./QuestionNav";
 
 interface Props {
-  testId: string;
+  collapsed: boolean;
 }
 
-export default function InnerSidebar({ testId }: Props) {
-  return (
-    <aside
-      className="
-        w-64
-        border-r
-        bg-white
-        p-4
-      "
-    >
-      <div className="space-y-2">
-        <NavLink
-          to={`/tests/${testId}/questions`}
-          className={({ isActive }: any) =>
-            `
-            block
-            rounded-xl
-            px-4
-            py-3
-            ${isActive ? "bg-[#6475F7] text-white" : "hover:bg-zinc-100"}
-          `
-          }
-        >
-          Questions
-        </NavLink>
+export default function InnerSidebar({ collapsed }: Props) {
+  const location = useLocation();
 
-        <NavLink
-          to={`/tests/${testId}/publish`}
-          className={({ isActive }: any) =>
-            `
-            block
-            rounded-xl
-            px-4
-            py-3
-            ${isActive ? "bg-[#6475F7] text-white" : "hover:bg-zinc-100"}
-          `
-          }
-        >
-          Review & Publish
-        </NavLink>
+  const sharedPanelClass = `
+    flex flex-col border-l ml-2 border-zinc-100 bg-white transition-all duration-300 overflow-hidden
+    ${collapsed ? "w-[30%]" : "w-full"}
+  `;
+
+  if (location.pathname.includes("/dashboard")) {
+    return (
+      <div className={sharedPanelClass}>
+        <DashboardNav collapsed={collapsed} />
       </div>
-    </aside>
-  );
+    );
+  }
+
+  if (
+    location.pathname.includes("/questions") ||
+    location.pathname.includes("/publish")
+  ) {
+    return (
+      <div className={sharedPanelClass}>
+        <QuestionsNav collapsed={collapsed} />
+      </div>
+    );
+  }
+
+  return null;
 }
