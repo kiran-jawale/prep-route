@@ -28,15 +28,8 @@ export default function ToastContainer({ toasts, removeToast }: Props) {
               x: 50,
             }}
             className={`
-              flex
-              min-w-[280px]
-              items-center
-              justify-between
-              rounded-xl
-              px-4
-              py-3
-              text-white
-              shadow-lg
+              flex    min-w-[280px] items-center  justify-between   rounded-xl
+              px-4   py-3   text-white  shadow-lg
               ${toast.type === "success" ? "bg-emerald-500" : "bg-red-500"}
             `}
           >

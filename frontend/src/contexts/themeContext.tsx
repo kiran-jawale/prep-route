@@ -1,10 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
-export type Theme = "light" | "dark";
-
-export type Font = "inter" | "poppins";
-
 interface ThemeContextType {
   theme: Theme;
   font: Font;
@@ -15,10 +11,10 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+
   const [theme, setTheme] = useState<Theme>(
     (localStorage.getItem("theme") as Theme) || "light"
   );
-
   const [font, setFont] = useState<Font>(
     (localStorage.getItem("font") as Font) || "inter"
   );
@@ -33,10 +29,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("font", font);
   }, [font]);
 
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
-
   const toggleFont = () => {
     setFont((prev) => (prev === "inter" ? "poppins" : "inter"));
   };
@@ -61,6 +57,8 @@ export const useTheme = () => {
   if (!context) {
     throw new Error("useTheme must be used inside ThemeProvider");
   }
-
   return context;
 };
+
+export type Theme = "light" | "dark";
+export type Font = "inter" | "poppins";

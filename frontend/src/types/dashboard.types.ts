@@ -8,12 +8,8 @@ export type DashboardFilter =
 
 export interface DashboardStats {
   total: number;
-
   live: number;
-
   draft: number;
-
   scheduled: number;
-
   expired: number;
 }

@@ -1,7 +1,9 @@
+
+
+
 export const getStorage = <T>(key: string): T | null => {
   try {
     const data = localStorage.getItem(key);
-
     if (!data) {
       return null;
     }

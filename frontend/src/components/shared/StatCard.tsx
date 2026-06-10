@@ -15,15 +15,8 @@ export default function StatCard({
     <div
       onClick={onClick}
       className="
-        cursor-pointer
-        rounded-2xl
-        border
-        bg-white
-        p-6
-        shadow-sm
-        transition-all
-        hover:border-[#6475F7]
-        hover:shadow-md
+        cursor-pointer   rounded-2xl border  bg-white  p-6
+        shadow-sm   transition-all  hover:border-[#6475F7]  hover:shadow-md
       "
     >
       <p className="text-sm text-zinc-500">{title}</p>

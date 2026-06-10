@@ -23,7 +23,7 @@ import AuthLayout from "./pages/AuthLayout";
 //pages
 import Auth from "./pages/auth/Auth";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Tracking from "./pages/Tracking/Tracking";
+import Tracking from "./pages/tracking/Tracking";
 import Test from "./pages/test/Test";
 import Question from "./pages/question/Question";
 import Publish from "./pages/publish/Publish";

@@ -15,16 +15,8 @@ export default function ModalContainer({ isOpen, onClose, children }: Props) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="
-            fixed
-            inset-0
-            z-[9999]
-            flex
-            items-center
-            justify-center
-            bg-black/40
-            p-6
-          "
+          className="  fixed inset-0  z-[9999]  flex
+            items-center  justify-center  bg-black/40 p-6 "
           initial={{
             opacity: 0,
           }}
@@ -37,14 +29,7 @@ export default function ModalContainer({ isOpen, onClose, children }: Props) {
           onClick={onClose}
         >
           <motion.div
-            className="
-              w-full
-              max-w-3xl
-              rounded-3xl
-              bg-white
-              p-6
-              shadow-xl
-            "
+            className="  w-full   max-w-3xl  rounded-3xl  bg-white  p-6  shadow-xl"
             initial={{
               scale: 0.95,
             }}

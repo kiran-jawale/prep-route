@@ -19,6 +19,7 @@ interface DomContextType {
 const DomContext = createContext<DomContextType | null>(null);
 
 export const DomProvider = ({ children }: { children: ReactNode }) => {
+
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [modal, setModal] = useState<ReactNode>(null);
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
@@ -29,9 +30,7 @@ export const DomProvider = ({ children }: { children: ReactNode }) => {
 
   const addToast = (message: string, type: ToastType = "success") => {
     const id = Date.now();
-
     setToasts((prev) => [...prev, { id, message, type }]);
-
     setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 3000);
@@ -52,13 +51,10 @@ export const DomProvider = ({ children }: { children: ReactNode }) => {
       }}
     >
       {children}
-
       <ToastContainer toasts={toasts} removeToast={removeToast} />
-
       <ModalContainer isOpen={!!modal} onClose={() => setModal(null)}>
         {modal}
       </ModalContainer>
-
       <NotificationPanel />
     </DomContext.Provider>
   );
@@ -70,6 +66,5 @@ export const useDom = () => {
   if (!context) {
     throw new Error("useDom must be used inside DomProvider");
   }
-
   return context;
 };

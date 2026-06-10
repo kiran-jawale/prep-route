@@ -33,19 +33,9 @@ export default function UserMenu({ open }: Props) {
 
   return (
     <div
-      className="
-        absolute
-        right-0
-        top-14
-        z-50
-        w-48
-        overflow-hidden
-        rounded-2xl
-        border
-        border-slate-100
-        bg-white
-        shadow-lg
-      "
+      className=" absolute right-0 top-14  z-50  w-48
+        overflow-hidden  rounded-2xl  border   border-slate-100
+        bg-white  shadow-lg "
     >
       <button
         onClick={handleLogout}
