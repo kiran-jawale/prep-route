@@ -36,12 +36,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route element={<AuthLayout authenticationRequired={false} />}>
-        <Route  path="" element={<Auth />} />
+        <Route path="" element={<Auth />} />
       </Route>
 
       <Route element={<AuthLayout authenticationRequired />}>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="tracking" element={<Tracking />} />
+        <Route path="tests/:id/tracking" element={<Tracking />} />{" "}
         <Route path="tests/create" element={<Test />} />
         <Route path="tests/:id/questions" element={<Question />} />
         <Route path="tests/:id/publish" element={<Publish />} />
@@ -54,11 +54,11 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <ErrorBoundary> 
+  <ErrorBoundary>
     <Provider store={store}>
-      <ThemeProvider> 
+      <ThemeProvider>
         <DomProvider>
-          <TestProvider> 
+          <TestProvider>
             <RouterProvider router={router} />
           </TestProvider>
         </DomProvider>

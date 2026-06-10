@@ -1,6 +1,9 @@
+import type { ReactNode } from "react";
+
+
 interface Props {
   value: string;
-
+  icon?: ReactNode;
   onChange: (value: string) => void;
 
   placeholder?: string;

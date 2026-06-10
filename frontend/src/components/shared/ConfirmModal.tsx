@@ -2,18 +2,17 @@ import Button from "../ui/Button";
 
 interface Props {
   title: string;
-
   message: string;
-
-  onConfirm: () => void;
-
+  onSave: () => void;
+  onDiscard: () => void;
   onCancel: () => void;
 }
 
 export default function ConfirmModal({
   title,
   message,
-  onConfirm,
+  onSave,
+  onDiscard,
   onCancel,
 }: Props) {
   return (
@@ -21,16 +20,31 @@ export default function ConfirmModal({
       <div>
         <h2 className="text-2xl font-semibold">{title}</h2>
 
-        <p className="mt-2 text-zinc-500">{message}</p>
+        <p className="mt-2 text-zinc-500">
+          {message}
+        </p>
       </div>
 
       <div className="flex justify-end gap-3">
-        <Button variant="secondary" onClick={onCancel}>
+        <Button
+          variant="secondary"
+          onClick={onCancel}
+        >
           Cancel
         </Button>
 
-        <Button variant="danger" onClick={onConfirm}>
-          Confirm
+        <Button
+          variant="primary"
+          onClick={onSave}
+        >
+          Save Progress
+        </Button>
+
+        <Button
+          variant="danger"
+          onClick={onDiscard}
+        >
+          Don't Save
         </Button>
       </div>
     </div>

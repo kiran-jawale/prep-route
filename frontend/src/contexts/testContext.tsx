@@ -1,54 +1,34 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-
-interface CurrentTest {
-  _id?: string;
-
-  name: string;
-
-  category: string;
-
-  subjectId: string;
-
-  topics: string[];
-
-  subTopics: string[];
-
-  difficulty: string;
-
-  totalQuestions: number;
-
-  totalMarks: number;
-
-  totalTime: number;
-
-  status?: string;
-
-  publishMode?: string;
-
-  scheduledAt?: string | null;
-
-  availableUntil?: string | null;
-
-  activeQuestion: number | null;
-}
+import type { Test } from "../types/test.types";
 
 interface TestContextType {
-  test: CurrentTest | null;
-
-  setTest: (test: CurrentTest | null) => void;
-
+  test: Test | null;
+  setTest: (test: Test | null) => void;
   activeQuestion: number | null;
-
   setActiveQuestion: (question: number) => void;
+  resetTest: () => void;
 }
 
 const TestContext = createContext<TestContextType | null>(null);
 
-export const TestProvider = ({ children }: { children: ReactNode }) => {
-  const [test, setTest] = useState<CurrentTest | null>(null);
+export const TestProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [test, setTest] =
+    useState<Test | null>(null);
 
-  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
+  const [
+    activeQuestion,
+    setActiveQuestion,
+  ] = useState<number | null>(null);
+
+  const resetTest = () => {
+    setTest(null);
+    setActiveQuestion(null);
+  };
 
   return (
     <TestContext.Provider
@@ -57,6 +37,7 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
         setTest,
         activeQuestion,
         setActiveQuestion,
+        resetTest,
       }}
     >
       {children}
@@ -65,10 +46,13 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useTest = () => {
-  const context = useContext(TestContext);
+  const context =
+    useContext(TestContext);
 
   if (!context) {
-    throw new Error("useTest must be used inside TestProvider");
+    throw new Error(
+      "useTest must be used inside TestProvider"
+    );
   }
 
   return context;
