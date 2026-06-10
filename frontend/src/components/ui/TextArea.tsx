@@ -7,8 +7,7 @@ export default function TextArea({ className = "", ...props }: Props) {
     <textarea
       {...props}
       className={`
-        min-h-32
-        w-full
+        min-h-32     w-full
         rounded-xl
         border
         border-zinc-300

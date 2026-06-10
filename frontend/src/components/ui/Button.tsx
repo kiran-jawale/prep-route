@@ -5,7 +5,6 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   variant?: "primary" | "secondary" | "danger";
 }
-
 export default function Button({
   children,
   loading = false,
@@ -16,28 +15,16 @@ export default function Button({
 }: Props) {
   const variants = {
     primary: "bg-[#6475F7] hover:bg-[#5455FF] text-white",
-
     secondary: "bg-zinc-900 hover:bg-black text-white",
-
     danger: "bg-red-600 hover:bg-red-700 text-white",
   };
-
   return (
     <button
       disabled={disabled || loading}
       className={`
-        inline-flex
-        items-center
-        justify-center
-        gap-2
-        rounded-xl
-        px-5
-        py-3
-        font-medium
-        transition-all
-        disabled:cursor-wait
-        disabled:opacity-60
-        ${variants[variant]}
+        inline-flex   items-center  justify-center gap-2    rounded-xl
+        px-5 py-3   font-medium  transition-all  disabled:cursor-wait
+        disabled:opacity-60  ${variants[variant]}
         ${className}
       `}
       {...props}
@@ -45,13 +32,7 @@ export default function Button({
       {loading && (
         <span
           className="
-            h-4
-            w-4
-            animate-spin
-            rounded-full
-            border-2
-            border-white
-            border-t-transparent
+            h-4      w-4   animate-spin   border-2  border-white border-t-transparent
           "
         />
       )}

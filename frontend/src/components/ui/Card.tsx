@@ -8,12 +8,7 @@ interface Props {
 const Card = ({ children, className = "" }: Props) => {
   return (
     <div
-      className={`
-        bg-white
-        border
-        rounded-2xl
-        p-6
-        shadow-sm
+      className={`  bg-white border  rounded-2xl  p-6        shadow-sm
         ${className}
       `}
     >

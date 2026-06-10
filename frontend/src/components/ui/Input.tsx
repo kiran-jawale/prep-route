@@ -7,14 +7,8 @@ const Input = ({ className = "", ...props }: Props) => {
     <input
       {...props}
       className={`
-        w-full
-        h-12
-        px-4
-        rounded-xl
-        border
-        border-zinc-300
-        outline-none
-        focus:border-[#6475F7]
+        w-full   h-12  px-4
+        rounded-xl   border   border-zinc-300  outline-none   focus:border-[#6475F7]
         ${className}
       `}
     />
