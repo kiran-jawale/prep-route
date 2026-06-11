@@ -41,8 +41,9 @@ const router = createBrowserRouter(
 
       <Route element={<AuthLayout authenticationRequired />}>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="tests/:id/tracking" element={<Tracking />} />{" "}
         <Route path="tests/create" element={<Test />} />
+        <Route path="tests/:id/edit" element={<Test />} />
+        <Route path="tests/:id/tracking" element={<Tracking />} />
         <Route path="tests/:id/questions" element={<Question />} />
         <Route path="tests/:id/publish" element={<Publish />} />
       </Route>

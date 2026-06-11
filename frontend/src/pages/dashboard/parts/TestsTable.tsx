@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
-import Button from "../../../components/ui/Button";
+import { Pencil, CircleHelp, Send } from "lucide-react";
 import StatusBadge from "../../../components/shared/StatusBadge";
 
 interface Props {
@@ -19,7 +18,9 @@ export default function TestsTable({ tests }: Props) {
             <th className="px-5 py-4 text-left">Subject</th>
             <th className="px-5 py-4 text-left">Status</th>
             <th className="px-5 py-4 text-left">Questions</th>
-            <th className="px-5 py-4 text-left">Actions</th>
+            <th className="px-5 py-4 text-center">Edit</th>
+            <th className="px-5 py-4 text-center">Questions</th>
+            <th className="px-5 py-4 text-center">Publish</th>
           </tr>
         </thead>
 
@@ -36,37 +37,44 @@ export default function TestsTable({ tests }: Props) {
 
               <td className="px-5 py-4">{test.totalQuestions}</td>
 
-              <td className="px-5 py-4">
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    variant="secondary"
-                    onClick={() =>
-                      navigate("/tests/create", {
-                        state: {
-                          testId: test._id,
-                        },
-                      })
-                    }
-                  >
-                    Edit
-                  </Button>
+              <td className="px-5 py-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => navigate(`/tests/${test._id}/edit`)}
+                >
+                  <Pencil
+                    size={18}
+                    className="mx-auto text-zinc-600 hover:text-[#6475F7]"
+                  />
+                </button>
+              </td>
 
-                  <Button
-                    onClick={() => navigate(`/tests/${test._id}/questions`)}
-                  >
-                    Questions
-                  </Button>
+              <td className="px-5 py-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => navigate(`/tests/${test._id}/questions`)}
+                >
+                  <CircleHelp
+                    size={18}
+                    className="mx-auto text-zinc-600 hover:text-[#6475F7]"
+                  />
+                </button>
+              </td>
 
-                  {test.status !== "live" && (
-                    <Button
-                      variant="secondary"
-                      onClick={() => navigate(`/tests/${test._id}/publish`)}
-                    >
-                      Publish
-                    </Button>
-                  )}
-                  
-                </div>
+              <td className="px-5 py-4 text-center">
+                {test.status !== "live" ? (
+                  <button
+                    type="button"
+                    onClick={() => navigate(`/tests/${test._id}/publish`)}
+                  >
+                    <Send
+                      size={18}
+                      className="mx-auto text-zinc-600 hover:text-[#6475F7]"
+                    />
+                  </button>
+                ) : (
+                  "-"
+                )}
               </td>
             </tr>
           ))}

@@ -5,12 +5,26 @@ import type { Test } from "../types/test.types";
 interface TestContextType {
   test: Test | null;
   setTest: (test: Test | null) => void;
+
   activeQuestion: number | null;
   setActiveQuestion: (question: number) => void;
+
+  completedQuestions: number[];
+  setCompletedQuestions: (
+    questions: number[]
+  ) => void;
+
+  markQuestionCompleted: (
+    questionNumber: number
+  ) => void;
+
   resetTest: () => void;
 }
 
-const TestContext = createContext<TestContextType | null>(null);
+const TestContext =
+  createContext<TestContextType | null>(
+    null
+  );
 
 export const TestProvider = ({
   children,
@@ -25,9 +39,34 @@ export const TestProvider = ({
     setActiveQuestion,
   ] = useState<number | null>(null);
 
+  const [
+    completedQuestions,
+    setCompletedQuestions,
+  ] = useState<number[]>([]);
+
+  const markQuestionCompleted = (
+    questionNumber: number
+  ) => {
+    setCompletedQuestions((prev) => {
+      if (
+        prev.includes(
+          questionNumber
+        )
+      ) {
+        return prev;
+      }
+
+      return [
+        ...prev,
+        questionNumber,
+      ];
+    });
+  };
+
   const resetTest = () => {
     setTest(null);
     setActiveQuestion(null);
+    setCompletedQuestions([]);
   };
 
   return (
@@ -35,8 +74,14 @@ export const TestProvider = ({
       value={{
         test,
         setTest,
+
         activeQuestion,
         setActiveQuestion,
+
+        completedQuestions,
+        setCompletedQuestions,
+        markQuestionCompleted,
+
         resetTest,
       }}
     >

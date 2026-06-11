@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Breadcrumb from "../../components/shared/BreadCrumb";
 import Input from "../../components/ui/Input";
@@ -27,13 +27,9 @@ import type { SubTopic } from "../../types/subTopic.types";
 export default function Test() {
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
+  const { id } = useParams();
 
-  const location = useLocation();
-
-  const editTestId = location.state?.testId;
-
-  const testId = searchParams.get("id") || editTestId;
+  const testId = id;
 
   const { addToast } = useDom();
 
@@ -172,11 +168,8 @@ export default function Test() {
     const responses = await Promise.all(
       topicIds.map((topicId: string) => subTopicService.getByTopic(topicId))
     );
-
     const allSubTopics = responses.flatMap((response) => response.data.data);
-
     const mapping: Record<string, string> = {};
-
     responses.forEach((response, index) => {
       response.data.data.forEach((subTopic: SubTopic) => {
         mapping[subTopic._id] = topicIds[index];
@@ -184,7 +177,6 @@ export default function Test() {
     });
 
     setSubTopicTopicMap(mapping);
-
     setSubTopics(allSubTopics);
   };
 
@@ -247,7 +239,9 @@ export default function Test() {
 
         addToast("Test updated successfully");
 
-        navigate("/dashboard#tests");
+        setActiveQuestion(1);
+
+        navigate(`/tests/${updatedTest._id}/questions`);
 
         return;
       }
@@ -269,6 +263,7 @@ export default function Test() {
       setLoading(false);
     }
   };
+
   if (initialLoading) {
     return (
       <div className="p-8">

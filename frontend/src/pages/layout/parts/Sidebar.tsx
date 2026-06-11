@@ -1,22 +1,12 @@
 import { useState } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import {
-  ScanSearch,
-  TrendingUp,
-  FilePenLine,
-} from "lucide-react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { ScanSearch, TrendingUp, FilePenLine } from "lucide-react";
 
 import { useDispatch } from "react-redux";
 
 import type { AppDispatch } from "../../../state/store";
 
-import {
-  rememberTest,
-} from "../../../state/slices/rememberSlice";
+import { rememberTest } from "../../../state/slices/rememberSlice";
 
 import InnerSidebar from "./InnerSidebar";
 
@@ -28,36 +18,23 @@ import ConfirmModal from "../../../components/shared/ConfirmModal";
 export default function Sidebar() {
   const navigate = useNavigate();
 
-  const dispatch =
-    useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const location =
-    useLocation();
+  const location = useLocation();
 
-  const { id } =
-    useParams();
+  const { id } = useParams();
 
-  const {
-    test,
-    resetTest,
-  } = useTest();
+  const { test, resetTest } = useTest();
 
-  const { setModal } =
-    useDom();
+  const { setModal } = useDom();
 
-  const [hovered, setHovered] =
-    useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const inWorkflow =
-    location.pathname.includes(
-      "/questions"
-    ) ||
-    location.pathname.includes(
-      "/publish"
-    ) ||
-    location.pathname.includes(
-      "/tracking"
-    );
+    location.pathname.includes("/edit") ||
+    location.pathname.includes("/questions") ||
+    location.pathname.includes("/publish") ||
+    location.pathname.includes("/tracking");
 
   const navItems = [
     {
@@ -67,12 +44,23 @@ export default function Sidebar() {
       exact: false,
     },
 
-    {
-      label: "Test Creation",
-      icon: FilePenLine,
-      path: "/tests/create",
-      exact: true,
-    },
+    ...(inWorkflow && id
+      ? [
+          {
+            label: "Edit Test",
+            icon: FilePenLine,
+            path: `/tests/${id}/edit`,
+            exact: true,
+          },
+        ]
+      : [
+          {
+            label: "Test Creation",
+            icon: FilePenLine,
+            path: "/tests/create",
+            exact: true,
+          },
+        ]),
 
     ...(inWorkflow && id
       ? [
@@ -87,46 +75,21 @@ export default function Sidebar() {
   ];
 
   const hasInnerSidebar =
-    location.pathname.includes(
-      "/dashboard"
-    ) ||
-    location.pathname.includes(
-      "/questions"
-    ) ||
-    location.pathname.includes(
-      "/publish"
-    ) ||
-    location.pathname.includes(
-      "/tracking"
-    );
+    location.pathname.includes("/dashboard") ||
+    location.pathname.includes("/questions") ||
+    location.pathname.includes("/publish") ||
+    location.pathname.includes("/tracking");
 
-  const mainWidth =
-    hasInnerSidebar
-      ? hovered
-        ? "w-70"
-        : "w-12"
-      : "w-70";
+  const mainWidth = hasInnerSidebar ? (hovered ? "w-70" : "w-12") : "w-70";
 
-  const showLabels =
-    !hasInnerSidebar ||
-    hovered;
+  const showLabels = !hasInnerSidebar || hovered;
 
   const workflowActive =
-    location.pathname.includes(
-      "/questions"
-    ) ||
-    location.pathname.includes(
-      "/publish"
-    );
+    location.pathname.includes("/questions") ||
+    location.pathname.includes("/publish");
 
-  const handleNavigation = (
-    path: string
-  ) => {
-    if (
-      path.includes(
-        "/tracking"
-      )
-    ) {
+  const handleNavigation = (path: string) => {
+    if (path.includes("/tracking") || path.includes("/edit")) {
       navigate(path);
 
       return;
@@ -143,20 +106,14 @@ export default function Sidebar() {
         title="Save Progress?"
         message="You have an unfinished test workflow."
         onSave={() => {
-          if (
-            test &&
-            id
-          ) {
+          if (test && id) {
             dispatch(
               rememberTest({
                 testId: id,
 
-                lastPage:
-                  location.pathname.includes(
-                    "/publish"
-                  )
-                    ? "publish"
-                    : "questions",
+                lastPage: location.pathname.includes("/publish")
+                  ? "publish"
+                  : "questions",
               })
             );
           }
@@ -184,96 +141,58 @@ export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 z-40 flex h-screen max-w-70 min-w-70 flex-col overflow-hidden border-r border-zinc-300 bg-white">
       <div className="border-b border-zinc-300 p-6">
-        <img
-          src="/company-logo.png"
-          alt="PrepRoute"
-          className="h-16 w-auto"
-        />
+        <img src="/company-logo.png" alt="PrepRoute" className="h-16 w-auto" />
       </div>
 
       <div className="flex h-full overflow-hidden">
         <div
-          onMouseEnter={() =>
-            setHovered(true)
-          }
-          onMouseLeave={() =>
-            setHovered(false)
-          }
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
           className={`${mainWidth} flex flex-col overflow-hidden px-1 transition-all duration-300`}
         >
           <nav className="flex flex-1 flex-col gap-1 py-3">
-            {navItems.map(
-              (item) => {
-                const Icon =
-                  item.icon;
+            {navItems.map((item) => {
+              const Icon = item.icon;
 
-                const isActive =
-                  item.path.includes(
-                    "/tracking"
-                  )
-                    ? location.pathname.includes(
-                        "/tracking"
-                      )
-                    : item.exact
-                      ? location.pathname ===
-                        item.path
-                      : location.pathname.startsWith(
-                          item.path
-                        );
+              const isActive = item.path.includes("/tracking")
+                ? location.pathname.includes("/tracking")
+                : item.exact
+                  ? location.pathname === item.path
+                  : location.pathname.startsWith(item.path);
 
-                return (
-                  <button
-                    key={item.path}
-                    type="button"
-                    onClick={() =>
-                      handleNavigation(
-                        item.path
-                      )
-                    }
-                    className="w-full text-left"
+              return (
+                <button
+                  key={item.path}
+                  type="button"
+                  onClick={() => handleNavigation(item.path)}
+                  className="w-full text-left"
+                >
+                  <div
+                    className={`relative flex items-center gap-3 rounded-xl py-4 pl-4 transition-all duration-300 ${
+                      isActive && showLabels
+                        ? "active-link bg-[#6475F7]/8 text-[#6475F7]"
+                        : "text-zinc-500 hover:bg-zinc-100"
+                    }`}
                   >
-                    <div
-                      className={`relative flex items-center gap-3 rounded-xl py-4 pl-4 transition-all duration-300 ${
-                        isActive &&
-                        showLabels
-                          ? "active-link bg-[#6475F7]/8 text-[#6475F7]"
-                          : "text-zinc-500 hover:bg-zinc-100"
-                      }`}
-                    >
-                      <Icon
-                        size={
-                          showLabels
-                            ? 20
-                            : 18
-                        }
-                        strokeWidth={
-                          1.8
-                        }
-                        className="flex-shrink-0"
-                      />
+                    <Icon
+                      size={showLabels ? 20 : 18}
+                      strokeWidth={1.8}
+                      className="flex-shrink-0"
+                    />
 
-                      {showLabels && (
-                        <span className="truncate text-[15px] font-medium">
-                          {
-                            item.label
-                          }
-                        </span>
-                      )}
-                    </div>
-                  </button>
-                );
-              }
-            )}
+                    {showLabels && (
+                      <span className="truncate text-[15px] font-medium">
+                        {item.label}
+                      </span>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
           </nav>
         </div>
 
-        {hasInnerSidebar && (
-          <InnerSidebar
-            collapsed={
-              hovered
-            }
-          />
-        )}
+        {hasInnerSidebar && <InnerSidebar collapsed={hovered} />}
       </div>
     </aside>
   );
