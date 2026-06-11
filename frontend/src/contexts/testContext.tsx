@@ -45,8 +45,11 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
 
   const resetTest = () => {
     setTest(null);
+
     setQuestions([]);
+
     setCompletedQuestions([]);
+
     setActiveQuestion(1);
   };
 
@@ -64,6 +67,7 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
 
         completedQuestions,
         setCompletedQuestions,
+
         markQuestionCompleted,
 
         resetTest,

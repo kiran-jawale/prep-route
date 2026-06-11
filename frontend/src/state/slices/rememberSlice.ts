@@ -6,10 +6,19 @@ import {
   getRememberedTests,
 } from "../../utils/rememberTest";
 
+import type { Test } from "../../types/test.types";
+import type { Question } from "../../types/question.types";
+
 export interface RememberedTest {
+  userId: string;
+
   testId: string;
 
   lastPage: "test" | "questions" | "publish";
+
+  test: Test;
+
+  questions: Question[];
 
   updatedAt: string;
 }
@@ -28,36 +37,35 @@ const rememberSlice = createSlice({
   initialState,
 
   reducers: {
-    rememberTest: (
-      state,
-      action: PayloadAction<{
-        testId: string;
-
-        lastPage: "test" | "questions" | "publish";
-      }>
-    ) => {
+    rememberTest: (state, action: PayloadAction<RememberedTest>) => {
       const existing = state.rememberedTests.find(
-        (item) => item.testId === action.payload.testId
+        (item) =>
+          item.testId === action.payload.testId &&
+          item.userId === action.payload.userId
       );
 
       if (existing) {
-        existing.lastPage = action.payload.lastPage;
-
-        existing.updatedAt = new Date().toISOString();
+        Object.assign(existing, action.payload);
       } else {
-        state.rememberedTests.push({
-          ...action.payload,
-
-          updatedAt: new Date().toISOString(),
-        });
+        state.rememberedTests.push(action.payload);
       }
 
       saveRememberedTests(state.rememberedTests);
     },
 
-    forgetTest: (state, action: PayloadAction<string>) => {
+    forgetTest: (
+      state,
+      action: PayloadAction<{
+        userId: string;
+        testId: string;
+      }>
+    ) => {
       state.rememberedTests = state.rememberedTests.filter(
-        (item) => item.testId !== action.payload
+        (item) =>
+          !(
+            item.userId === action.payload.userId &&
+            item.testId === action.payload.testId
+          )
       );
 
       saveRememberedTests(state.rememberedTests);

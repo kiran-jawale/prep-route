@@ -12,6 +12,8 @@ export const getRememberedTests = (): RememberedTest[] => {
   return getStorage<RememberedTest[]>(STORAGE_KEYS.REMEMBERED_TESTS) || [];
 };
 
-export const getRememberedTest = (testId: string) => {
-  return getRememberedTests().find((item) => item.testId === testId);
+export const getRememberedTest = (userId: string, testId: string) => {
+  return getRememberedTests().find(
+    (item) => item.userId === userId && item.testId === testId
+  );
 };
