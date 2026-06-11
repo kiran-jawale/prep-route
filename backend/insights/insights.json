@@ -1,82 +1,6 @@
 {
   "API_REQUESTS": [
     {
-      "timestamp": "2026-06-11T12:36:44.531Z",
-      "log": "GET /api/v1/sub-topics/topic/6a2422991e15140e6f082591 | 304 | 21.206 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:36:50.052Z",
-      "log": "PATCH /api/v1/tests/6a28f93fd3b3449a18beaec5 | 200 | 30.568 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:36:58.937Z",
-      "log": "GET /api/v1/tests | 200 | 50.300 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:10.174Z",
-      "log": "GET /api/v1/tests | 304 | 50.709 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:15.851Z",
-      "log": "GET /api/v1/tests | 304 | 56.873 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:28.573Z",
-      "log": "GET /api/v1/tests | 304 | 65.321 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:29.865Z",
-      "log": "GET /api/v1/tests | 304 | 36.711 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:31.165Z",
-      "log": "GET /api/v1/subjects | 304 | 17.681 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:33.376Z",
-      "log": "GET /api/v1/tests | 304 | 48.261 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:37.672Z",
-      "log": "GET /api/v1/subjects | 304 | 24.586 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:37.857Z",
-      "log": "GET /api/v1/tests | 304 | 65.211 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.119Z",
-      "log": "GET /api/v1/subjects | 304 | 20.686 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.159Z",
-      "log": "GET /api/v1/tests/6a28f93fd3b3449a18beaec5 | 200 | 32.953 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.175Z",
-      "log": "GET /api/v1/topics/subject/6a241552892aaa66e05bfc44 | 304 | 8.787 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.198Z",
-      "log": "GET /api/v1/sub-topics/topic/6a24227c094cb1abfa90ee79 | 304 | 11.478 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.204Z",
-      "log": "GET /api/v1/sub-topics/topic/6a2422991e15140e6f082591 | 304 | 15.562 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.233Z",
-      "log": "GET /api/v1/topics/subject/6a241552892aaa66e05bfc44 | 304 | 19.138 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.239Z",
-      "log": "GET /api/v1/sub-topics/topic/6a24227c094cb1abfa90ee79 | 304 | 20.936 ms"
-    },
-    {
-      "timestamp": "2026-06-11T12:37:39.246Z",
-      "log": "GET /api/v1/sub-topics/topic/6a2422991e15140e6f082591 | 304 | 22.823 ms"
-    },
-    {
       "timestamp": "2026-06-11T12:37:44.607Z",
       "log": "GET /api/v1/tests/6a28f93fd3b3449a18beaec5 | 304 | 48.679 ms"
     },
@@ -399,6 +323,82 @@
     {
       "timestamp": "2026-06-11T12:54:53.735Z",
       "log": "PATCH /api/v1/tests/6a28e5feebf5a704dfcad9ae | 200 | 21.743 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:21.887Z",
+      "log": "GET /api/v1/auth/me | 304 | 20.676 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:28.268Z",
+      "log": "GET /api/v1/tests | 200 | 57.834 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:33.645Z",
+      "log": "GET /api/v1/subjects | 304 | 20.359 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:37.248Z",
+      "log": "GET /api/v1/topics/subject/6a24156bf90bf10fe5357b8c | 304 | 16.681 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:45.799Z",
+      "log": "POST /api/v1/tests | 201 | 36.056 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:52.217Z",
+      "log": "GET /api/v1/auth/me | 304 | 23.060 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:09:57.144Z",
+      "log": "GET /api/v1/subjects | 304 | 19.553 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:05.299Z",
+      "log": "GET /api/v1/tests | 200 | 54.217 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.440Z",
+      "log": "GET /api/v1/subjects | 304 | 18.578 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.484Z",
+      "log": "GET /api/v1/tests/6a28f93fd3b3449a18beaec5 | 200 | 33.248 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.503Z",
+      "log": "GET /api/v1/topics/subject/6a241552892aaa66e05bfc44 | 304 | 12.177 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.540Z",
+      "log": "GET /api/v1/sub-topics/topic/6a2422991e15140e6f082591 | 304 | 21.783 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.554Z",
+      "log": "GET /api/v1/sub-topics/topic/6a24227c094cb1abfa90ee79 | 304 | 24.038 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.628Z",
+      "log": "GET /api/v1/topics/subject/6a241552892aaa66e05bfc44 | 304 | 46.698 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.637Z",
+      "log": "GET /api/v1/sub-topics/topic/6a2422991e15140e6f082591 | 304 | 45.979 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:09.668Z",
+      "log": "GET /api/v1/sub-topics/topic/6a24227c094cb1abfa90ee79 | 304 | 67.731 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:11.598Z",
+      "log": "PATCH /api/v1/tests/6a28f93fd3b3449a18beaec5 | 200 | 20.111 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:11:17.510Z",
+      "log": "GET /api/v1/auth/me | 304 | 24.068 ms"
+    },
+    {
+      "timestamp": "2026-06-11T13:17:50.329Z",
+      "log": "GET /api/v1/auth/me | 304 | 55.532 ms"
     }
   ],
   "DB_OPS": {
@@ -550,6 +550,22 @@
       {
         "timestamp": "2026-06-11T12:54:51.832Z",
         "latencyMs": 26.15
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.535Z",
+        "latencyMs": 4.22
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.544Z",
+        "latencyMs": 8.5
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.631Z",
+        "latencyMs": 30.13
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.642Z",
+        "latencyMs": 43.56
       }
     ],
     "UPDATE_TEST": [
@@ -576,6 +592,10 @@
       {
         "timestamp": "2026-06-11T12:54:53.730Z",
         "latencyMs": 9.49
+      },
+      {
+        "timestamp": "2026-06-11T13:11:11.590Z",
+        "latencyMs": 4.89
       }
     ],
     "GET_TEST_BY_ID": [
@@ -638,6 +658,10 @@
       {
         "timestamp": "2026-06-11T12:54:51.710Z",
         "latencyMs": 29.9
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.481Z",
+        "latencyMs": 26.77
       }
     ],
     "GET_ALL_SUBJECTS": [
@@ -696,6 +720,18 @@
       {
         "timestamp": "2026-06-11T12:54:51.659Z",
         "latencyMs": 2.79
+      },
+      {
+        "timestamp": "2026-06-11T13:09:33.636Z",
+        "latencyMs": 2.81
+      },
+      {
+        "timestamp": "2026-06-11T13:09:57.133Z",
+        "latencyMs": 3.03
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.434Z",
+        "latencyMs": 2.85
       }
     ],
     "GET_TOPICS_BY_SUBJECT": [
@@ -786,6 +822,18 @@
       {
         "timestamp": "2026-06-11T12:54:51.809Z",
         "latencyMs": 6.11
+      },
+      {
+        "timestamp": "2026-06-11T13:09:37.240Z",
+        "latencyMs": 2.72
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.500Z",
+        "latencyMs": 2.58
+      },
+      {
+        "timestamp": "2026-06-11T13:11:09.604Z",
+        "latencyMs": 12.51
       }
     ],
     "GET_ALL_TESTS": [
@@ -832,6 +880,14 @@
       {
         "timestamp": "2026-06-11T12:54:45.782Z",
         "latencyMs": 41.3
+      },
+      {
+        "timestamp": "2026-06-11T13:09:28.251Z",
+        "latencyMs": 33.21
+      },
+      {
+        "timestamp": "2026-06-11T13:11:05.284Z",
+        "latencyMs": 32.63
       }
     ],
     "GET_MY_PROFILE": [
@@ -858,6 +914,28 @@
       {
         "timestamp": "2026-06-11T12:54:40.974Z",
         "latencyMs": 1.87
+      },
+      {
+        "timestamp": "2026-06-11T13:09:21.881Z",
+        "latencyMs": 1.62
+      },
+      {
+        "timestamp": "2026-06-11T13:09:52.189Z",
+        "latencyMs": 1.77
+      },
+      {
+        "timestamp": "2026-06-11T13:11:17.490Z",
+        "latencyMs": 2.35
+      },
+      {
+        "timestamp": "2026-06-11T13:17:50.299Z",
+        "latencyMs": 4.93
+      }
+    ],
+    "CREATE_TEST": [
+      {
+        "timestamp": "2026-06-11T13:09:45.783Z",
+        "latencyMs": 20.39
       }
     ]
   },

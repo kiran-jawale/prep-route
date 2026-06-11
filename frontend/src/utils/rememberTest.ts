@@ -1,25 +1,17 @@
+import { getStorage, setStorage } from "./localStorage";
 
-
-import {
-  getStorage,
-  setStorage,
-} from "./localStorage";
 import { STORAGE_KEYS } from "../constants/storage";
 
-export const saveRememberedTests = (
-  tests: any[]
-) => {
-  setStorage(
-    STORAGE_KEYS.REMEMBERED_TESTS,
-    tests
-  );
+import type { RememberedTest } from "../state/slices/rememberSlice";
+
+export const saveRememberedTests = (tests: RememberedTest[]) => {
+  setStorage(STORAGE_KEYS.REMEMBERED_TESTS, tests);
 };
 
-export const getRememberedTests =
-  () => {
-    return (
-      getStorage<any[]>(
-        STORAGE_KEYS.REMEMBERED_TESTS
-      ) || []
-    );
-  };
+export const getRememberedTests = (): RememberedTest[] => {
+  return getStorage<RememberedTest[]>(STORAGE_KEYS.REMEMBERED_TESTS) || [];
+};
+
+export const getRememberedTest = (testId: string) => {
+  return getRememberedTests().find((item) => item.testId === testId);
+};

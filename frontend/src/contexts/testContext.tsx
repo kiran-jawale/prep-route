@@ -1,72 +1,53 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+
+import type { Question } from "../types/question.types";
 import type { Test } from "../types/test.types";
 
 interface TestContextType {
   test: Test | null;
   setTest: (test: Test | null) => void;
 
+  questions: Question[];
+  setQuestions: (questions: Question[]) => void;
+
   activeQuestion: number | null;
   setActiveQuestion: (question: number) => void;
 
   completedQuestions: number[];
-  setCompletedQuestions: (
-    questions: number[]
-  ) => void;
+  setCompletedQuestions: (questions: number[]) => void;
 
-  markQuestionCompleted: (
-    questionNumber: number
-  ) => void;
+  markQuestionCompleted: (questionNumber: number) => void;
 
   resetTest: () => void;
 }
 
-const TestContext =
-  createContext<TestContextType | null>(
-    null
-  );
+const TestContext = createContext<TestContextType | null>(null);
 
-export const TestProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
-  const [test, setTest] =
-    useState<Test | null>(null);
+export const TestProvider = ({ children }: { children: ReactNode }) => {
+  const [test, setTest] = useState<Test | null>(null);
 
-  const [
-    activeQuestion,
-    setActiveQuestion,
-  ] = useState<number | null>(null);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-  const [
-    completedQuestions,
-    setCompletedQuestions,
-  ] = useState<number[]>([]);
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(1);
 
-  const markQuestionCompleted = (
-    questionNumber: number
-  ) => {
+  const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
+
+  const markQuestionCompleted = (questionNumber: number) => {
     setCompletedQuestions((prev) => {
-      if (
-        prev.includes(
-          questionNumber
-        )
-      ) {
+      if (prev.includes(questionNumber)) {
         return prev;
       }
 
-      return [
-        ...prev,
-        questionNumber,
-      ];
+      return [...prev, questionNumber];
     });
   };
 
   const resetTest = () => {
     setTest(null);
-    setActiveQuestion(null);
+    setQuestions([]);
     setCompletedQuestions([]);
+    setActiveQuestion(1);
   };
 
   return (
@@ -74,6 +55,9 @@ export const TestProvider = ({
       value={{
         test,
         setTest,
+
+        questions,
+        setQuestions,
 
         activeQuestion,
         setActiveQuestion,
@@ -91,13 +75,10 @@ export const TestProvider = ({
 };
 
 export const useTest = () => {
-  const context =
-    useContext(TestContext);
+  const context = useContext(TestContext);
 
   if (!context) {
-    throw new Error(
-      "useTest must be used inside TestProvider"
-    );
+    throw new Error("useTest must be used inside TestProvider");
   }
 
   return context;

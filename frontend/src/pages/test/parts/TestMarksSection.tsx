@@ -65,11 +65,9 @@ export default function TestMarksSection({
         <div>
           <label className="mb-3 block">Total Marks</label>
 
-          <Input
-            type="number"
-            value={totalMarks}
-            onChange={(e) => onChange("totalMarks", Number(e.target.value))}
-          />
+          <div className="flex h-12 items-center rounded-xl border border-zinc-200 bg-zinc-50 px-4 text-sm font-medium text-zinc-600">
+            {totalMarks}
+          </div>
         </div>
       </div>
     </div>

@@ -26,25 +26,17 @@ import type { SubTopic } from "../../types/subTopic.types";
 
 export default function Test() {
   const navigate = useNavigate();
-
   const { id } = useParams();
-
   const testId = id;
 
   const { addToast } = useDom();
-
   const { setTest, setActiveQuestion } = useTest();
-
   const [loading, setLoading] = useState(false);
-
   const [initialLoading, setInitialLoading] = useState(true);
 
   const [subjects, setSubjects] = useState<Subject[]>([]);
-
   const [topics, setTopics] = useState<Topic[]>([]);
-
   const [subTopics, setSubTopics] = useState<SubTopic[]>([]);
-
   const [subTopicTopicMap, setSubTopicTopicMap] = useState<
     Record<string, string>
   >({});
@@ -56,12 +48,12 @@ export default function Test() {
     topics: [] as string[],
     subTopics: [] as string[],
     difficulty: "easy",
-    correctMarks: 5,
+    correctMarks: 1,
     wrongMarks: -1,
     unattemptMarks: 0,
     totalTime: 60,
-    totalMarks: 250,
-    totalQuestions: 50,
+    totalQuestions: 10,
+    totalMarks: 1 * 10,
   });
 
   useEffect(() => {
@@ -145,7 +137,7 @@ export default function Test() {
         wrongMarks: test.wrongMarks,
         unattemptMarks: test.unattemptMarks,
         totalTime: test.totalTime,
-        totalMarks: test.totalMarks,
+        totalMarks: Number(test.correctMarks) * Number(test.totalQuestions),
         totalQuestions: test.totalQuestions,
       });
     } finally {
@@ -217,11 +209,19 @@ export default function Test() {
 
       return;
     }
+    setForm((prev) => {
+      const nextForm = {
+        ...prev,
+        [field]: value,
+      };
 
-    setForm((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+      if (field === "correctMarks" || field === "totalQuestions") {
+        nextForm.totalMarks =
+          Number(nextForm.correctMarks) * Number(nextForm.totalQuestions);
+      }
+
+      return nextForm;
+    });
   };
 
   const handleSubmit = async (e: any) => {
