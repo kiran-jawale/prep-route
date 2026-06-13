@@ -1,11 +1,14 @@
 import type { Question } from "../types/question.types";
 
-export const createEmptyQuestion = (): Question => ({
+export const createEmptyQuestion = (
+  topicId = "",
+  subTopicId = ""
+): Question => ({
   type: "mcq",
 
-  topicId: "",
+  topicId,
 
-  subTopicId: "",
+  subTopicId,
 
   question: "",
 

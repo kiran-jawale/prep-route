@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 import {
   saveRememberedTests,
@@ -37,7 +36,9 @@ const rememberSlice = createSlice({
   initialState,
 
   reducers: {
-    rememberTest: (state, action: PayloadAction<RememberedTest>) => {
+    rememberTest: (state, action) => {
+      console.log("SAVING REMEMBERED TEST", action.payload);
+
       const existing = state.rememberedTests.find(
         (item) =>
           item.testId === action.payload.testId &&
@@ -50,16 +51,17 @@ const rememberSlice = createSlice({
         state.rememberedTests.push(action.payload);
       }
 
+      console.log(
+        "FINAL STORAGE DATA",
+        JSON.stringify(state.rememberedTests, null, 2)
+      );
+
       saveRememberedTests(state.rememberedTests);
     },
 
-    forgetTest: (
-      state,
-      action: PayloadAction<{
-        userId: string;
-        testId: string;
-      }>
-    ) => {
+    forgetTest: (state, action) => {
+      console.log("FORGET TEST", action.payload);
+
       state.rememberedTests = state.rememberedTests.filter(
         (item) =>
           !(
@@ -67,6 +69,8 @@ const rememberSlice = createSlice({
             item.testId === action.payload.testId
           )
       );
+
+      console.log("AFTER DELETE", state.rememberedTests);
 
       saveRememberedTests(state.rememberedTests);
     },

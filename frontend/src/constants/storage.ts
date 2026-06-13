@@ -3,4 +3,5 @@ export const STORAGE_KEYS = {
   THEME: "theme",
   FONT: "font",
   REMEMBERED_TESTS: "remembered-tests",
+  CURRENT_TEST: "current-test",
 };

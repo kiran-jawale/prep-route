@@ -5,11 +5,21 @@ import { STORAGE_KEYS } from "../constants/storage";
 import type { RememberedTest } from "../state/slices/rememberSlice";
 
 export const saveRememberedTests = (tests: RememberedTest[]) => {
+  console.log("LOCALSTORAGE SAVE", tests);
+
   setStorage(STORAGE_KEYS.REMEMBERED_TESTS, tests);
 };
 
 export const getRememberedTests = (): RememberedTest[] => {
-  return getStorage<RememberedTest[]>(STORAGE_KEYS.REMEMBERED_TESTS) || [];
+  const data = getStorage<any[]>(STORAGE_KEYS.REMEMBERED_TESTS) || [];
+
+  return data.filter(
+    (item) =>
+      item?.userId &&
+      item?.testId &&
+      item?.test &&
+      Array.isArray(item?.questions)
+  );
 };
 
 export const getRememberedTest = (userId: string, testId: string) => {
