@@ -236,28 +236,48 @@ export default function Test() {
     });
   };
 
-const handleSubmit = async (e: any) => {
-  e.preventDefault();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    if (testId) {
-      const response = await testService.update(
-        testId,
-        form
-      );
+      if (testId) {
+        const response = await testService.update(testId, form);
 
-      const updatedTest =
-        response.data.data;
+        const updatedTest = response.data.data;
 
-      const fullResponse =
-        await testService.getById(
-          updatedTest._id
-        );
+        const fullResponse = await testService.getById(updatedTest._id);
 
-      const populatedTest =
-        fullResponse.data.data;
+        const populatedTest = fullResponse.data.data;
+
+        resetTest();
+
+        setTest(populatedTest);
+        setSubjects(subjects);
+
+        setTopics(topics);
+
+        setSubTopics(subTopics);
+
+        setQuestions([]);
+
+        setActiveQuestion(1);
+
+        addToast("Test updated successfully");
+
+        navigate(`/tests/${populatedTest._id}/questions`);
+
+        return;
+      }
+
+      const response = await testService.create(form);
+
+      const createdTest = response.data.data;
+
+      const fullResponse = await testService.getById(createdTest._id);
+
+      const populatedTest = fullResponse.data.data;
 
       resetTest();
 
@@ -267,55 +287,15 @@ const handleSubmit = async (e: any) => {
 
       setActiveQuestion(1);
 
-      addToast(
-        "Test updated successfully"
-      );
+      addToast("Test created successfully");
 
-      navigate(
-        `/tests/${populatedTest._id}/questions`
-      );
-
-      return;
+      navigate(`/tests/${populatedTest._id}/questions`);
+    } catch {
+      addToast("Unable to save test", "error");
+    } finally {
+      setLoading(false);
     }
-
-    const response =
-      await testService.create(form);
-
-    const createdTest =
-      response.data.data;
-
-    const fullResponse =
-      await testService.getById(
-        createdTest._id
-      );
-
-    const populatedTest =
-      fullResponse.data.data;
-
-    resetTest();
-
-    setTest(populatedTest);
-
-    setQuestions([]);
-
-    setActiveQuestion(1);
-
-    addToast(
-      "Test created successfully"
-    );
-
-    navigate(
-      `/tests/${populatedTest._id}/questions`
-    );
-  } catch {
-    addToast(
-      "Unable to save test",
-      "error"
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   if (initialLoading) {
     return (

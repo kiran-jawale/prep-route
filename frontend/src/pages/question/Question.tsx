@@ -169,15 +169,33 @@ export default function Question() {
     try {
       setLoading(true);
 
-      questions.forEach((question) => questionSchema.parse(question));
+      const finalQuestions = questions.map((question) => ({
+        ...question,
+        topicId:
+          question.topicId ||
+          (Array.isArray(test?.topics)
+            ? typeof test.topics[0] === "string"
+              ? test.topics[0]
+              : test.topics[0]?._id
+            : ""),
+        subTopicId:
+          question.subTopicId ||
+          (Array.isArray(test?.subTopics)
+            ? typeof test.subTopics[0] === "string"
+              ? test.subTopics[0]
+              : (test.subTopics[0] as any)?._id
+            : ""),
+      }));
+
+      finalQuestions.forEach((question) => questionSchema.parse(question));
 
       const response = await questionService.bulkCreate({
         testId: id,
-        questions,
+        finalQuestions,
       });
       navigate(`/tests/${id}/publish`);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       addToast("Invalid Question Data", "error");
     } finally {
       setLoading(false);
