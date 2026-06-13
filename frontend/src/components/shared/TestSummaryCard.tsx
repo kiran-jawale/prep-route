@@ -1,63 +1,36 @@
-import {
-  Clock3,
-  BookOpen,
-  Award,
-  Pencil,
-} from "lucide-react";
+import { Clock3, BookOpen, Award, Pencil } from "lucide-react";
 
 import Badge from "../ui/Badge";
 
-import type {
-  Test,
-  TestTopic,
-  TestSubject,
-} from "../../types/test.types";
+import type { Test, TestTopic } from "../../types/test.types";
 
 interface Props {
   test: Test;
 }
 
-export default function TestSummaryCard({
-  test,
-}: Props) {
+export default function TestSummaryCard({ test }: Props) {
   const subjectName =
-    typeof test.subjectId === "string"
-      ? test.subjectId
-      : (test.subjectId as TestSubject)
-          .name;
+    typeof test.subjectId === "object" ? test.subjectId?.name : "-";
 
-  const topicNames = Array.isArray(
-    test.topics
-  )
-    ? test.topics.map((topic) =>
-        typeof topic === "string"
-          ? topic
-          : (topic as TestTopic).name
-      )
+  const topicNames = Array.isArray(test.topics)
+    ? test.topics
+        .filter((topic) => typeof topic === "object")
+        .map((topic) => (topic as TestTopic).name)
     : [];
-
-  const subTopicNames = Array.isArray(
-    test.subTopics
-  )
-    ? test.subTopics.map((subTopic: any) =>
-        typeof subTopic === "string"
-          ? subTopic
-          : subTopic?.name
-      )
+  const subTopicNames = Array.isArray(test.subTopics)
+    ? test.subTopics
+        .filter((subTopic) => typeof subTopic === "object")
+        .map((subTopic: any) => subTopic.name)
     : [];
 
   return (
     <div className="rounded-2xl border border-zinc-200 bg-white p-6">
       <div className="flex justify-between">
         <div className="space-y-4">
-          <Badge>
-            {test.category}
-          </Badge>
+          <Badge>{test.category}</Badge>
 
           <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-semibold">
-              {test.name}
-            </h2>
+            <h2 className="text-2xl font-semibold">{test.name}</h2>
 
             <span className="rounded-full bg-emerald-500 px-4 py-1 text-sm text-white">
               {test.difficulty}
@@ -65,53 +38,40 @@ export default function TestSummaryCard({
           </div>
 
           <div className="grid grid-cols-[100px_1fr] gap-y-3 text-sm">
-            <span className="text-zinc-500">
-              Subject
-            </span>
+            <span className="text-zinc-500">Subject</span>
 
             <span>{subjectName}</span>
 
-            <span className="text-zinc-500">
-              Topic
-            </span>
+            <span className="text-zinc-500">Topic</span>
 
             <div className="flex flex-wrap gap-2">
-              {topicNames.map(
-                (topicName) => (
-                  <span
-                    key={topicName}
-                    className="rounded-full border border-amber-300 px-3 py-1 text-xs text-amber-500"
-                  >
-                    {topicName}
-                  </span>
-                )
-              )}
+              {topicNames.map((topicName) => (
+                <span
+                  key={topicName}
+                  className="rounded-full border border-amber-300 px-3 py-1 text-xs text-amber-500"
+                >
+                  {topicName}
+                </span>
+              ))}
             </div>
 
-            <span className="text-zinc-500">
-              Sub Topic
-            </span>
+            <span className="text-zinc-500">Sub Topic</span>
 
             <div className="flex flex-wrap gap-2">
-              {subTopicNames.map(
-                (subTopicName) => (
-                  <span
-                    key={subTopicName}
-                    className="rounded-full border border-amber-300 px-3 py-1 text-xs text-amber-500"
-                  >
-                    {subTopicName}
-                  </span>
-                )
-              )}
+              {subTopicNames.map((subTopicName) => (
+                <span
+                  key={subTopicName}
+                  className="rounded-full border border-amber-300 px-3 py-1 text-xs text-amber-500"
+                >
+                  {subTopicName}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col justify-between">
-          <button
-            type="button"
-            className="ml-auto text-[#6475F7]"
-          >
+          <button type="button" className="ml-auto text-[#6475F7]">
             <Pencil size={18} />
           </button>
 

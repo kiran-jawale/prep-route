@@ -20,9 +20,9 @@ import testService from "../../services/test.service";
 import { useDom } from "../../contexts/domContext";
 import { useTest } from "../../contexts/testContext";
 
+import type { SubTopic } from "../../types/subTopic.types";
 import type { Subject } from "../../types/subject.types";
 import type { Topic } from "../../types/topic.types";
-import type { SubTopic } from "../../types/subTopic.types";
 
 export default function Test() {
   const navigate = useNavigate();
@@ -30,13 +30,24 @@ export default function Test() {
   const testId = id;
 
   const { addToast } = useDom();
-  const { setTest, setActiveQuestion } = useTest();
+  const {
+    setTest,
+    test: currentTest,
+    resetTest,
+    subjects,
+    setSubjects,
+
+    topics,
+    setTopics,
+    setQuestions,
+    subTopics,
+    setSubTopics,
+
+    setActiveQuestion,
+  } = useTest();
+
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
-
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [topics, setTopics] = useState<Topic[]>([]);
-  const [subTopics, setSubTopics] = useState<SubTopic[]>([]);
   const [subTopicTopicMap, setSubTopicTopicMap] = useState<
     Record<string, string>
   >({});
@@ -85,17 +96,18 @@ export default function Test() {
       }
 
       const testResponse = await testService.getById(testId);
-
       const test = testResponse.data.data;
+      if (currentTest && currentTest._id !== test._id) {
+        resetTest();
+      }
 
       const subjectId =
         typeof test.subjectId === "string"
           ? test.subjectId
           : test.subjectId._id;
 
-      const topicIds: string[] = test.topics.map(
-        (topic: string | { _id: string }) =>
-          typeof topic === "string" ? topic : topic._id
+      const topicIds: string[] = test.topics.map((topic: Topic) =>
+        typeof topic === "string" ? topic : topic._id
       );
 
       const topicsResponse = await topicService.getBySubject(subjectId);
@@ -224,45 +236,86 @@ export default function Test() {
     });
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+const handleSubmit = async (e: any) => {
+  e.preventDefault();
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      if (testId) {
-        const response = await testService.update(testId, form);
+    if (testId) {
+      const response = await testService.update(
+        testId,
+        form
+      );
 
-        const updatedTest = response.data.data;
+      const updatedTest =
+        response.data.data;
 
-        setTest(updatedTest);
+      const fullResponse =
+        await testService.getById(
+          updatedTest._id
+        );
 
-        addToast("Test updated successfully");
+      const populatedTest =
+        fullResponse.data.data;
 
-        setActiveQuestion(1);
+      resetTest();
 
-        navigate(`/tests/${updatedTest._id}/questions`);
+      setTest(populatedTest);
 
-        return;
-      }
-
-      const response = await testService.create(form);
-
-      const createdTest = response.data.data;
-
-      setTest(createdTest);
+      setQuestions([]);
 
       setActiveQuestion(1);
 
-      addToast("Test created successfully");
+      addToast(
+        "Test updated successfully"
+      );
 
-      navigate(`/tests/${createdTest._id}/questions`);
-    } catch {
-      addToast("Unable to save test", "error");
-    } finally {
-      setLoading(false);
+      navigate(
+        `/tests/${populatedTest._id}/questions`
+      );
+
+      return;
     }
-  };
+
+    const response =
+      await testService.create(form);
+
+    const createdTest =
+      response.data.data;
+
+    const fullResponse =
+      await testService.getById(
+        createdTest._id
+      );
+
+    const populatedTest =
+      fullResponse.data.data;
+
+    resetTest();
+
+    setTest(populatedTest);
+
+    setQuestions([]);
+
+    setActiveQuestion(1);
+
+    addToast(
+      "Test created successfully"
+    );
+
+    navigate(
+      `/tests/${populatedTest._id}/questions`
+    );
+  } catch {
+    addToast(
+      "Unable to save test",
+      "error"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (initialLoading) {
     return (
@@ -291,7 +344,7 @@ export default function Test() {
             <Select
               value={form.subjectId}
               onChange={(value) => handleChange("subjectId", value)}
-              options={subjects.map((subject) => ({
+              options={subjects.map((subject: Subject) => ({
                 label: subject.name,
                 value: subject._id,
               }))}
@@ -326,9 +379,9 @@ export default function Test() {
             <MultiSelect
               values={form.subTopics}
               onChange={(value) => handleChange("subTopics", value)}
-              options={subTopics.map((topic) => ({
-                label: topic.name,
-                value: topic._id,
+              options={subTopics.map((subTopic: SubTopic) => ({
+                label: subTopic.name,
+                value: subTopic._id,
               }))}
             />
           </div>

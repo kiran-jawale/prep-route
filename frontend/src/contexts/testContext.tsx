@@ -1,8 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
+import {
+  getCurrentTest,
+  saveCurrentTest,
+  clearCurrentTest,
+} from "../utils/currentTest";
 import type { Question } from "../types/question.types";
 import type { Test } from "../types/test.types";
+import type { Subject } from "../types/subject.types";
+import type { Topic } from "../types/topic.types";
+import type { SubTopic } from "../types/subTopic.types";
 
 interface TestContextType {
   test: Test | null;
@@ -20,18 +28,43 @@ interface TestContextType {
   markQuestionCompleted: (questionNumber: number) => void;
 
   resetTest: () => void;
+  subjects: Subject[];
+  setSubjects: (subjects: Subject[]) => void;
+
+  topics: Topic[];
+  setTopics: (topics: Topic[]) => void;
+
+  subTopics: SubTopic[];
+  setSubTopics: (subTopics: SubTopic[]) => void;
 }
 
 const TestContext = createContext<TestContextType | null>(null);
 
 export const TestProvider = ({ children }: { children: ReactNode }) => {
-  const [test, setTest] = useState<Test | null>(null);
+  const persisted = getCurrentTest();
 
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [test, setTest] = useState<Test | null>(persisted?.test || null);
 
-  const [activeQuestion, setActiveQuestion] = useState<number | null>(1);
+  const [questions, setQuestions] = useState<Question[]>(
+    persisted?.questions || []
+  );
 
-  const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
+  const [activeQuestion, setActiveQuestion] = useState<number>(
+    persisted?.activeQuestion || 1
+  );
+
+  const [completedQuestions, setCompletedQuestions] = useState<number[]>(
+    persisted?.completedQuestions || []
+  );
+  const [topics, setTopics] = useState<Topic[]>(persisted?.topics || []);
+
+  const [subTopics, setSubTopics] = useState<SubTopic[]>(
+    persisted?.subTopics || []
+  );
+
+  const [subjects, setSubjects] = useState<Subject[]>(
+    persisted?.subjects || []
+  );
 
   const markQuestionCompleted = (questionNumber: number) => {
     setCompletedQuestions((prev) => {
@@ -43,14 +76,42 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  useEffect(() => {
+    saveCurrentTest({
+      test,
+      questions,
+      subjects,
+      topics,
+      subTopics,
+      activeQuestion,
+      completedQuestions,
+      updatedAt: new Date().toISOString(),
+    });
+  }, [
+    test,
+    questions,
+    subjects,
+    topics,
+    subTopics,
+    activeQuestion,
+    completedQuestions,
+  ]);
   const resetTest = () => {
     setTest(null);
 
     setQuestions([]);
 
+    setSubjects([]);
+
+    setTopics([]);
+
+    setSubTopics([]);
+
     setCompletedQuestions([]);
 
     setActiveQuestion(1);
+
+    clearCurrentTest();
   };
 
   return (
@@ -69,6 +130,15 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
         setCompletedQuestions,
 
         markQuestionCompleted,
+
+        subjects,
+        topics,
+        subTopics,
+        setSubjects,
+
+        setTopics,
+
+        setSubTopics,
 
         resetTest,
       }}
