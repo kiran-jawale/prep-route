@@ -9,33 +9,22 @@ import {
 } from "lucide-react";
 
 import { useDispatch, useSelector } from "react-redux";
-
 import type { AppDispatch } from "../../../state/store";
-
 import { forgetTest, rememberTest } from "../../../state/slices/rememberSlice";
 
 import InnerSidebar from "./InnerSidebar";
-
 import { useTest } from "../../../contexts/testContext";
 import { useDom } from "../../../contexts/domContext";
-
 import ConfirmModal from "../../../components/shared/ConfirmModal";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-
   const dispatch = useDispatch<AppDispatch>();
-
   const location = useLocation();
-
   const { id } = useParams();
-
   const { test, questions, resetTest } = useTest();
-
   const { setModal } = useDom();
-
   const [hovered, setHovered] = useState(false);
-
   const auth = useSelector((state: any) => state.auth);
 
   const inWorkflow =
@@ -99,9 +88,7 @@ export default function Sidebar() {
     location.pathname.includes("/tracking");
 
   const mainWidth = hasInnerSidebar ? (hovered ? "w-70" : "w-12") : "w-70";
-
   const showLabels = !hasInnerSidebar || hovered;
-
   const workflowActive =
     location.pathname.includes("/edit") ||
     location.pathname.includes("/questions") ||
@@ -134,26 +121,20 @@ export default function Sidebar() {
             dispatch(
               rememberTest({
                 userId: auth.user._id,
-
                 testId: test._id,
-
                 lastPage: location.pathname.includes("/publish")
                   ? "publish"
                   : "questions",
 
                 test,
-
                 questions,
-
                 updatedAt: new Date().toISOString(),
               })
             );
           }
 
           resetTest();
-
           setModal(null);
-
           navigate(path);
         }}
         onDiscard={() => {
@@ -167,9 +148,7 @@ export default function Sidebar() {
           }
 
           resetTest();
-
           setModal(null);
-
           navigate(path);
         }}
         onCancel={() => {

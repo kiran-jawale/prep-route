@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { useTest } from "../../../contexts/testContext";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   collapsed: boolean;
@@ -17,6 +18,7 @@ interface Props {
 export default function QuestionsNav({ collapsed }: Props) {
   const { test, activeQuestion, setActiveQuestion, completedQuestions } =
     useTest();
+  const navigate = useNavigate();
 
   const totalQuestions = test?.totalQuestions || 0;
 
@@ -35,6 +37,16 @@ export default function QuestionsNav({ collapsed }: Props) {
       end,
     };
   });
+
+  const jumpToQuestion = (questionNo: number) => {
+    if (!test) {
+      return;
+    }
+
+    setActiveQuestion(questionNo);
+
+    navigate(`/tests/${test._id}/questions`);
+  };
 
   return (
     <div className="flex h-full flex-col">
@@ -96,7 +108,7 @@ export default function QuestionsNav({ collapsed }: Props) {
                 <button
                   key={questionNo}
                   type="button"
-                  onClick={() => setActiveQuestion(questionNo)}
+                  onClick={() => jumpToQuestion(questionNo)}
                   className={`flex items-center rounded-xl border transition ${
                     isActive
                       ? "border-[#6475F7] bg-[#6475F7]/8 text-[#6475F7]"
@@ -167,7 +179,7 @@ export default function QuestionsNav({ collapsed }: Props) {
                         <button
                           key={questionNo}
                           type="button"
-                          onClick={() => setActiveQuestion(questionNo)}
+                          onClick={() => jumpToQuestion(questionNo)}
                           className={`flex items-center justify-between rounded-xl border px-3 py-2.5 transition ${
                             isActive
                               ? "border-[#6475F7] bg-[#6475F7]/8 text-[#6475F7]"

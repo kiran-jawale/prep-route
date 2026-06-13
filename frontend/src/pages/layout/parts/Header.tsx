@@ -11,9 +11,7 @@ export default function Header() {
   const user = useSelector((state: RootState) => state.auth.user);
 
   const [open, setOpen] = useState(false);
-
   const { toggleNotifications } = useDom();
-
   return (
     <header className="w-full sticky top-0 z-30 flex h-24 items-center justify-end border-b border-zinc-200 bg-white px-10">
       <div
