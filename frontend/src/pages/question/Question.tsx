@@ -177,6 +177,7 @@ export default function Question() {
       });
       navigate(`/tests/${id}/publish`);
     } catch (err) {
+      console.log(err)
       addToast("Invalid Question Data", "error");
     } finally {
       setLoading(false);

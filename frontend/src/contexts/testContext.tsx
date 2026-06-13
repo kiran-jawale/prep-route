@@ -96,23 +96,16 @@ export const TestProvider = ({ children }: { children: ReactNode }) => {
     activeQuestion,
     completedQuestions,
   ]);
-  const resetTest = () => {
-    setTest(null);
-
-    setQuestions([]);
-
-    setSubjects([]);
-
-    setTopics([]);
-
-    setSubTopics([]);
-
-    setCompletedQuestions([]);
-
-    setActiveQuestion(1);
-
-    clearCurrentTest();
-  };
+const resetTest = () => {
+  setTest(null);
+  setQuestions([]);
+  setSubjects([]);
+  setTopics([]);
+  setSubTopics([]);
+  setCompletedQuestions([]);
+  setActiveQuestion(1);
+  clearCurrentTest();
+};
 
   return (
     <TestContext.Provider
