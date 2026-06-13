@@ -10,15 +10,10 @@ import type { Question } from "../../types/question.types";
 
 export interface RememberedTest {
   userId: string;
-
   testId: string;
-
   lastPage: "test" | "questions" | "publish";
-
   test: Test;
-
   questions: Question[];
-
   updatedAt: string;
 }
 
@@ -32,13 +27,9 @@ const initialState: RememberState = {
 
 const rememberSlice = createSlice({
   name: "remember",
-
   initialState,
-
   reducers: {
     rememberTest: (state, action) => {
-      console.log("SAVING REMEMBERED TEST", action.payload);
-
       const existing = state.rememberedTests.find(
         (item) =>
           item.testId === action.payload.testId &&
@@ -51,17 +42,10 @@ const rememberSlice = createSlice({
         state.rememberedTests.push(action.payload);
       }
 
-      console.log(
-        "FINAL STORAGE DATA",
-        JSON.stringify(state.rememberedTests, null, 2)
-      );
-
       saveRememberedTests(state.rememberedTests);
     },
 
     forgetTest: (state, action) => {
-      console.log("FORGET TEST", action.payload);
-
       state.rememberedTests = state.rememberedTests.filter(
         (item) =>
           !(
@@ -69,8 +53,6 @@ const rememberSlice = createSlice({
             item.testId === action.payload.testId
           )
       );
-
-      console.log("AFTER DELETE", state.rememberedTests);
 
       saveRememberedTests(state.rememberedTests);
     },

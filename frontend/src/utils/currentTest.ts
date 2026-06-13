@@ -10,19 +10,12 @@ import type { SubTopic } from "../types/subTopic.types";
 
 export interface CurrentTestStorage {
   test: Test | null;
-
   questions: Question[];
-
   activeQuestion: number;
-
   completedQuestions: number[];
-
   subjects: Subject[];
-
   topics: Topic[];
-
   subTopics: SubTopic[];
-
   updatedAt: string;
 }
 

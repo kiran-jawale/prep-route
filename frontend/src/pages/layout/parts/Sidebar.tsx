@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ScanSearch, TrendingUp, FilePenLine } from "lucide-react";
+import {
+  ScanSearch,
+  TrendingUp,
+  FilePenLine,
+  Send,
+  CircleHelp,
+} from "lucide-react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import type { AppDispatch } from "../../../state/store";
 
-import { rememberTest } from "../../../state/slices/rememberSlice";
+import { forgetTest, rememberTest } from "../../../state/slices/rememberSlice";
 
 import InnerSidebar from "./InnerSidebar";
 
@@ -24,11 +30,13 @@ export default function Sidebar() {
 
   const { id } = useParams();
 
-  const { test, resetTest } = useTest();
+  const { test, questions, resetTest } = useTest();
 
   const { setModal } = useDom();
 
   const [hovered, setHovered] = useState(false);
+
+  const auth = useSelector((state: any) => state.auth);
 
   const inWorkflow =
     location.pathname.includes("/edit") ||
@@ -52,6 +60,27 @@ export default function Sidebar() {
             path: `/tests/${id}/edit`,
             exact: true,
           },
+
+          {
+            label: "Questions",
+            icon: CircleHelp,
+            path: `/tests/${id}/questions`,
+            exact: true,
+          },
+
+          {
+            label: "Publish",
+            icon: Send,
+            path: `/tests/${id}/publish`,
+            exact: true,
+          },
+
+          {
+            label: "Test Tracking",
+            icon: ScanSearch,
+            path: `/tests/${id}/tracking`,
+            exact: true,
+          },
         ]
       : [
           {
@@ -61,17 +90,6 @@ export default function Sidebar() {
             exact: true,
           },
         ]),
-
-    ...(inWorkflow && id
-      ? [
-          {
-            label: "Test Tracking",
-            icon: ScanSearch,
-            path: `/tests/${id}/tracking`,
-            exact: true,
-          },
-        ]
-      : []),
   ];
 
   const hasInnerSidebar =
@@ -85,11 +103,17 @@ export default function Sidebar() {
   const showLabels = !hasInnerSidebar || hovered;
 
   const workflowActive =
+    location.pathname.includes("/edit") ||
     location.pathname.includes("/questions") ||
     location.pathname.includes("/publish");
 
   const handleNavigation = (path: string) => {
-    if (path.includes("/tracking") || path.includes("/edit")) {
+    if (
+      path.includes("/tracking") ||
+      path.includes("/edit") ||
+      path.includes("/questions") ||
+      path.includes("/publish")
+    ) {
       navigate(path);
 
       return;
@@ -109,11 +133,19 @@ export default function Sidebar() {
           if (test && id) {
             dispatch(
               rememberTest({
-                testId: id,
+                userId: auth.user._id,
+
+                testId: test._id,
 
                 lastPage: location.pathname.includes("/publish")
                   ? "publish"
                   : "questions",
+
+                test,
+
+                questions,
+
+                updatedAt: new Date().toISOString(),
               })
             );
           }
@@ -125,6 +157,15 @@ export default function Sidebar() {
           navigate(path);
         }}
         onDiscard={() => {
+          if (test) {
+            dispatch(
+              forgetTest({
+                userId: auth.user._id,
+                testId: test._id,
+              })
+            );
+          }
+
           resetTest();
 
           setModal(null);

@@ -5,15 +5,10 @@ import type { SubTopic } from "../../../types/subTopic.types";
 
 interface Props {
   difficulty: string;
-
   topicId: string;
-
   subTopicId: string;
-
   topics: Topic[];
-
   subTopics: SubTopic[];
-
   onChange: (field: string, value: string) => void;
 }
 

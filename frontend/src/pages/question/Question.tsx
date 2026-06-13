@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { rememberTest } from "../../state/slices/rememberSlice";
-
+import { getRememberedTest } from "../../utils/rememberTest";
 import type { AppDispatch } from "../../state/store";
 
 import { useTest } from "../../contexts/testContext";
@@ -13,12 +13,7 @@ import { useTest } from "../../contexts/testContext";
 import { useDom } from "../../contexts/domContext";
 
 import testService from "../../services/test.service";
-import topicService from "../../services/topic.service";
-import subTopicService from "../../services/subTopic.service";
 import questionService from "../../services/question.service";
-
-import type { Topic } from "../../types/topic.types";
-import type { SubTopic } from "../../types/subTopic.types";
 
 import TestSummaryCard from "../../components/shared/TestSummaryCard";
 
@@ -49,6 +44,10 @@ export default function Question() {
     questions,
     setQuestions,
 
+    topics,
+
+    subTopics,
+
     activeQuestion,
     setActiveQuestion,
 
@@ -59,18 +58,36 @@ export default function Question() {
 
   const [loading, setLoading] = useState(false);
 
-  const [topics, setTopics] = useState<Topic[]>([]);
-
-  const [subTopics, setSubTopics] = useState<SubTopic[]>([]);
-
   const auth = useSelector((state: any) => state.auth);
 
-  useEffect(() => {
-    loadInitial();
+  const restoreOrLoad = async () => {
+    if (test && test._id === id) {
+      return;
+    }
 
-    return () => {
+    const remembered = getRememberedTest(auth.user._id, id as string);
+
+    if (remembered && remembered.test && remembered.test._id === id) {
+      setTest(remembered.test);
+
+      setQuestions(remembered.questions || []);
+
+      return;
+    }
+
+    await loadInitial();
+  };
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+
+    if (test && test._id !== id) {
       resetTest();
-    };
+    }
+
+    restoreOrLoad();
   }, [id]);
 
   const loadInitial = async () => {
@@ -80,36 +97,10 @@ export default function Question() {
       const response = await testService.getById(id as string);
 
       const loadedTest = response.data.data;
-      console.log("Loaded Test", JSON.stringify(loadedTest, null, 2));
 
       setTest(loadedTest);
 
       setQuestions(loadedTest.questions || []);
-
-      const subjectId =
-        typeof loadedTest.subjectId === "string"
-          ? loadedTest.subjectId
-          : loadedTest.subjectId._id;
-
-      const topicsResponse = await topicService.getBySubject(subjectId);
-
-      setTopics(topicsResponse.data.data);
-
-      const topicIds = loadedTest.topics.map((topic: any) =>
-        typeof topic === "string" ? topic : topic._id
-      );
-
-      if (topicIds.length) {
-        const responses = await Promise.all(
-          topicIds.map((topicId: string) => subTopicService.getByTopic(topicId))
-        );
-
-        const allSubTopics = responses.flatMap(
-          (response) => response.data.data
-        );
-
-        setSubTopics(allSubTopics);
-      }
     } catch {
       addToast("Unable to load test", "error");
     }
@@ -118,7 +109,13 @@ export default function Question() {
   const currentIndex = (activeQuestion || 1) - 1;
 
   const currentQuestion = useMemo(() => {
-    return questions[currentIndex] || createEmptyQuestion();
+    return (
+      questions[currentIndex] ||
+      createEmptyQuestion(
+        questions[currentIndex - 1]?.topicId || "",
+        questions[currentIndex - 1]?.subTopicId || ""
+      )
+    );
   }, [questions, currentIndex]);
 
   const updateQuestion = (field: string, value: string) => {
@@ -151,7 +148,7 @@ export default function Question() {
 
     dispatch(
       rememberTest({
-        userId: auth.user?._id || "",
+        userId: auth.user._id,
 
         testId: test._id,
 
@@ -174,14 +171,12 @@ export default function Question() {
 
       questions.forEach((question) => questionSchema.parse(question));
 
-      await questionService.bulkCreate({
+      const response = await questionService.bulkCreate({
         testId: id,
-
         questions,
       });
-
       navigate(`/tests/${id}/publish`);
-    } catch {
+    } catch (err) {
       addToast("Invalid Question Data", "error");
     } finally {
       setLoading(false);
