@@ -1,5 +1,5 @@
 
-
+import CONFIG from "../constants/config";
 import axios from "axios";
 
 declare module "axios" {
@@ -13,7 +13,7 @@ declare module "axios" {
 }
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: CONFIG.API_URL,
   withCredentials: true,
 });
 

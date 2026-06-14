@@ -191,8 +191,9 @@ export default function Question() {
 
       const response = await questionService.bulkCreate({
         testId: id,
-        finalQuestions,
+        questions: finalQuestions,
       });
+
       navigate(`/tests/${id}/publish`);
     } catch (err) {
       console.log(err);
