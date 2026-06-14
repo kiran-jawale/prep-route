@@ -236,33 +236,53 @@ export default function Test() {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       setLoading(true);
 
-      if (testId) {
-        const response = await testService.update(testId, form);
+      let populatedTest: any;
 
-        const updatedTest = response.data.data;
+      if (testId) {
+        const updateResponse = await testService.update(testId, form);
+
+        const updatedTest = updateResponse.data.data;
 
         const fullResponse = await testService.getById(updatedTest._id);
 
-        const populatedTest = fullResponse.data.data;
+        populatedTest = fullResponse.data.data;
 
-        resetTest();
+        const subjectId =
+          typeof populatedTest.subjectId === "string"
+            ? populatedTest.subjectId
+            : populatedTest.subjectId._id;
+
+        const topicIds = populatedTest.topics.map((topic: Topic | string) =>
+          typeof topic === "string" ? topic : topic._id
+        );
+
+        const topicsResponse = await topicService.getBySubject(subjectId);
+
+        const freshTopics = topicsResponse.data.data;
+
+        let freshSubTopics: SubTopic[] = [];
+
+        if (topicIds.length) {
+          const responses = await Promise.all(
+            topicIds.map((topicId: string) =>
+              subTopicService.getByTopic(topicId)
+            )
+          );
+
+          freshSubTopics = responses.flatMap((response) => response.data.data);
+        }
 
         setTest(populatedTest);
-        setSubjects(subjects);
 
-        setTopics(topics);
+        setTopics(freshTopics);
 
-        setSubTopics(subTopics);
-
-        setQuestions([]);
-
-        setActiveQuestion(1);
+        setSubTopics(freshSubTopics);
 
         addToast("Test updated successfully");
 
@@ -271,17 +291,44 @@ export default function Test() {
         return;
       }
 
-      const response = await testService.create(form);
+      const createResponse = await testService.create(form);
 
-      const createdTest = response.data.data;
+      const createdTest = createResponse.data.data;
 
       const fullResponse = await testService.getById(createdTest._id);
 
-      const populatedTest = fullResponse.data.data;
+      populatedTest = fullResponse.data.data;
+
+      const subjectId =
+        typeof populatedTest.subjectId === "string"
+          ? populatedTest.subjectId
+          : populatedTest.subjectId._id;
+
+      const topicIds = populatedTest.topics.map((topic: Topic | string) =>
+        typeof topic === "string" ? topic : topic._id
+      );
+
+      const topicsResponse = await topicService.getBySubject(subjectId);
+
+      const freshTopics = topicsResponse.data.data;
+
+      let freshSubTopics: SubTopic[] = [];
+
+      if (topicIds.length) {
+        const responses = await Promise.all(
+          topicIds.map((topicId: string) => subTopicService.getByTopic(topicId))
+        );
+
+        freshSubTopics = responses.flatMap((response) => response.data.data);
+      }
 
       resetTest();
 
       setTest(populatedTest);
+
+      setTopics(freshTopics);
+
+      setSubTopics(freshSubTopics);
 
       setQuestions([]);
 
@@ -290,7 +337,9 @@ export default function Test() {
       addToast("Test created successfully");
 
       navigate(`/tests/${populatedTest._id}/questions`);
-    } catch {
+    } catch (error) {
+      console.error(error);
+
       addToast("Unable to save test", "error");
     } finally {
       setLoading(false);

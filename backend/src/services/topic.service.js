@@ -8,9 +8,7 @@ class TopicService {
     return await withMetrics("GET_TOPICS_BY_SUBJECT", async () => {
       return await Topic.find({
         subjectId,
-      }).sort({
-        name: 1,
-      });
+      }).sort({ createdAt: -1 });
     });
   }
 

@@ -8,9 +8,7 @@ class SubTopicService {
     return await withMetrics("GET_SUBTOPICS_BY_TOPIC", async () => {
       return await SubTopic.find({
         topicId,
-      }).sort({
-        name: 1,
-      });
+      }).sort({ createdAt: -1 });
     });
   }
 
