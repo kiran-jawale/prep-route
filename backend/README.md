@@ -1,5 +1,5 @@
 # TestDash Backend API
-
+ 
 A scalable Node.js and Express.js backend powering the TestDash platform for creating, managing, publishing, scheduling, and tracking online tests.
 
 ---
@@ -229,7 +229,7 @@ Create a `.env` file in the `backend` directory with the following variables:
 PORT=3000
 CORS_ORIGIN="*"
 MONGODB_URI=<mongodb-uri>
-
+GET_METRICS=<"true" or "false">
 
 ACCESS_TOKEN_SECRET=secret_access
 ACCESS_TOKEN_EXPIRY=1d
