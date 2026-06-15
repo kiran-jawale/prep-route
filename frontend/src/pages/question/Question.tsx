@@ -10,12 +10,14 @@ import type { AppDispatch } from "../../state/store";
 
 import { useTest } from "../../contexts/testContext";
 
-import { useDom } from "../../contexts/domContext";
-
 import testService from "../../services/test.service";
 import questionService from "../../services/question.service";
 
 import TestSummaryCard from "../../components/shared/TestSummaryCard";
+import { useDom } from "../../contexts/domContext";
+
+import QuestionMarkingSchemeModal from "./parts/QuestionMarkingSchemeModal";
+import QuestionCsvImportModal from "./parts/QuestionCsvImportModal";
 
 import { questionSchema } from "../../utils/validation";
 
@@ -35,7 +37,7 @@ export default function Question() {
 
   const { id } = useParams();
 
-  const { addToast } = useDom();
+  const { addToast, setModal } = useDom();
 
   const {
     test,
@@ -166,43 +168,47 @@ export default function Question() {
   };
 
   const submitQuestions = async () => {
+    if (!test) {
+      addToast("Test not loaded", "error");
+      return;
+    }
+
     try {
       setLoading(true);
 
-      const finalQuestions = questions.map((question) => ({
-        ...question,
-        topicId:
-          question.topicId ||
-          (Array.isArray(test?.topics)
-            ? typeof test.topics[0] === "string"
-              ? test.topics[0]
-              : test.topics[0]?._id
-            : ""),
-        subTopicId:
-          question.subTopicId ||
-          (Array.isArray(test?.subTopics)
-            ? typeof test.subTopics[0] === "string"
-              ? test.subTopics[0]
-              : (test.subTopics[0] as any)?._id
-            : ""),
-      }));
+      if (questions.length !== test.totalQuestions) {
+        addToast(
+          `Expected ${test.totalQuestions} questions but found ${questions.length}`,
+          "error"
+        );
+
+        return;
+      }
+
+   const finalQuestions = questions.map((question) => ({
+  ...question,
+}));
 
       finalQuestions.forEach((question) => questionSchema.parse(question));
 
       const response = await questionService.bulkCreate({
-        testId: id,
+        testId: test._id,
         questions: finalQuestions,
       });
 
-      navigate(`/tests/${id}/publish`);
+      if (response.status === 200) {
+        addToast("Questions Saved Successfully");
+
+        navigate(`/tests/${test._id}/publish`);
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+
       addToast("Invalid Question Data", "error");
     } finally {
       setLoading(false);
     }
   };
-
   if (!test) {
     return null;
   }
@@ -214,7 +220,29 @@ export default function Question() {
       <QuestionHeader
         current={activeQuestion || 1}
         total={test.totalQuestions}
-        onReset={() => updateQuestion("question", "")}
+        
+        onReset={() => {
+          const copy = [...questions];
+
+          copy[currentIndex] = createEmptyQuestion(
+            currentQuestion.topicId,
+            currentQuestion.subTopicId
+          );
+
+          setQuestions(copy);
+        }}
+        onMarkingScheme={() => {
+          setModal(<QuestionMarkingSchemeModal test={test} />);
+        }}
+        onCsvImport={() => {
+          setModal(
+            <QuestionCsvImportModal
+              test={test}
+              questions={questions}
+              setQuestions={setQuestions}
+            />
+          );
+        }}
       />
 
       <QuestionEditor

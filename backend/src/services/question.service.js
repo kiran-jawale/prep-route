@@ -17,8 +17,10 @@ class QuestionService {
         testId,
         subjectId: test.subjectId,
 
-        topicId: question.topicId,
-        subTopicId: question.subTopicId,
+      topicId: question.topicId || null,
+
+subTopicId:
+  question.subTopicId || null,
 
         type: question.type,
         question: question.question,

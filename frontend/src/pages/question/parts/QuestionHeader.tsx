@@ -4,12 +4,23 @@ import Button from "../../../components/ui/Button";
 
 interface Props {
   current: number;
+
   total: number;
 
   onReset: () => void;
+
+  onMarkingScheme: () => void;
+
+  onCsvImport: () => void;
 }
 
-export default function QuestionHeader({ current, total, onReset }: Props) {
+export default function QuestionHeader({
+  current,
+  total,
+  onReset,
+  onMarkingScheme,
+  onCsvImport,
+}: Props) {
   return (
     <div>
       <div className="flex items-start justify-between">
@@ -22,7 +33,11 @@ export default function QuestionHeader({ current, total, onReset }: Props) {
           <button
             type="button"
             onClick={onReset}
-            className="mt-4 flex items-center gap-2 text-sm text-red-400 transition hover:text-red-500"
+            className="
+              mt-4 flex items-center gap-2
+              text-sm text-red-400
+              transition hover:text-red-500
+            "
           >
             <Trash2 size={15} />
             Delete All Edits
@@ -30,12 +45,12 @@ export default function QuestionHeader({ current, total, onReset }: Props) {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={onMarkingScheme}>
             <Plus size={15} />
             MCQ
           </Button>
 
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={onCsvImport}>
             <Upload size={15} />
             CSV
           </Button>

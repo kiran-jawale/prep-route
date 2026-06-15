@@ -22,13 +22,11 @@ const questionSchema = new mongoose.Schema(
     topicId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Topic",
-      required: true,
     },
 
     subTopicId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "SubTopic",
-      required: true,
     },
     question: {
       type: String,
