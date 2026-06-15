@@ -12,6 +12,14 @@ class SubTopicService {
     });
   }
 
+  async getAllSubTopics() {
+    return await withMetrics("GET_ALL_SUBTOPICS", async () => {
+      return await SubTopic.find().sort({
+        createdAt: -1,
+      });
+    });
+  }
+
   async getSubTopicById(subTopicId) {
     return await withMetrics("GET_SUBTOPIC_BY_ID", async () => {
       const subTopic = await SubTopic.findById(subTopicId);

@@ -214,7 +214,7 @@ export default function Tracking() {
           <p className="mt-2 font-medium">
             {formatDate(
               (test as any)
-                ?.expiresAt
+                ?.availableUntil
             )}
           </p>
         </div>

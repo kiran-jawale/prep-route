@@ -4,6 +4,14 @@ import { UX_ERRORS } from "../constants/uxErrors.js";
 import { withMetrics } from "../utils/metricsLogger.js";
 
 class TopicService {
+  async getAllTopics() {
+    return await withMetrics("GET_ALL_TOPICS", async () => {
+      return await Topic.find().sort({
+        createdAt: -1,
+      });
+    });
+  }
+
   async getTopicsBySubject(subjectId) {
     return await withMetrics("GET_TOPICS_BY_SUBJECT", async () => {
       return await Topic.find({
@@ -35,7 +43,6 @@ class TopicService {
 
   async updateTopic(topicId, data) {
     return await withMetrics("UPDATE_TOPIC", async () => {
-      
       const topic = await Topic.findByIdAndUpdate(
         topicId,
         {

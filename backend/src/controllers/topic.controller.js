@@ -10,6 +10,14 @@ export const getTopicsBySubject = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, topics, "Topics fetched successfully."));
 });
 
+export const getAllTopics = asyncHandler(async (req, res) => {
+  const topics = await topicService.getAllTopics();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, topics, "Topics fetched successfully."));
+});
+
 export const getTopicById = asyncHandler(async (req, res) => {
   const topic = await topicService.getTopicById(req.params.id);
 
@@ -27,7 +35,6 @@ export const createTopic = asyncHandler(async (req, res) => {
 });
 
 export const updateTopic = asyncHandler(async (req, res) => {
- 
   const topic = await topicService.updateTopic(req.params.id, req.body);
 
   return res

@@ -12,6 +12,14 @@ export const getSubTopicsByTopic = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, subTopics, "SubTopics fetched successfully."));
 });
 
+export const getAllSubTopics = asyncHandler(async (req, res) => {
+  const subTopics = await subTopicService.getAllSubTopics();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, subTopics, "SubTopics fetched successfully."));
+});
+
 export const getSubTopicById = asyncHandler(async (req, res) => {
   const subTopic = await subTopicService.getSubTopicById(req.params.id);
 
