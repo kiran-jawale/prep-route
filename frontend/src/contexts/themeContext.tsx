@@ -1,3 +1,20 @@
+
+
+/**
+ * Theme Context
+ *
+ * Provides application theme and font preferences.
+ *
+ * Features:
+ * - Light/Dark mode
+ * - Font switching
+ * - Local storage persistence
+ *
+ * Purpose:
+ * Centralizes appearance-related settings.
+ */
+
+
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 

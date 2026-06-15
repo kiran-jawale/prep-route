@@ -1,3 +1,14 @@
+
+
+/**
+ * Rich text explanation editor.
+ *
+ * Props:
+ * - value: Explanation content.
+ * - onChange: Handles explanation updates.
+ */
+
+
 import { Editor } from "@tinymce/tinymce-react";
 
 import CONFIG from "../../../constants/config";

@@ -1,3 +1,13 @@
+
+
+/**
+ * Test marking scheme configuration modal.
+ *
+ * Props:
+ * - test: Active test being updated.
+ */
+
+
 import { useState } from "react";
 
 import Button from "../../../components/ui/Button";

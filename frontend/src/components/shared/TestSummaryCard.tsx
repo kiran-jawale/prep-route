@@ -1,3 +1,31 @@
+
+
+/**
+ * Test Summary Card Component
+ *
+ * Displays condensed information about the
+ * currently selected test.
+ *
+ * Props:
+ * @param test Test information object.
+ *
+ * Displays:
+ * - Category
+ * - Name
+ * - Difficulty
+ * - Subject
+ * - Topics
+ * - SubTopics
+ * - Duration
+ * - Question Count
+ * - Total Marks
+ *
+ * Purpose:
+ * Provides quick test context throughout
+ * workflow pages.
+ */
+
+
 import { Clock3, BookOpen, Award, Pencil } from "lucide-react";
 
 import Badge from "../ui/Badge";

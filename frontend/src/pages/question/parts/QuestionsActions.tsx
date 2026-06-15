@@ -1,3 +1,19 @@
+
+
+/**
+ * Question workflow navigation controls.
+ *
+ * Props:
+ * - currentQuestion: Current question number.
+ * - totalQuestions: Total configured questions.
+ * - loading: Submission loading state.
+ * - onPrevious: Navigate to previous question.
+ * - onNext: Navigate to next question.
+ * - onSaveDraft: Save workflow draft.
+ * - onSubmit: Submit all questions.
+ */
+
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import Button from "../../../components/ui/Button";

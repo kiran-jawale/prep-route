@@ -1,3 +1,18 @@
+
+
+/**
+ * Redux store configuration.
+ *
+ * Responsibilities:
+ * - Register application slices
+ * - Configure global Redux state
+ * - Persist remembered tests
+ *
+ * Purpose:
+ * Provides centralized application state management.
+ */
+
+
 import { configureStore } from "@reduxjs/toolkit";
 
 import authReducer from "./slices/authSlice";

@@ -1,3 +1,20 @@
+
+
+/**
+ * CSV parsing and validation utility.
+ *
+ * Responsibilities:
+ * - Parse uploaded CSV files
+ * - Validate required question fields
+ * - Validate difficulty values
+ * - Validate correct option values
+ * - Convert CSV rows into application question format
+ *
+ * Purpose:
+ * Provides a centralized CSV import validation workflow for bulk question creation.
+ */
+
+
 import Papa from "papaparse";
 
 export interface ParsedCsvQuestion {

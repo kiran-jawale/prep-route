@@ -1,3 +1,17 @@
+
+
+/**
+ * Question workflow header actions.
+ *
+ * Props:
+ * - current: Current active question number.
+ * - total: Total questions configured for the test.
+ * - onReset: Resets current question data.
+ * - onMarkingScheme: Opens marking scheme configuration.
+ * - onCsvImport: Opens CSV import workflow.
+ */
+
+
 import { Trash2, Plus, Upload } from "lucide-react";
 
 import Button from "../../../components/ui/Button";

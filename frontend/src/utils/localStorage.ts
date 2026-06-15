@@ -1,3 +1,18 @@
+
+
+/**
+ * Local storage helper utilities.
+ *
+ * Responsibilities:
+ * - Read values from local storage
+ * - Write values to local storage
+ * - Remove stored values
+ *
+ * Purpose:
+ * Provides a reusable abstraction over browser local storage operations.
+ */
+
+
 export const getStorage = <T>(key: string): T | null => {
   try {
     const data = localStorage.getItem(key);

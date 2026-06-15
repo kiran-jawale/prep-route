@@ -1,3 +1,20 @@
+
+
+/**
+ * Modal Container Component
+ *
+ * Global modal wrapper with backdrop and animation support.
+ *
+ * Props:
+ * @param isOpen Controls modal visibility.
+ * @param onClose Callback executed when modal closes.
+ * @param children Modal content.
+ *
+ * Purpose:
+ * Provides consistent modal rendering behavior.
+ */
+
+
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { ReactNode } from "react";

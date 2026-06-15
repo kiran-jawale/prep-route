@@ -1,3 +1,22 @@
+
+
+/**
+ * Test API service.
+ *
+ * Endpoints:
+ * - GET /tests
+ * - GET /tests/:id
+ * - POST /tests
+ * - PATCH /tests/:id
+ * - DELETE /tests/:id
+ * - PATCH /tests/:id/marking-scheme
+ * - GET /tests/dashboard-stats
+ *
+ * Purpose:
+ * Handles test lifecycle and dashboard-related API operations.
+ */
+
+
 import api from "./axios";
 
 class TestService {

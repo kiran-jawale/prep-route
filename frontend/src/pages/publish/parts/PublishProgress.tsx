@@ -1,3 +1,14 @@
+
+
+/**
+ * Publish workflow progress summary.
+ *
+ * Props:
+ * - completed: Number of completed questions.
+ * - total: Total expected questions.
+ */
+
+
 import { CircleCheckBig } from "lucide-react";
 
 interface Props {

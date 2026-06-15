@@ -1,3 +1,16 @@
+
+
+/**
+ * Question API service.
+ *
+ * Endpoints:
+ * - POST /questions/bulk
+ *
+ * Purpose:
+ * Handles question creation operations for test workflows.
+ */
+
+
 import api from "./axios";
 
 class QuestionService {

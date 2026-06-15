@@ -1,35 +1,79 @@
+
+
+/**
+ * Root application layout.
+ *
+ * Purpose:
+ * Initializes authenticated session state and renders shared application shell.
+ */
+
+
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import authService from "../../services/auth.service";
+
 import { login, logout } from "../../state/slices/authSlice";
-import type { AppDispatch, RootState } from "../../state/store";
+
+import type {
+  AppDispatch,
+  RootState,
+} from "../../state/store";
+
 import Sidebar from "./parts/Sidebar";
 import Header from "./parts/Header";
 
 export default function Layout() {
-  const dispatch = useDispatch<AppDispatch>();
-  const authStatus = useSelector((state: RootState) => state.auth.status);
+  const dispatch =
+    useDispatch<AppDispatch>();
 
-  const location = useLocation();
-  const [loading, setLoading] = useState(true);
+  const authStatus =
+    useSelector(
+      (
+        state: RootState
+      ) =>
+        state.auth.status
+    );
+
+  const location =
+    useLocation();
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [
+    mobileSidebarOpen,
+    setMobileSidebarOpen,
+  ] = useState(false);
 
   useEffect(() => {
-    const initialize = async () => {
-      try {
-        const response = await authService.getCurrentUser();
+    const initialize =
+      async () => {
+        try {
+          const response =
+            await authService.getCurrentUser();
 
-        dispatch(login(response.data.data));
-      } catch {
-        dispatch(logout());
-      } finally {
-        setLoading(false);
-      }
-    };
+          dispatch(
+            login(
+              response.data.data
+            )
+          );
+        } catch {
+          dispatch(logout());
+        } finally {
+          setLoading(false);
+        }
+      };
 
     initialize();
   }, [dispatch]);
+
+  useEffect(() => {
+    setMobileSidebarOpen(
+      false
+    );
+  }, [location.pathname]);
 
   if (loading) {
     return (
@@ -39,27 +83,57 @@ export default function Layout() {
     );
   }
 
-  const protectedRoutes = ["/dashboard", "/tracking", "/tests"];
+  const protectedRoutes = [
+    "/dashboard",
+    "/tracking",
+    "/tests",
+  ];
 
   const showSidebar =
     authStatus &&
-    protectedRoutes.some((route) => location.pathname.startsWith(route));
+    protectedRoutes.some(
+      (route) =>
+        location.pathname.startsWith(
+          route
+        )
+    );
 
- return (
-  <div className="flex min-h-screen bg-zinc-50">
-    {showSidebar && <Sidebar />}
+  return (
+    <div className="flex min-h-screen bg-zinc-50">
+      {showSidebar && (
+        <Sidebar
+          mobileOpen={
+            mobileSidebarOpen
+          }
+          onClose={() =>
+            setMobileSidebarOpen(
+              false
+            )
+          }
+        />
+      )}
 
-    <main
-      className={` flex flex-1 flex-col
-        ${showSidebar ? "ml-[286px]" : ""}
-      `}
-    >
-      {authStatus && <Header />}
+      <main
+        className={`flex flex-1 flex-col ${
+          showSidebar
+            ? "sm:ml-[286px]"
+            : ""
+        }`}
+      >
+        {authStatus && (
+          <Header
+            onMenuClick={() =>
+              setMobileSidebarOpen(
+                true
+              )
+            }
+          />
+        )}
 
-      <div className="flex-1 overflow-auto">
-        <Outlet />
-      </div>
-    </main>
-  </div>
-);
+        <div className="flex-1 overflow-auto">
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
 }

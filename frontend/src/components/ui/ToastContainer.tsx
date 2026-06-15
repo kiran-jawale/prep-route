@@ -1,3 +1,19 @@
+
+
+/**
+ * Toast Container Component
+ *
+ * Renders animated success and error toast notifications.
+ *
+ * Props:
+ * @param toasts Active toast messages.
+ * @param removeToast Removes a toast by identifier.
+ *
+ * Purpose:
+ * Provides user feedback for application events.
+ */
+
+
 import { AnimatePresence, motion } from "framer-motion";
 
 import type { Toast } from "../../types/toast.types";

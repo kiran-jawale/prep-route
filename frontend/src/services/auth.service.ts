@@ -1,3 +1,20 @@
+
+
+/**
+ * Authentication API service.
+ *
+ * Endpoints:
+ * - POST /auth/register
+ * - POST /auth/login
+ * - POST /auth/logout
+ * - GET /auth/me
+ * - POST /auth/refresh-token
+ *
+ * Purpose:
+ * Encapsulates authentication-related API communication.
+ */
+
+
 import api from "./axios";
 
 class AuthService {

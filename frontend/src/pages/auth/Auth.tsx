@@ -1,3 +1,13 @@
+
+
+/**
+ * Authentication module container.
+ *
+ * Purpose:
+ * Renders the authentication workflow and authentication layout sections.
+ */
+
+
 import { useState } from "react";
 
 import AuthIllustration from "./parts/AuthIllustration";

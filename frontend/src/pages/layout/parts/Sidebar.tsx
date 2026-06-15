@@ -1,3 +1,17 @@
+
+
+/**
+ * Main application sidebar.
+ *
+ * Props:
+ * - mobileOpen
+ * - onClose
+ *
+ * Purpose:
+ * Provides primary workflow navigation and workflow protection handling.
+ */
+
+
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
@@ -17,7 +31,12 @@ import { useTest } from "../../../contexts/testContext";
 import { useDom } from "../../../contexts/domContext";
 import ConfirmModal from "../../../components/shared/ConfirmModal";
 
-export default function Sidebar() {
+interface Props {
+  mobileOpen: boolean;
+  onClose: () => void;
+}
+
+export default function Sidebar({ mobileOpen, onClose }: Props) {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
@@ -84,15 +103,15 @@ export default function Sidebar() {
   const hasInnerSidebar =
     location.pathname.includes("/dashboard") ||
     location.pathname.includes("/questions") ||
-    location.pathname.includes("/publish") ||
-    location.pathname.includes("/tracking");
+    location.pathname.includes("/publish");
 
   const mainWidth = hasInnerSidebar ? (hovered ? "w-70" : "w-12") : "w-70";
   const showLabels = !hasInnerSidebar || hovered;
   const workflowActive =
     location.pathname.includes("/edit") ||
     location.pathname.includes("/questions") ||
-    location.pathname.includes("/publish");
+    location.pathname.includes("/publish") || 
+    location.pathname.includes("/tracking");
 
   const handleNavigation = (path: string) => {
     if (
@@ -102,13 +121,11 @@ export default function Sidebar() {
       path.includes("/publish")
     ) {
       navigate(path);
-
       return;
     }
 
     if (!workflowActive) {
       navigate(path);
-
       return;
     }
 
@@ -159,61 +176,99 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 z-40 flex h-screen max-w-70 min-w-70 flex-col overflow-hidden border-r border-zinc-300 bg-white">
-      <div className="border-b border-zinc-300 p-6">
-        <img src="/company-logo.png" alt="PrepRoute" className="h-16 w-auto" />
-      </div>
-
-      <div className="flex h-full overflow-hidden">
+    <>
+      {mobileOpen && (
         <div
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          className={`${mainWidth} flex flex-col overflow-hidden px-1 transition-all duration-300`}
-        >
-          <nav className="flex flex-1 flex-col gap-1 py-3">
-            {navItems.map((item) => {
-              const Icon = item.icon;
+          onClick={onClose}
+          className="
+        fixed inset-0
+        z-40
+        bg-black/40
 
-              const isActive = item.path.includes("/tracking")
-                ? location.pathname.includes("/tracking")
-                : item.exact
-                  ? location.pathname === item.path
-                  : location.pathname.startsWith(item.path);
+        sm:hidden
+      "
+        />
+      )}
 
-              return (
-                <button
-                  key={item.path}
-                  type="button"
-                  onClick={() => handleNavigation(item.path)}
-                  className="w-full text-left"
-                >
-                  <div
-                    className={`relative flex items-center gap-3 rounded-xl py-4 pl-4 transition-all duration-300 ${
-                      isActive && showLabels
-                        ? "active-link bg-[#6475F7]/8 text-[#6475F7]"
-                        : "text-zinc-500 hover:bg-zinc-100"
-                    }`}
-                  >
-                    <Icon
-                      size={showLabels ? 20 : 18}
-                      strokeWidth={1.8}
-                      className="flex-shrink-0"
-                    />
+      <aside
+        className={`
+      fixed top-0 left-0
+      z-50 sm:z-40
 
-                    {showLabels && (
-                      <span className="truncate text-[15px] font-medium">
-                        {item.label}
-                      </span>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </nav>
+      flex h-screen
+      max-w-70 min-w-70
+      flex-col overflow-hidden
+
+      border-r border-zinc-300
+      bg-white
+
+      transition-transform
+      duration-300
+
+      ${mobileOpen ? "translate-y-0" : "-translate-y-full"}
+
+      sm:translate-y-0
+    `}
+      >
+        <div className="border-b border-zinc-300 p-6">
+          <img
+            src="/company-logo.png"
+            alt="PrepRoute"
+            className="h-16 w-auto"
+          />
         </div>
 
-        {hasInnerSidebar && <InnerSidebar collapsed={hovered} />}
-      </div>
-    </aside>
+        <div className="flex h-full overflow-hidden">
+          <div
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={`${mainWidth} flex flex-col overflow-hidden px-1 transition-all duration-300`}
+          >
+            <nav className="flex flex-1 flex-col gap-1 py-3">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+
+                const isActive = item.path.includes("/tracking")
+                  ? location.pathname.includes("/tracking")
+                  : item.exact
+                    ? location.pathname === item.path
+                    : location.pathname.startsWith(item.path);
+
+                return (
+                  <button
+                    key={item.path}
+                    type="button"
+                    onClick={() => handleNavigation(item.path)}
+                    className="w-full text-left"
+                  >
+                    <div
+                      className={`relative flex items-center gap-3 rounded-xl py-4 pl-4 transition-all duration-300 ${
+                        isActive && showLabels
+                          ? "active-link bg-[#6475F7]/8 text-[#6475F7]"
+                          : "text-zinc-500 hover:bg-zinc-100"
+                      }`}
+                    >
+                      <Icon
+                        size={showLabels ? 20 : 18}
+                        strokeWidth={1.8}
+                        className="flex-shrink-0"
+                      />
+
+                      {showLabels && (
+                        <span className="truncate text-[15px] font-medium">
+                          {item.label}
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+
+          {hasInnerSidebar && <InnerSidebar collapsed={hovered} />}
+        </div>
+      </aside>
+    </>
   );
 }

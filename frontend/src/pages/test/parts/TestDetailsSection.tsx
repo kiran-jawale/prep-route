@@ -1,3 +1,15 @@
+
+
+/**
+ * Test details form section.
+ *
+ * Props:
+ * - name: Test name value.
+ * - totalTime: Test duration in minutes.
+ * - onChange: Handles field value updates.
+ */
+
+
 import Input from "../../../components/ui/Input";
 
 interface Props {

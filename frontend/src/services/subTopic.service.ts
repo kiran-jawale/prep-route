@@ -1,3 +1,20 @@
+
+
+/**
+ * SubTopic API service.
+ *
+ * Endpoints:
+ * - GET /sub-topics/topic/:topicId
+ * - GET /sub-topics/:id
+ * - POST /sub-topics
+ * - PATCH /sub-topics/:id
+ * - DELETE /sub-topics/:id
+ *
+ * Purpose:
+ * Provides sub-topic management API operations.
+ */
+
+
 import api from "./axios";
 
 class SubTopicService {

@@ -1,3 +1,14 @@
+
+
+/**
+ * Rich text question editor.
+ *
+ * Props:
+ * - value: Question content.
+ * - onChange: Handles editor content updates.
+ */
+
+
 import { Editor } from "@tinymce/tinymce-react";
 
 import CONFIG from "../../../constants/config";

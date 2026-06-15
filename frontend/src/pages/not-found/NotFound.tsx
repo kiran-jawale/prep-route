@@ -1,3 +1,13 @@
+
+
+/**
+ * Application fallback route.
+ *
+ * Purpose:
+ * Handles unknown routes and redirects users back to authentication flow.
+ */
+
+
 import { Link } from "react-router-dom";
 
 export default function NotFound() {

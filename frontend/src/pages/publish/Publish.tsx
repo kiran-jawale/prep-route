@@ -1,3 +1,14 @@
+
+
+/**
+ * Test publishing page.
+ *
+ * Purpose:
+ * Manages publication mode, scheduling and availability
+ * configuration before making a test live.
+ */
+
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 

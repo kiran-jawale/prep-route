@@ -1,4 +1,20 @@
 
+
+/**
+ * Axios application instance used by all service modules.
+ *
+ * Responsibilities:
+ * - Configure base API URL
+ * - Attach access tokens
+ * - Log requests and responses
+ * - Handle token refresh workflow
+ * - Retry failed authenticated requests
+ *
+ * Purpose:
+ * Provides a single HTTP client configuration for the entire frontend.
+ */
+
+
 import CONFIG from "../constants/config";
 import axios from "axios";
 

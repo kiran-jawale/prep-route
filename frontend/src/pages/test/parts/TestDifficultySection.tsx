@@ -1,3 +1,14 @@
+
+
+/**
+ * Test difficulty selection section.
+ *
+ * Props:
+ * - value: Selected difficulty level.
+ * - onChange: Handles difficulty updates.
+ */
+
+
 interface Props {
   value: string;
   onChange: (value: string) => void;

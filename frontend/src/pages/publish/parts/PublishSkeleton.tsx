@@ -1,3 +1,13 @@
+
+
+/**
+ * Publish workflow loading placeholder.
+ *
+ * Purpose:
+ * Displays skeleton content while publish data is loading.
+ */
+
+
 export default function PublishSkeleton() {
   return (
     <div className="space-y-6">

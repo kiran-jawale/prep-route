@@ -1,3 +1,14 @@
+
+
+/**
+ * Publish mode selector.
+ *
+ * Props:
+ * - value: Selected publish mode.
+ * - onChange: Handles publish mode updates.
+ */
+
+
 interface Props {
   value: "immediate" | "scheduled";
   onChange: (value: "immediate" | "scheduled") => void;

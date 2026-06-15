@@ -1,3 +1,15 @@
+
+
+/**
+ * Loader Component
+ *
+ * Displays a centered loading spinner.
+ *
+ * Purpose:
+ * Indicates loading states during asynchronous operations.
+ */
+
+
 export default function Loader() {
   return (
     <div className="flex justify-center py-16">

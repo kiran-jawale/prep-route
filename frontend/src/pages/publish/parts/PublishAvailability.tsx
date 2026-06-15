@@ -1,3 +1,18 @@
+
+
+/**
+ * Test availability configuration section.
+ *
+ * Props:
+ * - value: Selected availability mode.
+ * - endDate: Custom availability end date.
+ * - endTime: Custom availability end time.
+ * - onChange: Handles availability mode updates.
+ * - onEndDateChange: Handles end date updates.
+ * - onEndTimeChange: Handles end time updates.
+ */
+
+
 import Input from "../../../components/ui/Input";
 
 interface Props {

@@ -1,3 +1,13 @@
+
+
+/**
+ * Dashboard tests loading state.
+ *
+ * Purpose:
+ * Displays placeholder content while test data is loading.
+ */
+
+
 export default function TestsSkeleton() {
   return (
     <div className="space-y-6">

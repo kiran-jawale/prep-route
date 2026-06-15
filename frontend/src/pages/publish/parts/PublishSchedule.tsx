@@ -1,3 +1,16 @@
+
+
+/**
+ * Publish scheduling section.
+ *
+ * Props:
+ * - date: Scheduled publication date.
+ * - time: Scheduled publication time.
+ * - onDateChange: Handles date updates.
+ * - onTimeChange: Handles time updates.
+ */
+
+
 import Input from "../../../components/ui/Input";
 
 interface Props {

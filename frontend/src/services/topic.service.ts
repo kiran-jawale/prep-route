@@ -1,3 +1,20 @@
+
+
+/**
+ * Topic API service.
+ *
+ * Endpoints:
+ * - GET /topics/subject/:subjectId
+ * - GET /topics/:id
+ * - POST /topics
+ * - PATCH /topics/:id
+ * - DELETE /topics/:id
+ *
+ * Purpose:
+ * Provides topic management API operations.
+ */
+
+
 import api from "./axios";
 
 class TopicService {

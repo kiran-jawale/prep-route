@@ -1,3 +1,18 @@
+
+
+/**
+ * Current test workflow persistence utilities.
+ *
+ * Responsibilities:
+ * - Persist active workflow state
+ * - Restore workflow state
+ * - Clear workflow state
+ *
+ * Purpose:
+ * Supports TestContext state restoration across page refreshes and navigation.
+ */
+
+
 import { getStorage, setStorage, removeStorage } from "./localStorage";
 
 import { STORAGE_KEYS } from "../constants/storage";

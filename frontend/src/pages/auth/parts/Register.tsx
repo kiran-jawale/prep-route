@@ -1,3 +1,16 @@
+
+
+/**
+ * Registration workflow form.
+ *
+ * Interfaces:
+ * - ApiError
+ *
+ * Purpose:
+ * Creates new user accounts through the authentication service.
+ */
+
+
 import { useState } from "react";
 import { AxiosError } from "axios";
 

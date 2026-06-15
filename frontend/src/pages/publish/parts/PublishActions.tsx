@@ -1,3 +1,14 @@
+
+
+/**
+ * Publish workflow action controls.
+ *
+ * Props:
+ * - loading: Controls publish submission state.
+ * - onCancel: Handles publish workflow cancellation.
+ */
+
+
 import Button from "../../../components/ui/Button";
 
 interface Props {

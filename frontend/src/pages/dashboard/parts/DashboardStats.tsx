@@ -1,3 +1,17 @@
+
+
+/**
+ * Dashboard statistics section.
+ *
+ * Props:
+ * - stats
+ * - onSelect
+ *
+ * Purpose:
+ * Displays test lifecycle metrics and dashboard filters.
+ */
+
+
 import StatCard from "../../../components/shared/StatCard";
 
 interface Props {

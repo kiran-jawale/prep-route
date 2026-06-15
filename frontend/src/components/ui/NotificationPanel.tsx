@@ -1,3 +1,15 @@
+
+
+/**
+ * Notification Panel Component
+ *
+ * Slide-in notification drawer displayed from the right side.
+ *
+ * Purpose:
+ * Displays application notifications and workflow updates.
+ */
+
+
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useDom } from "../../contexts/domContext";

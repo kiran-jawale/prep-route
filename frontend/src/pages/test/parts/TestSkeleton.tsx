@@ -1,3 +1,13 @@
+
+
+/**
+ * Test workflow loading placeholder.
+ *
+ * Purpose:
+ * Displays skeleton content while test data is loading.
+ */
+
+
 export default function TestSkeleton() {
   return (
     <div className="animate-pulse space-y-8">

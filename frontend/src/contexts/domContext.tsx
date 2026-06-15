@@ -1,3 +1,20 @@
+
+
+/**
+ * DOM Context
+ *
+ * Provides application-wide UI state management.
+ *
+ * Features:
+ * - Toast notifications
+ * - Modal rendering
+ * - Notification panel visibility
+ *
+ * Purpose:
+ * Centralizes transient UI interactions and overlays.
+ */
+
+
 import { createContext, useContext, useState } from "react";
 
 import type { ReactNode } from "react";

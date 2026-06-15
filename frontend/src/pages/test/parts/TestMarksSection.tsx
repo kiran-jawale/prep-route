@@ -1,3 +1,18 @@
+
+
+/**
+ * Test marking scheme configuration section.
+ *
+ * Props:
+ * - correctMarks: Marks awarded for correct answers.
+ * - wrongMarks: Marks deducted for incorrect answers.
+ * - unattemptMarks: Marks awarded for unanswered questions.
+ * - totalQuestions: Total number of questions.
+ * - totalMarks: Computed total test marks.
+ * - onChange: Handles marking scheme updates.
+ */
+
+
 import Input from "../../../components/ui/Input";
 
 interface Props {

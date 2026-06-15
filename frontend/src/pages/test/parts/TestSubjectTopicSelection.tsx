@@ -1,3 +1,19 @@
+
+
+/**
+ * Subject, topic and subtopic selection section.
+ *
+ * Props:
+ * - subjects: Available subject options.
+ * - topics: Available topic options.
+ * - subTopics: Available subtopic options.
+ * - subjectId: Selected subject identifier.
+ * - topicValues: Selected topic identifiers.
+ * - subTopicValues: Selected subtopic identifiers.
+ * - onChange: Handles selection updates.
+ */
+
+
 import Select from "../../../components/ui/Select";
 import MultiSelect from "../../../components/ui/MultiSelect";
 

@@ -1,3 +1,16 @@
+
+
+/**
+ * Login workflow form.
+ *
+ * Interfaces:
+ * - ApiError
+ *
+ * Purpose:
+ * Authenticates users and initializes application session state.
+ */
+
+
 import { useState } from "react";
 import { AxiosError } from "axios";
 import { useDispatch } from "react-redux";

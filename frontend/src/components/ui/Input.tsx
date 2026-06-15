@@ -1,3 +1,18 @@
+
+
+/**
+ * Input Component
+ *
+ * Reusable text input wrapper around the native HTML input.
+ *
+ * Props:
+ * Inherits all standard HTML input attributes.
+ *
+ * Purpose:
+ * Provides consistent styling for form inputs.
+ */
+
+
 import type { InputHTMLAttributes } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {}

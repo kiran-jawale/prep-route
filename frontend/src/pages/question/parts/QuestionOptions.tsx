@@ -1,3 +1,14 @@
+
+
+/**
+ * Question options management section.
+ *
+ * Props:
+ * - question: Current question state.
+ * - onChange: Handles option and correct answer updates.
+ */
+
+
 import Input from "../../../components/ui/Input";
 
 import type { Question, OptionKey } from "../../../types/question.types";

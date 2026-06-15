@@ -1,3 +1,26 @@
+
+
+/**
+ * Test filtering controls.
+ *
+ * Interfaces:
+ * - Subject
+ *
+ * Props:
+ * - search
+ * - status
+ * - subject
+ * - subjects
+ * - onSearch
+ * - onStatusChange
+ * - onSubjectChange
+ * - onRefresh
+ *
+ * Purpose:
+ * Provides search and filtering controls for dashboard test listings.
+ */
+
+
 import SearchBar from "../../../components/shared/SearchBar";
 import Select from "../../../components/ui/Select";
 import Button from "../../../components/ui/Button";
@@ -57,10 +80,6 @@ export default function TestsFilters({
             {
               label: "Live",
               value: "live",
-            },
-            {
-              label: "Scheduled",
-              value: "scheduled",
             },
             {
               label: "Draft",

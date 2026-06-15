@@ -1,3 +1,13 @@
+
+
+/**
+ * Dashboard overview loading state.
+ *
+ * Purpose:
+ * Displays placeholder content while overview data is loading.
+ */
+
+
 export default function OverviewSkeleton() {
   return (
     <div className="space-y-6">

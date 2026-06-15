@@ -1,3 +1,14 @@
+
+
+/**
+ * Test category selector.
+ *
+ * Props:
+ * - value: Currently selected test category.
+ * - onChange: Handles category selection changes.
+ */
+
+
 interface Props {
   value: string;
   onChange: (value: string) => void;

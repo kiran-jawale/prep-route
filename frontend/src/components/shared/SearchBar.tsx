@@ -1,3 +1,22 @@
+
+
+/**
+ * Search Bar Component
+ *
+ * Reusable controlled search input used throughout
+ * dashboard and management screens.
+ *
+ * Props:
+ * @param value Current search value.
+ * @param icon Optional icon element.
+ * @param onChange Search value change handler.
+ * @param placeholder Placeholder text.
+ *
+ * Purpose:
+ * Standardizes search input behavior across modules.
+ */
+
+
 import type { ReactNode } from "react";
 
 
@@ -5,7 +24,6 @@ interface Props {
   value: string;
   icon?: ReactNode;
   onChange: (value: string) => void;
-
   placeholder?: string;
 }
 

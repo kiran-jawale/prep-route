@@ -1,3 +1,16 @@
+
+
+/**
+ * Recent tests section.
+ *
+ * Props:
+ * - tests
+ *
+ * Purpose:
+ * Displays recently created tests for quick visibility.
+ */
+
+
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 

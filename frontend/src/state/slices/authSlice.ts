@@ -1,5 +1,18 @@
 
 
+/**
+ * Authentication state slice.
+ *
+ * Responsibilities:
+ * - Store authenticated user data
+ * - Manage login state
+ * - Manage logout state
+ *
+ * Purpose:
+ * Provides application-wide authentication state.
+ */
+
+
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 

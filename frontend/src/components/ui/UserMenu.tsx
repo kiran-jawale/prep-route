@@ -1,3 +1,19 @@
+
+
+/**
+ * User Menu Component
+ *
+ * Dropdown menu displayed from the user profile section.
+ *
+ * Props:
+ * @param open Controls menu visibility.
+ * @param onClose Reserved menu close callback.
+ *
+ * Purpose:
+ * Provides account-level actions such as logout.
+ */
+
+
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 

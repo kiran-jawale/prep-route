@@ -1,3 +1,13 @@
+
+
+/**
+ * Dashboard module page.
+ *
+ * Purpose:
+ * Coordinates overview metrics, test listing, filtering and dashboard navigation workflows.
+ */
+
+
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 

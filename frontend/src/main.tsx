@@ -1,3 +1,19 @@
+
+
+/**
+ * Application entry point.
+ *
+ * Responsibilities:
+ * - Configure application routes
+ * - Register global providers
+ * - Initialize React application
+ * - Mount root application tree
+ *
+ * Purpose:
+ * Bootstraps the complete frontend application and its global infrastructure.
+ */
+
+
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,

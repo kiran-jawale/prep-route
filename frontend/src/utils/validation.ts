@@ -1,3 +1,19 @@
+
+
+/**
+ * Application validation schemas.
+ *
+ * Responsibilities:
+ * - Authentication validation
+ * - Test validation
+ * - Question validation
+ * - Form type inference
+ *
+ * Purpose:
+ * Centralizes frontend validation rules using Zod schemas.
+ */
+
+
 import { z } from "zod";
 export const loginSchema = z.object({
   identifier: z.string().min(3, "User ID is required"),

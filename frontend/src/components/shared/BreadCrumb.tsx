@@ -1,3 +1,19 @@
+
+
+/**
+ * Breadcrumb Component
+ *
+ * Displays the current navigation path as a sequence of items
+ * separated by forward slashes.
+ *
+ * Props:
+ * @param items Ordered list of breadcrumb labels.
+ *
+ * Purpose:
+ * Provides simple navigation context to the user.
+ */
+
+
 interface Props {
   items: string[];
 }

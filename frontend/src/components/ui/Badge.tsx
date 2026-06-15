@@ -1,3 +1,18 @@
+
+
+/**
+ * Badge Component
+ *
+ * Displays small highlighted content inside a rounded badge.
+ *
+ * Props:
+ * @param children Content displayed inside the badge.
+ *
+ * Purpose:
+ * Provides a reusable visual label component.
+ */
+
+
 import type { ReactNode } from "react";
 
 interface Props {

@@ -1,3 +1,25 @@
+
+
+/**
+ * Test Context
+ *
+ * Manages the complete test creation workflow state.
+ *
+ * Features:
+ * - Current test
+ * - Questions
+ * - Subjects
+ * - Topics
+ * - SubTopics
+ * - Active question tracking
+ * - Completion tracking
+ * - Workflow persistence
+ *
+ * Purpose:
+ * Acts as the primary state container for the test workflow.
+ */
+
+
 import { createContext, useEffect, useContext, useState } from "react";
 import type { ReactNode } from "react";
 

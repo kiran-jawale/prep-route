@@ -1,3 +1,18 @@
+
+
+/**
+ * Draft persistence utilities.
+ *
+ * Responsibilities:
+ * - Persist remembered tests
+ * - Restore remembered tests
+ * - Retrieve specific remembered drafts
+ *
+ * Purpose:
+ * Supports Redux draft restoration workflows across sessions.
+ */
+
+
 import { getStorage, setStorage } from "./localStorage";
 import { STORAGE_KEYS } from "../constants/storage";
 import type { RememberedTest } from "../state/slices/rememberSlice";

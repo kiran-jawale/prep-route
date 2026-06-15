@@ -1,3 +1,21 @@
+
+
+/**
+ * Button Component
+ *
+ * Reusable button supporting loading states and
+ * multiple visual variants.
+ *
+ * Props:
+ * @param children Button content.
+ * @param loading Displays loading indicator and disables interaction.
+ * @param variant Visual appearance of button.
+ *
+ * Purpose:
+ * Standardizes action buttons across the application.
+ */
+
+
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

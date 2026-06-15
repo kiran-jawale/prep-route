@@ -1,3 +1,14 @@
+
+
+/**
+ * Test workflow action controls.
+ *
+ * Props:
+ * - loading: Controls submit loading state.
+ * - onCancel: Handles workflow cancellation.
+ */
+
+
 import Button from "../../../components/ui/Button";
 
 interface Props {

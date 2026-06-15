@@ -1,3 +1,18 @@
+
+
+/**
+ * Question configuration section.
+ *
+ * Props:
+ * - difficulty: Selected difficulty level.
+ * - topicId: Selected topic identifier.
+ * - subTopicId: Selected subtopic identifier.
+ * - topics: Available topic options.
+ * - subTopics: Available subtopic options.
+ * - onChange: Handles configuration updates.
+ */
+
+
 import Select from "../../../components/ui/Select";
 
 import type { Topic } from "../../../types/topic.types";

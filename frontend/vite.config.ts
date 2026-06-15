@@ -8,4 +8,8 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
+   build: {
+    outDir: "../backend/dist",
+    emptyOutDir: true,
+  },
 })

@@ -1,3 +1,17 @@
+
+
+/**
+ * Question factory utility.
+ *
+ * Responsibilities:
+ * - Generate default question objects
+ * - Initialize question creation state
+ *
+ * Purpose:
+ * Ensures consistent question structure throughout the application.
+ */
+
+
 import type { Question } from "../types/question.types";
 
 export const createEmptyQuestion = (

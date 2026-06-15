@@ -1,3 +1,20 @@
+
+
+/**
+ * Subject API service.
+ *
+ * Endpoints:
+ * - GET /subjects
+ * - GET /subjects/:id
+ * - POST /subjects
+ * - PATCH /subjects/:id
+ * - DELETE /subjects/:id
+ *
+ * Purpose:
+ * Provides subject management API operations.
+ */
+
+
 import api from "./axios";
 
 class SubjectService {

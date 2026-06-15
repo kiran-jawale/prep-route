@@ -1,3 +1,17 @@
+/**
+ * Dashboard test listing table.
+ *
+ * Props:
+ * - tests
+ * - page
+ * - totalPages
+ * - onPageChange
+ * - isLoading
+ *
+ * Purpose:
+ * Displays paginated test data and workflow navigation actions.
+ */
+
 import { useNavigate } from "react-router-dom";
 
 import { Pencil, CircleHelp, Send } from "lucide-react";
@@ -96,15 +110,9 @@ export default function TestsTable({
               </td>
 
               <td className="px-5 py-4 text-center">
-                {test.status !== "live" ? (
-                  <button
-                    onClick={() => navigate(`/tests/${test._id}/publish`)}
-                  >
-                    <Send size={18} className="mx-auto" />
-                  </button>
-                ) : (
-                  "-"
-                )}
+                <button onClick={() => navigate(`/tests/${test._id}/publish`)}>
+                  <Send size={18} className="mx-auto" />
+                </button>
               </td>
             </tr>
           ))}

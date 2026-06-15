@@ -1,3 +1,19 @@
+
+
+/**
+ * Error Boundary Component
+ *
+ * React class component used to catch rendering errors
+ * occurring anywhere inside its child component tree.
+ *
+ * Props:
+ * @param children Wrapped application content.
+ *
+ * Purpose:
+ * Prevents full application crashes by displaying a fallback UI.
+ */
+
+
 import React from "react";
 
 interface Props {

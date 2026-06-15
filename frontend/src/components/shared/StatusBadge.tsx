@@ -1,3 +1,25 @@
+
+
+/**
+ * Status Badge Component
+ *
+ * Displays test lifecycle status using
+ * color-coded badges.
+ *
+ * Props:
+ * @param status Current test status.
+ *
+ * Supported Values:
+ * - draft
+ * - scheduled
+ * - live
+ * - expired
+ *
+ * Purpose:
+ * Provides quick status identification.
+ */
+
+
 interface Props {
   status: "draft" | "live" | "scheduled" | "expired";
 }
