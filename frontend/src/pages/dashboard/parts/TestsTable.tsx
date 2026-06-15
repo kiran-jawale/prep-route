@@ -1,13 +1,51 @@
 import { useNavigate } from "react-router-dom";
+
 import { Pencil, CircleHelp, Send } from "lucide-react";
+
+import { useEffect, useRef } from "react";
+
 import StatusBadge from "../../../components/shared/StatusBadge";
+import Loader from "../../../components/ui/Loader";
 
 interface Props {
   tests: any[];
+
+  page: number;
+
+  totalPages: number;
+
+  onPageChange: (page: number) => void;
+
+  isLoading?: boolean;
 }
 
-export default function TestsTable({ tests }: Props) {
+export default function TestsTable({
+  tests,
+  page,
+  totalPages,
+  onPageChange,
+  isLoading = false,
+}: Props) {
   const navigate = useNavigate();
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = sentinelRef.current;
+
+    if (!node) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !isLoading && page < totalPages) {
+        onPageChange(page + 1);
+      }
+    });
+
+    observer.observe(node);
+
+    return () => {
+      observer.unobserve(node);
+    };
+  }, [page, totalPages, isLoading, onPageChange]);
 
   return (
     <div className="overflow-hidden rounded-2xl border bg-white">
@@ -15,11 +53,17 @@ export default function TestsTable({ tests }: Props) {
         <thead>
           <tr className="border-b bg-zinc-50">
             <th className="px-5 py-4 text-left">Name</th>
+
             <th className="px-5 py-4 text-left">Subject</th>
+
             <th className="px-5 py-4 text-left">Status</th>
+
             <th className="px-5 py-4 text-left">Questions</th>
+
             <th className="px-5 py-4 text-center">Edit</th>
+
             <th className="px-5 py-4 text-center">Questions</th>
+
             <th className="px-5 py-4 text-center">Publish</th>
           </tr>
         </thead>
@@ -38,39 +82,25 @@ export default function TestsTable({ tests }: Props) {
               <td className="px-5 py-4">{test.totalQuestions}</td>
 
               <td className="px-5 py-4 text-center">
-                <button
-                  type="button"
-                  onClick={() => navigate(`/tests/${test._id}/edit`)}
-                >
-                  <Pencil
-                    size={18}
-                    className="mx-auto text-zinc-600 hover:text-[#6475F7]"
-                  />
+                <button onClick={() => navigate(`/tests/${test._id}/edit`)}>
+                  <Pencil size={18} className="mx-auto" />
                 </button>
               </td>
 
               <td className="px-5 py-4 text-center">
                 <button
-                  type="button"
                   onClick={() => navigate(`/tests/${test._id}/questions`)}
                 >
-                  <CircleHelp
-                    size={18}
-                    className="mx-auto text-zinc-600 hover:text-[#6475F7]"
-                  />
+                  <CircleHelp size={18} className="mx-auto" />
                 </button>
               </td>
 
               <td className="px-5 py-4 text-center">
                 {test.status !== "live" ? (
                   <button
-                    type="button"
                     onClick={() => navigate(`/tests/${test._id}/publish`)}
                   >
-                    <Send
-                      size={18}
-                      className="mx-auto text-zinc-600 hover:text-[#6475F7]"
-                    />
+                    <Send size={18} className="mx-auto" />
                   </button>
                 ) : (
                   "-"
@@ -80,6 +110,12 @@ export default function TestsTable({ tests }: Props) {
           ))}
         </tbody>
       </table>
+
+      {isLoading && <Loader />}
+
+      {!isLoading && page < totalPages && (
+        <div ref={sentinelRef} className="h-1" />
+      )}
     </div>
   );
 }

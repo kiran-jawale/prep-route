@@ -3,7 +3,6 @@ import { STORAGE_KEYS } from "../constants/storage";
 import type { RememberedTest } from "../state/slices/rememberSlice";
 
 export const saveRememberedTests = (tests: RememberedTest[]) => {
-  console.log("LOCALSTORAGE SAVE", tests);
 
   setStorage(STORAGE_KEYS.REMEMBERED_TESTS, tests);
 };

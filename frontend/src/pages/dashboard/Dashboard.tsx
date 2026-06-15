@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import testService from "../../services/test.service";
+import subjectService from "../../services/subject.service";
 
 import DashboardActions from "./parts/DashboardActions";
 import DashboardStats from "./parts/DashboardStats";
@@ -19,37 +20,118 @@ export default function Dashboard() {
 
   const currentHash = location.hash || "#overview";
 
-  const [loading, setLoading] = useState(true);
-
-  const [tests, setTests] = useState<any[]>([]);
-
   const [search, setSearch] = useState("");
 
   const [statusFilter, setStatusFilter] = useState("all");
 
   const [subjectFilter, setSubjectFilter] = useState("all");
 
-  const loadTests = async () => {
+  const [tests, setTests] = useState<any[]>([]);
+
+  const [subjects, setSubjects] = useState<any[]>([]);
+
+  const [page, setPage] = useState(1);
+
+  const [totalPages, setTotalPages] = useState(1);
+
+  const [initialLoading, setInitialLoading] = useState(true);
+
+  const [loadingMore, setLoadingMore] = useState(false);
+
+  const [stats, setStats] = useState({
+    total: 0,
+    live: 0,
+    draft: 0,
+    scheduled: 0,
+    expired: 0,
+  });
+
+  const loadStats = async () => {
     try {
-      setLoading(true);
+      const response = await testService.getDashboardStats();
 
-      const response = await testService.getAll();
+      setStats(response.data.data);
+    } catch {}
+  };
 
-      setTests(response.data.data);
+  const loadSubjects = async () => {
+    try {
+      const response = await subjectService.getAll();
+
+      setSubjects(response.data.data);
+    } catch {}
+  };
+
+  const loadTests = async (
+    nextPage = 1,
+    replace = false
+  ) => {
+    try {
+      if (replace) {
+        setInitialLoading(true);
+      } else {
+        setLoadingMore(true);
+      }
+
+      const response =
+        await testService.getAll(nextPage, 20);
+
+      const data = response.data.data;
+
+      setPage(nextPage);
+
+      setTotalPages(data.totalPages);
+
+      setTests((prev) => {
+        if (replace) {
+          return data.items;
+        }
+
+        const map = new Map();
+
+        [...prev, ...data.items].forEach((item: any) => {
+          map.set(item._id, item);
+        });
+
+        return Array.from(map.values());
+      });
     } finally {
-      setLoading(false);
+      setInitialLoading(false);
+      setLoadingMore(false);
     }
   };
 
+  const handlePageChange = useCallback(
+    (nextPage: number) => {
+      if (
+        loadingMore ||
+        nextPage > totalPages
+      ) {
+        return;
+      }
+
+      loadTests(nextPage);
+    },
+    [loadingMore, totalPages]
+  );
+
   useEffect(() => {
-    loadTests();
+    loadStats();
+
+    loadSubjects();
+
+    loadTests(1, true);
   }, []);
 
   const filteredTests = useMemo(() => {
     return tests.filter((test) => {
       const matchesSearch =
-        test.name.toLowerCase().includes(search.toLowerCase()) ||
-        test.subjectId?.name?.toLowerCase().includes(search.toLowerCase());
+        test.name
+          ?.toLowerCase()
+          .includes(search.toLowerCase()) ||
+        test.subjectId?.name
+          ?.toLowerCase()
+          .includes(search.toLowerCase());
 
       const matchesStatus =
         statusFilter === "all"
@@ -59,34 +141,31 @@ export default function Dashboard() {
             : test.status === statusFilter;
 
       const matchesSubject =
-        subjectFilter === "all" ? true : test.subjectId?._id === subjectFilter;
+        subjectFilter === "all"
+          ? true
+          : test.subjectId?._id ===
+            subjectFilter;
 
-      return matchesSearch && matchesStatus && matchesSubject;
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesSubject
+      );
     });
-  }, [tests, search, statusFilter, subjectFilter]);
-
-  const stats = {
-    total: tests.length,
-    live: tests.filter((item) => item.status === "live").length,
-    draft: tests.filter((item) => item.status === "draft").length,
-    scheduled: tests.filter((item) => item.publishMode === "scheduled").length,
-    expired: tests.filter((item) => item.status === "expired").length,
-  };
-
-  const subjects = useMemo(() => {
-    const map = new Map();
-
-    tests.forEach((test) => {
-      if (test.subjectId?._id) {
-        map.set(test.subjectId._id, test.subjectId);
-      }
-    });
-
-    return Array.from(map.values());
-  }, [tests]);
+  }, [
+    tests,
+    search,
+    statusFilter,
+    subjectFilter,
+  ]);
 
   const handleCardClick = (
-    filter: "all" | "live" | "draft" | "scheduled" | "expired"
+    filter:
+      | "all"
+      | "live"
+      | "draft"
+      | "scheduled"
+      | "expired"
   ) => {
     navigate("/dashboard#tests");
 
@@ -97,15 +176,20 @@ export default function Dashboard() {
     <div className="space-y-8 p-8">
       {currentHash === "#overview" && (
         <>
-          {loading ? (
+          {initialLoading ? (
             <OverviewSkeleton />
           ) : (
             <>
               <DashboardActions />
 
-              <DashboardStats stats={stats} onSelect={handleCardClick} />
+              <DashboardStats
+                stats={stats}
+                onSelect={handleCardClick}
+              />
 
-              <RecentTests tests={tests.slice(0, 5)} />
+              <RecentTests
+                tests={tests.slice(0, 5)}
+              />
             </>
           )}
         </>
@@ -113,7 +197,7 @@ export default function Dashboard() {
 
       {currentHash === "#tests" && (
         <>
-          {loading ? (
+          {initialLoading ? (
             <TestsSkeleton />
           ) : (
             <>
@@ -125,10 +209,18 @@ export default function Dashboard() {
                 onSearch={setSearch}
                 onStatusChange={setStatusFilter}
                 onSubjectChange={setSubjectFilter}
-                onRefresh={loadTests}
+                onRefresh={() => {
+                  loadTests(1, true);
+                }}
               />
 
-              <TestsTable tests={filteredTests} />
+              <TestsTable
+                tests={filteredTests}
+                page={page}
+                totalPages={totalPages}
+                isLoading={loadingMore}
+                onPageChange={handlePageChange}
+              />
             </>
           )}
         </>

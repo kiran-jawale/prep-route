@@ -58,11 +58,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <ErrorBoundary>
     <Provider store={store}>
       <ThemeProvider>
-        <DomProvider>
-          <TestProvider>
+        <TestProvider>
+          <DomProvider>
             <RouterProvider router={router} />
-          </TestProvider>
-        </DomProvider>
+          </DomProvider>
+        </TestProvider>
       </ThemeProvider>
     </Provider>
   </ErrorBoundary>

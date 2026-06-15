@@ -41,7 +41,7 @@ export default function TestsFilters({
         <SearchBar
           value={search}
           onChange={onSearch}
-          placeholder="Search test or subject..."
+          placeholder="Search by test or subject"
         />
       </div>
 
@@ -92,10 +92,7 @@ export default function TestsFilters({
         />
       </div>
 
-      <Button
-        variant="secondary"
-        onClick={onRefresh}
-      >
+      <Button variant="secondary" onClick={onRefresh}>
         Refresh
       </Button>
     </div>
