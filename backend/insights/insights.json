@@ -1,134 +1,6 @@
 {
   "API_REQUESTS": [
     {
-      "timestamp": "2026-06-15T15:11:09.615Z",
-      "log": "GET /api/v1/auth/me | 304 | 52.010 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:09.776Z",
-      "log": "GET /api/v1/subjects | 304 | 51.164 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:09.833Z",
-      "log": "GET /api/v1/tests/dashboard-stats | 304 | 110.393 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:09.999Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 236.556 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:11.869Z",
-      "log": "GET /api/v1/tests?page=2&limit=20 | 200 | 154.123 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:12.039Z",
-      "log": "GET /api/v1/tests?page=3&limit=20 | 200 | 69.480 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:16.749Z",
-      "log": "GET /api/v1/auth/me | 304 | 17.238 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:16.864Z",
-      "log": "GET /api/v1/subjects | 304 | 51.277 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:16.880Z",
-      "log": "GET /api/v1/tests/dashboard-stats | 304 | 73.593 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:16.937Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 118.427 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:19.537Z",
-      "log": "GET /api/v1/tests?page=2&limit=20 | 304 | 57.559 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:19.631Z",
-      "log": "GET /api/v1/tests?page=3&limit=20 | 304 | 48.484 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:22.886Z",
-      "log": "GET /api/v1/auth/me | 304 | 19.360 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:22.987Z",
-      "log": "GET /api/v1/subjects | 304 | 46.363 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:23.018Z",
-      "log": "GET /api/v1/tests/dashboard-stats | 304 | 80.154 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:23.095Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 146.826 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:27.192Z",
-      "log": "GET /api/v1/tests?page=2&limit=20 | 304 | 49.004 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:11:27.317Z",
-      "log": "GET /api/v1/tests?page=3&limit=20 | 304 | 90.688 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:30.480Z",
-      "log": "GET /api/v1/auth/me | 304 | 35.397 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:30.582Z",
-      "log": "GET /api/v1/subjects | 304 | 47.657 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:30.604Z",
-      "log": "GET /api/v1/tests/dashboard-stats | 304 | 86.170 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:30.667Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 125.062 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:39.668Z",
-      "log": "GET /api/v1/subjects | 304 | 45.570 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:39.700Z",
-      "log": "GET /api/v1/tests/dashboard-stats | 304 | 79.407 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:12:39.771Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 133.408 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:02.136Z",
-      "log": "OPTIONS /api/v1/auth/me | 200 | 8.901 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:21.314Z",
-      "log": "GET / | 500 | 62.452 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:21.343Z",
-      "log": "GET /favicon.ico | 500 | 4.887 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:40.722Z",
-      "log": "GET / | 500 | 4.006 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:40.766Z",
-      "log": "GET /favicon.ico | 500 | 4.773 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:42.099Z",
-      "log": "GET / | 500 | 16.631 ms"
-    },
-    {
-      "timestamp": "2026-06-15T15:45:42.132Z",
-      "log": "GET /favicon.ico | 500 | 5.858 ms"
-    },
-    {
       "timestamp": "2026-06-15T15:46:17.354Z",
       "log": "GET / | 200 | 16.846 ms"
     },
@@ -399,6 +271,134 @@
     {
       "timestamp": "2026-06-15T15:50:02.956Z",
       "log": "GET /api/v1/tests?page=1&limit=20 | 304 | 136.706 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:20.000Z",
+      "log": "GET /api/v1/tests | 401 | 5.513 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:20.063Z",
+      "log": "GET /favicon.ico | 500 | 8.693 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:26.357Z",
+      "log": "GET /api/v1/ | 200 | 0.806 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:26.421Z",
+      "log": "GET /favicon.ico | 500 | 1.302 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:30.620Z",
+      "log": "GET / | 500 | 1.460 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:30.682Z",
+      "log": "GET /favicon.ico | 500 | 0.926 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:33.366Z",
+      "log": "GET / | 500 | 1.125 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:48:33.421Z",
+      "log": "GET /favicon.ico | 500 | 0.878 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.423Z",
+      "log": "GET / | 200 | 8.505 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.441Z",
+      "log": "GET /assets/index-DltWCcFd.css | 200 | 1.116 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.470Z",
+      "log": "GET /assets/index-reiKPtCQ.js | 200 | 22.819 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.566Z",
+      "log": "GET /api/v1/auth/me | 401 | 7.507 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.570Z",
+      "log": "GET /favicon.svg | 200 | 19.938 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.616Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 1.683 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.625Z",
+      "log": "GET /auth.png | 200 | 1.127 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:52:18.634Z",
+      "log": "GET /company-logo.png | 200 | 6.218 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:56:21.716Z",
+      "log": "POST /api/v1/auth/login | 401 | 188.387 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:56:21.729Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 0.744 ms"
+    },
+    {
+      "timestamp": "2026-06-16T05:58:23.874Z",
+      "log": "POST /api/v1/auth/register | 201 | 310.957 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.658Z",
+      "log": "GET / | 304 | 7.257 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.690Z",
+      "log": "GET /assets/index-reiKPtCQ.js | 304 | 1.653 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.702Z",
+      "log": "GET /assets/index-DltWCcFd.css | 304 | 26.992 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.774Z",
+      "log": "GET /api/v1/auth/me | 401 | 0.597 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.777Z",
+      "log": "GET /favicon.svg | 304 | 9.087 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.782Z",
+      "log": "POST /api/v1/auth/refresh-token | 401 | 0.365 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.797Z",
+      "log": "GET /auth.png | 304 | 1.507 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:04.800Z",
+      "log": "GET /company-logo.png | 304 | 11.131 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:15.047Z",
+      "log": "POST /api/v1/auth/login | 200 | 387.961 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:15.146Z",
+      "log": "GET /favicon.svg | 304 | 2.759 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:15.333Z",
+      "log": "GET /api/v1/subjects | 200 | 168.614 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:15.571Z",
+      "log": "GET /api/v1/tests?page=1&limit=20 | 200 | 401.161 ms"
+    },
+    {
+      "timestamp": "2026-06-16T06:00:16.099Z",
+      "log": "GET /api/v1/tests/dashboard-stats | 200 | 950.119 ms"
     }
   ],
   "DB_OPS": {
@@ -1208,10 +1208,6 @@
     ],
     "GET_ALL_SUBJECTS": [
       {
-        "timestamp": "2026-06-15T04:36:09.808Z",
-        "latencyMs": 14.68
-      },
-      {
         "timestamp": "2026-06-15T04:36:13.968Z",
         "latencyMs": 4.26
       },
@@ -1606,6 +1602,10 @@
       {
         "timestamp": "2026-06-15T15:50:02.856Z",
         "latencyMs": 23.72
+      },
+      {
+        "timestamp": "2026-06-16T06:00:15.328Z",
+        "latencyMs": 75.61
       }
     ],
     "GET_MY_PROFILE": [
@@ -2012,10 +2012,6 @@
     ],
     "GET_ALL_TESTS": [
       {
-        "timestamp": "2026-06-15T04:08:35.959Z",
-        "latencyMs": 64.84
-      },
-      {
         "timestamp": "2026-06-15T04:14:44.181Z",
         "latencyMs": 103.63
       },
@@ -2410,6 +2406,10 @@
       {
         "timestamp": "2026-06-15T15:50:02.942Z",
         "latencyMs": 103.59
+      },
+      {
+        "timestamp": "2026-06-16T06:00:15.564Z",
+        "latencyMs": 323.97
       }
     ],
     "CREATE_TEST": [
@@ -3316,6 +3316,10 @@
       {
         "timestamp": "2026-06-15T15:50:02.889Z",
         "latencyMs": 49.58
+      },
+      {
+        "timestamp": "2026-06-16T06:00:16.096Z",
+        "latencyMs": 811.09
       }
     ],
     "UPDATE_MARKING_SCHEME": [
@@ -3366,6 +3370,12 @@
       {
         "timestamp": "2026-06-15T15:03:58.200Z",
         "latencyMs": 34.86
+      }
+    ],
+    "REGISTER_USER": [
+      {
+        "timestamp": "2026-06-16T05:58:23.856Z",
+        "latencyMs": 294.71
       }
     ]
   },

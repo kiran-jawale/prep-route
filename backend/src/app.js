@@ -80,7 +80,7 @@ app.use(CONFIG.API_VERSION + "/health", (req, res) => {
 });
 
 if (CONFIG.SERVE_STATIC) {
-  const clientPath = path.resolve(__dirname, "../../dist");
+  const clientPath = path.resolve(__dirname, "../dist");
 
   app.use(express.static(clientPath));
 
