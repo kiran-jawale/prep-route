@@ -1,20 +1,27 @@
 import dotenv from "dotenv";
-import connectDb from "./models/index.js";
-import { app } from "./app.js";
-import CONFIG  from './constants/config.js'
 
 dotenv.config({
   path: "./.env",
 });
 
-const PORT = process.env.PORT || 3000;
+import connectDb from "./models/index.js";
+import { app } from "./app.js";
+import CONFIG from "./constants/config.js";
+
+const PORT = CONFIG.PORT || 3000;
 
 connectDb()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}${CONFIG.API_VERSION}`);
+      console.log(`[${CONFIG.APP_NAME}] Server started`);
+      console.log(`Environment: ${CONFIG.NODE_ENV}`);
+      console.log(`API Base: ${CONFIG.API_VERSION}`);
+      console.log(`Port: ${PORT}`);
+      console.log(`Serve Static: ${CONFIG.SERVE_STATIC}`);
     });
   })
   .catch((error) => {
-    console.log(error);
+    console.error("[DATABASE CONNECTION ERROR]", error);
+
+    process.exit(1);
   });
