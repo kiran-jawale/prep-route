@@ -11,7 +11,7 @@ import { morganStream } from "./utils/metricsLogger.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 
 import healthController from "./routers/health.route.js";
-
+import metricsRouter from "./controllers/metrics.controller.js";
 import authRouter from "./routers/auth.route.js";
 import subjectRouter from "./routers/subject.route.js";
 import topicRouter from "./routers/topic.route.js";
@@ -72,6 +72,8 @@ app.use(CONFIG.API_VERSION + "/sub-topics", subTopicRouter);
 app.use(CONFIG.API_VERSION + "/tests", testRouter);
 
 app.use(CONFIG.API_VERSION + "/questions", questionRouter);
+
+app.use(CONFIG.API_VERSION + "/metrics", metricsRouter);
 
 app.use(CONFIG.API_VERSION + "/health", (req, res) => {
   res.json({
