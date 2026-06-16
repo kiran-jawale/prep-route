@@ -1,126 +1,6 @@
 {
   "API_REQUESTS": [
     {
-      "timestamp": "2026-06-16T10:50:47.932Z",
-      "log": "GET / | Status: 200 | Size: 462 bytes | Time: 1.299 ms | Date: 2026-06-16T10:50:47.930Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:47.985Z",
-      "log": "GET /assets/index-BZx4H6PW.css | Status: 304 | Size: - bytes | Time: 7.834 ms | Date: 2026-06-16T10:50:47.983Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:47.989Z",
-      "log": "GET /assets/index-Cp9behX7.js | Status: 304 | Size: - bytes | Time: 5.768 ms | Date: 2026-06-16T10:50:47.987Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:48.041Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 4.695 ms | Date: 2026-06-16T10:50:48.038Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:48.210Z",
-      "log": "GET /api/v1/auth/me | Status: 304 | Size: - bytes | Time: 181.316 ms | Date: 2026-06-16T10:50:48.203Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:48.248Z",
-      "log": "GET /company-logo.png | Status: 304 | Size: - bytes | Time: 3.252 ms | Date: 2026-06-16T10:50:48.238Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:48.269Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 13.751 ms | Date: 2026-06-16T10:50:48.267Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:48.485Z",
-      "log": "GET /api/v1/subjects | Status: 304 | Size: - bytes | Time: 227.657 ms | Date: 2026-06-16T10:50:48.483Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:49.101Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | Status: 304 | Size: - bytes | Time: 823.428 ms | Date: 2026-06-16T10:50:49.088Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:49.254Z",
-      "log": "GET /api/v1/tests/dashboard-stats | Status: 304 | Size: - bytes | Time: 984.826 ms | Date: 2026-06-16T10:50:49.248Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:50.134Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 5.031 ms | Date: 2026-06-16T10:50:50.132Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:53.990Z",
-      "log": "GET /dashboard | Status: 200 | Size: 462 bytes | Time: 1.585 ms | Date: 2026-06-16T10:50:53.989Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.002Z",
-      "log": "GET /assets/index-Cp9behX7.js | Status: 304 | Size: - bytes | Time: 0.724 ms | Date: 2026-06-16T10:50:54.000Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.018Z",
-      "log": "GET /assets/index-BZx4H6PW.css | Status: 304 | Size: - bytes | Time: 6.004 ms | Date: 2026-06-16T10:50:54.007Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.051Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.696 ms | Date: 2026-06-16T10:50:54.046Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.184Z",
-      "log": "GET /api/v1/auth/me | Status: 304 | Size: - bytes | Time: 148.083 ms | Date: 2026-06-16T10:50:54.182Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.218Z",
-      "log": "GET /company-logo.png | Status: 304 | Size: - bytes | Time: 1.567 ms | Date: 2026-06-16T10:50:54.195Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.415Z",
-      "log": "GET /api/v1/subjects | Status: 304 | Size: - bytes | Time: 184.484 ms | Date: 2026-06-16T10:50:54.410Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:54.968Z",
-      "log": "GET /api/v1/tests?page=1&limit=20 | Status: 304 | Size: - bytes | Time: 733.661 ms | Date: 2026-06-16T10:50:54.966Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:50:55.107Z",
-      "log": "GET /api/v1/tests/dashboard-stats | Status: 304 | Size: - bytes | Time: 880.666 ms | Date: 2026-06-16T10:50:55.103Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:02.294Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.052 ms | Date: 2026-06-16T10:51:02.291Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:03.400Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.236 ms | Date: 2026-06-16T10:51:03.398Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:04.560Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.297 ms | Date: 2026-06-16T10:51:04.556Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:20.253Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 0.648 ms | Date: 2026-06-16T10:51:20.252Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:22.620Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.770 ms | Date: 2026-06-16T10:51:22.618Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:24.095Z",
-      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 1.158 ms | Date: 2026-06-16T10:51:24.093Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:28.519Z",
-      "log": "GET /assets/index-BZx4H6PW.css | Status: 304 | Size: - bytes | Time: 0.837 ms | Date: 2026-06-16T10:51:28.503Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:28.532Z",
-      "log": "GET /.well-known/appspecific/com.chrome.devtools.json | Status: 200 | Size: 462 bytes | Time: 1.359 ms | Date: 2026-06-16T10:51:28.525Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:31.200Z",
-      "log": "GET /dashboard | Status: 304 | Size: - bytes | Time: 1.335 ms | Date: 2026-06-16T10:51:31.199Z"
-    },
-    {
-      "timestamp": "2026-06-16T10:51:31.297Z",
-      "log": "GET /assets/index-Cp9behX7.js | Status: 304 | Size: - bytes | Time: 16.145 ms | Date: 2026-06-16T10:51:31.246Z"
-    },
-    {
       "timestamp": "2026-06-16T10:51:31.302Z",
       "log": "GET /assets/index-BZx4H6PW.css | Status: 304 | Size: - bytes | Time: 56.504 ms | Date: 2026-06-16T10:51:31.300Z"
     },
@@ -399,6 +279,126 @@
     {
       "timestamp": "2026-06-16T10:56:20.575Z",
       "log": "GET /api/v1/tests?page=1&limit=20 | Status: 304 | Size: - bytes | Time: 527.038 ms | Date: 2026-06-16T10:56:20.572Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:38.912Z",
+      "log": "GET / | Status: 200 | Size: 462 bytes | Time: 98.942 ms | Date: 2026-06-16T11:04:38.879Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.012Z",
+      "log": "GET /assets/index-ttGHIiWj.css | Status: 200 | Size: 30374 bytes | Time: 18.906 ms | Date: 2026-06-16T11:04:38.998Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.230Z",
+      "log": "GET /assets/index-B_NgtRlT.js | Status: 200 | Size: 649006 bytes | Time: 25.867 ms | Date: 2026-06-16T11:04:39.177Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.304Z",
+      "log": "GET /auth/me | Status: 200 | Size: 462 bytes | Time: 22.050 ms | Date: 2026-06-16T11:04:39.293Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.343Z",
+      "log": "GET /favicon.svg | Status: 200 | Size: 462 bytes | Time: 50.090 ms | Date: 2026-06-16T11:04:39.330Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.386Z",
+      "log": "GET /company-logo.png | Status: 304 | Size: - bytes | Time: 18.320 ms | Date: 2026-06-16T11:04:39.379Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:39.441Z",
+      "log": "GET /auth.png | Status: 304 | Size: - bytes | Time: 31.157 ms | Date: 2026-06-16T11:04:39.411Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:42.876Z",
+      "log": "GET /assets/index-ttGHIiWj.css | Status: 304 | Size: - bytes | Time: 1.547 ms | Date: 2026-06-16T11:04:42.873Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:42.975Z",
+      "log": "GET /.well-known/appspecific/com.chrome.devtools.json | Status: 200 | Size: 462 bytes | Time: 4.393 ms | Date: 2026-06-16T11:04:42.971Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:04:51.912Z",
+      "log": "POST /auth/login | Status: 404 | Size: 150 bytes | Time: 2.517 ms | Date: 2026-06-16T11:04:51.907Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.012Z",
+      "log": "GET / | Status: 304 | Size: - bytes | Time: 4.692 ms | Date: 2026-06-16T11:05:45.010Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.141Z",
+      "log": "GET /assets/index-B_NgtRlT.js | Status: 304 | Size: - bytes | Time: 5.767 ms | Date: 2026-06-16T11:05:45.075Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.312Z",
+      "log": "GET /assets/index-ttGHIiWj.css | Status: 304 | Size: - bytes | Time: 141.215 ms | Date: 2026-06-16T11:05:45.195Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.496Z",
+      "log": "GET /.well-known/appspecific/com.chrome.devtools.json | Status: 304 | Size: - bytes | Time: 83.001 ms | Date: 2026-06-16T11:05:45.464Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.660Z",
+      "log": "GET /auth/me | Status: 304 | Size: - bytes | Time: 197.467 ms | Date: 2026-06-16T11:05:45.562Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.685Z",
+      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 262.447 ms | Date: 2026-06-16T11:05:45.668Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.764Z",
+      "log": "GET /auth.png | Status: 304 | Size: - bytes | Time: 28.132 ms | Date: 2026-06-16T11:05:45.743Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:45.791Z",
+      "log": "GET /company-logo.png | Status: 304 | Size: - bytes | Time: 38.676 ms | Date: 2026-06-16T11:05:45.783Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:05:58.127Z",
+      "log": "POST /auth/login | Status: 404 | Size: 150 bytes | Time: 1.303 ms | Date: 2026-06-16T11:05:58.123Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:23.269Z",
+      "log": "GET / | Status: 200 | Size: 462 bytes | Time: 15.228 ms | Date: 2026-06-16T11:08:23.265Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:23.370Z",
+      "log": "GET /assets/index-ttGHIiWj.css | Status: 200 | Size: 30374 bytes | Time: 4.236 ms | Date: 2026-06-16T11:08:23.366Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:23.561Z",
+      "log": "GET /.well-known/appspecific/com.chrome.devtools.json | Status: 200 | Size: 462 bytes | Time: 169.105 ms | Date: 2026-06-16T11:08:23.554Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:23.694Z",
+      "log": "GET /assets/index-f4zNLJm3.js | Status: 200 | Size: 649013 bytes | Time: 24.797 ms | Date: 2026-06-16T11:08:23.584Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:23.805Z",
+      "log": "GET /favicon.svg | Status: 200 | Size: 462 bytes | Time: 31.658 ms | Date: 2026-06-16T11:08:23.802Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:24.030Z",
+      "log": "GET /api/v1/auth/me | Status: 304 | Size: - bytes | Time: 243.445 ms | Date: 2026-06-16T11:08:24.028Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:24.200Z",
+      "log": "GET /company-logo.png | Status: 304 | Size: - bytes | Time: 55.285 ms | Date: 2026-06-16T11:08:24.185Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:24.347Z",
+      "log": "GET /favicon.svg | Status: 304 | Size: - bytes | Time: 217.466 ms | Date: 2026-06-16T11:08:24.338Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:24.520Z",
+      "log": "GET /api/v1/subjects | Status: 304 | Size: - bytes | Time: 166.362 ms | Date: 2026-06-16T11:08:24.517Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:24.867Z",
+      "log": "GET /api/v1/tests?page=1&limit=20 | Status: 304 | Size: - bytes | Time: 561.718 ms | Date: 2026-06-16T11:08:24.863Z"
+    },
+    {
+      "timestamp": "2026-06-16T11:08:25.052Z",
+      "log": "GET /api/v1/tests/dashboard-stats | Status: 304 | Size: - bytes | Time: 728.172 ms | Date: 2026-06-16T11:08:25.048Z"
     }
   ],
   "DB_OPS": {
@@ -1208,10 +1208,6 @@
     ],
     "GET_ALL_SUBJECTS": [
       {
-        "timestamp": "2026-06-15T15:05:40.542Z",
-        "latencyMs": 7.94
-      },
-      {
         "timestamp": "2026-06-15T15:05:42.578Z",
         "latencyMs": 12.4
       },
@@ -1606,13 +1602,13 @@
       {
         "timestamp": "2026-06-16T10:56:20.175Z",
         "latencyMs": 69.96
+      },
+      {
+        "timestamp": "2026-06-16T11:08:24.511Z",
+        "latencyMs": 85.42
       }
     ],
     "GET_MY_PROFILE": [
-      {
-        "timestamp": "2026-06-15T04:22:20.045Z",
-        "latencyMs": 1.99
-      },
       {
         "timestamp": "2026-06-15T04:22:46.186Z",
         "latencyMs": 1.56
@@ -2008,13 +2004,13 @@
       {
         "timestamp": "2026-06-16T10:56:19.998Z",
         "latencyMs": 45.31
+      },
+      {
+        "timestamp": "2026-06-16T11:08:24.020Z",
+        "latencyMs": 113.84
       }
     ],
     "GET_ALL_TESTS": [
-      {
-        "timestamp": "2026-06-15T05:13:59.240Z",
-        "latencyMs": 1143.79
-      },
       {
         "timestamp": "2026-06-15T05:29:26.216Z",
         "latencyMs": 307.28
@@ -2410,6 +2406,10 @@
       {
         "timestamp": "2026-06-16T10:56:20.561Z",
         "latencyMs": 448.8
+      },
+      {
+        "timestamp": "2026-06-16T11:08:24.855Z",
+        "latencyMs": 466.05
       }
     ],
     "CREATE_TEST": [
@@ -3042,10 +3042,6 @@
     ],
     "GET_DASHBOARD_STATS": [
       {
-        "timestamp": "2026-06-15T04:15:17.095Z",
-        "latencyMs": 131.69
-      },
-      {
         "timestamp": "2026-06-15T04:18:08.849Z",
         "latencyMs": 31.47
       },
@@ -3440,6 +3436,10 @@
       {
         "timestamp": "2026-06-16T10:56:20.281Z",
         "latencyMs": 89.17
+      },
+      {
+        "timestamp": "2026-06-16T11:08:25.043Z",
+        "latencyMs": 563.13
       }
     ],
     "UPDATE_MARKING_SCHEME": [
