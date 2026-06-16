@@ -62,7 +62,7 @@ export default function TestsTable({
   }, [page, totalPages, isLoading, onPageChange]);
 
   return (
-    <div className="overflow-hidden rounded-2xl border bg-white">
+    <div className="overflow-hidden rounded-2xl border border-zinc-500 bg-white">
       <table className="w-full">
         <thead>
           <tr className="border-b bg-zinc-50">
@@ -84,7 +84,7 @@ export default function TestsTable({
 
         <tbody>
           {tests.map((test) => (
-            <tr key={test._id} className="border-b">
+            <tr key={test._id} className="border-b border-b-zinc-500 hover:bg-zinc-100 duration-150">
               <td className="px-5 py-4">{test.name}</td>
 
               <td className="px-5 py-4">{test.subjectId?.name}</td>

@@ -1,12 +1,9 @@
-
-
 /**
  * Dashboard module page.
  *
  * Purpose:
  * Coordinates overview metrics, test listing, filtering and dashboard navigation workflows.
  */
-
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -60,22 +57,39 @@ export default function Dashboard() {
     try {
       const response = await testService.getDashboardStats();
 
-      setStats(response.data.data);
-    } catch {}
+      setStats(
+        response?.data?.data ?? {
+          total: 0,
+          live: 0,
+          draft: 0,
+          scheduled: 0,
+          expired: 0,
+        }
+      );
+    } catch {
+      setStats({
+        total: 0,
+        live: 0,
+        draft: 0,
+        scheduled: 0,
+        expired: 0,
+      });
+    }
   };
 
   const loadSubjects = async () => {
     try {
       const response = await subjectService.getAll();
 
-      setSubjects(response.data.data);
-    } catch {}
+      setSubjects(
+        Array.isArray(response?.data?.data) ? response.data.data : []
+      );
+    } catch {
+      setSubjects([]);
+    }
   };
 
-  const loadTests = async (
-    nextPage = 1,
-    replace = false
-  ) => {
+  const loadTests = async (nextPage = 1, replace = false) => {
     try {
       if (replace) {
         setInitialLoading(true);
@@ -83,18 +97,20 @@ export default function Dashboard() {
         setLoadingMore(true);
       }
 
-      const response =
-        await testService.getAll(nextPage, 20);
+      const response = await testService.getAll(nextPage, 20);
 
-      const data = response.data.data;
+      const data = response?.data?.data;
 
+      if (!data) {
+        setTests([]);
+        setTotalPages(1);
+        return;
+      }
       setPage(nextPage);
-
-      setTotalPages(data.totalPages);
-
+      setTotalPages(data?.totalPages ?? 1);
       setTests((prev) => {
         if (replace) {
-          return data.items;
+         return data?.items ?? [];
         }
 
         const map = new Map();
@@ -113,10 +129,7 @@ export default function Dashboard() {
 
   const handlePageChange = useCallback(
     (nextPage: number) => {
-      if (
-        loadingMore ||
-        nextPage > totalPages
-      ) {
+      if (loadingMore || nextPage > totalPages) {
         return;
       }
 
@@ -136,12 +149,8 @@ export default function Dashboard() {
   const filteredTests = useMemo(() => {
     return tests.filter((test) => {
       const matchesSearch =
-        test.name
-          ?.toLowerCase()
-          .includes(search.toLowerCase()) ||
-        test.subjectId?.name
-          ?.toLowerCase()
-          .includes(search.toLowerCase());
+        test.name?.toLowerCase().includes(search.toLowerCase()) ||
+        test.subjectId?.name?.toLowerCase().includes(search.toLowerCase());
 
       const matchesStatus =
         statusFilter === "all"
@@ -151,31 +160,14 @@ export default function Dashboard() {
             : test.status === statusFilter;
 
       const matchesSubject =
-        subjectFilter === "all"
-          ? true
-          : test.subjectId?._id ===
-            subjectFilter;
+        subjectFilter === "all" ? true : test.subjectId?._id === subjectFilter;
 
-      return (
-        matchesSearch &&
-        matchesStatus &&
-        matchesSubject
-      );
+      return matchesSearch && matchesStatus && matchesSubject;
     });
-  }, [
-    tests,
-    search,
-    statusFilter,
-    subjectFilter,
-  ]);
+  }, [tests, search, statusFilter, subjectFilter]);
 
   const handleCardClick = (
-    filter:
-      | "all"
-      | "live"
-      | "draft"
-      | "scheduled"
-      | "expired"
+    filter: "all" | "live" | "draft" | "scheduled" | "expired"
   ) => {
     navigate("/dashboard#tests");
 
@@ -192,14 +184,9 @@ export default function Dashboard() {
             <>
               <DashboardActions />
 
-              <DashboardStats
-                stats={stats}
-                onSelect={handleCardClick}
-              />
+              <DashboardStats stats={stats} onSelect={handleCardClick} />
 
-              <RecentTests
-                tests={tests.slice(0, 5)}
-              />
+              <RecentTests tests={(tests ?? []).slice(0, 5)} />
             </>
           )}
         </>

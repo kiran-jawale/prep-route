@@ -56,7 +56,6 @@ app.use(
   )
 );
 
-
 app.get(CONFIG.API_VERSION, healthController);
 app.get(`${CONFIG.API_VERSION}/health`, healthController);
 app.use(`${CONFIG.API_VERSION}/auth`, authRouter);
@@ -66,7 +65,6 @@ app.use(`${CONFIG.API_VERSION}/sub-topics`, subTopicRouter);
 app.use(`${CONFIG.API_VERSION}/tests`, testRouter);
 app.use(`${CONFIG.API_VERSION}/questions`, questionRouter);
 app.use(`${CONFIG.API_VERSION}/metrics`, metricsRouter);
-
 
 if (CONFIG.SERVE_STATIC) {
   const clientPath = path.resolve(__dirname, "../dist");

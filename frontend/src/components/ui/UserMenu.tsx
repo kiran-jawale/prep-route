@@ -55,7 +55,7 @@ export default function UserMenu({ open }: Props) {
     >
       <button
         onClick={handleLogout}
-        className="w-full px-5 py-3.5 text-left text-sm text-red-500 transition hover:bg-red-50"
+        className="w-full px-5 h-10 py-3.5 text-left text-sm text-red-500 transition hover:bg-red-50"
       >
         Logout
       </button>

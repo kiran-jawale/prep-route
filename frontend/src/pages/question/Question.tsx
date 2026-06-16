@@ -1,5 +1,3 @@
-
-
 /**
  * Question management workflow page.
  *
@@ -7,7 +5,6 @@
  * Handles question creation, editing, draft restoration,
  * validation, bulk import and submission workflow.
  */
-
 
 import { useEffect, useMemo, useState } from "react";
 
@@ -78,6 +75,9 @@ export default function Question() {
       return;
     }
 
+    if (!auth?.user?._id) {
+      return;
+    }
     const remembered = getRememberedTest(auth.user._id, id as string);
 
     if (remembered && remembered.test && remembered.test._id === id) {
@@ -109,7 +109,13 @@ export default function Question() {
 
       const response = await testService.getById(id as string);
 
-      const loadedTest = response.data.data;
+      const loadedTest = response?.data?.data;
+
+      if (!loadedTest) {
+        addToast("Test not found", "error");
+
+        return;
+      }
 
       setTest(loadedTest);
 
@@ -196,9 +202,9 @@ export default function Question() {
         return;
       }
 
-   const finalQuestions = questions.map((question) => ({
-  ...question,
-}));
+      const finalQuestions = questions.map((question) => ({
+        ...question,
+      }));
 
       finalQuestions.forEach((question) => questionSchema.parse(question));
 
@@ -220,10 +226,13 @@ export default function Question() {
       setLoading(false);
     }
   };
-  if (!test) {
-    return null;
-  }
-
+ if (!test) {
+  return (
+    <div className="p-8">
+      Unable to load test
+    </div>
+  );
+}
   return (
     <div className="space-y-8 p-8">
       <TestSummaryCard test={test} />
@@ -231,7 +240,6 @@ export default function Question() {
       <QuestionHeader
         current={activeQuestion || 1}
         total={test.totalQuestions}
-        
         onReset={() => {
           const copy = [...questions];
 

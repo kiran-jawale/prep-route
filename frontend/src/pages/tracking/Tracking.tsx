@@ -1,12 +1,9 @@
-
-
 /**
  * Test lifecycle tracking page.
  *
  * Purpose:
  * Displays current test status, lifecycle progression and publication metadata.
  */
-
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -25,12 +22,16 @@ export default function Tracking() {
 
   const [test, setTest] = useState<Test | null>(null);
 
+  if (!id) {
+    return <div className="p-8">Invalid test id</div>;
+  }
+
   useEffect(() => {
     const loadTest = async () => {
       try {
         const response = await testService.getById(id!);
 
-        setTest(response.data.data);
+        setTest(response?.data?.data ?? null);
       } finally {
         setLoading(false);
       }

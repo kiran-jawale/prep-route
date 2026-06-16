@@ -1,5 +1,3 @@
-
-
 /**
  * Button Component
  *
@@ -14,7 +12,6 @@
  * Purpose:
  * Standardizes action buttons across the application.
  */
-
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
@@ -32,19 +29,40 @@ export default function Button({
   ...props
 }: Props) {
   const variants = {
-    primary: "bg-[#6475F7] hover:bg-[#5455FF] text-white",
-    secondary: "bg-zinc-900 hover:bg-black text-white",
-    danger: "bg-red-600 hover:bg-red-700 text-white",
+    primary:
+      "bg-[#6475F7] hover:bg-[#5B6CF2] text-white border border-[#6475F7]",
+
+    secondary:
+      "bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border border-zinc-200",
+
+    danger: "bg-red-50 hover:bg-red-100 text-red-600 border border-red-200",
   };
+
   return (
     <button
       disabled={disabled || loading}
       className={`
-        inline-flex   items-center  justify-center gap-2    rounded-xl
-        px-5 py-3   font-medium  transition-all  disabled:cursor-wait
-        disabled:opacity-60  ${variants[variant]}
-        ${className}
-      `}
+  inline-flex
+  items-center
+  justify-center
+  gap-2
+
+  rounded-lg
+
+  px-6
+  py-2.5
+
+  text-sm
+  font-medium
+
+  transition-all
+
+  disabled:cursor-wait
+  disabled:opacity-60
+
+  ${variants[variant]}
+  ${className}
+`}
       {...props}
     >
       {loading && (

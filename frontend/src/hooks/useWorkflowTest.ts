@@ -1,5 +1,3 @@
-
-
 /**
  * useWorkflowTest Hook
  *
@@ -11,7 +9,6 @@
  * Purpose:
  * Restores saved workflow state or loads test data from API.
  */
-
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -50,11 +47,18 @@ export const useWorkflowTest = (testId?: string) => {
     if (test && test._id === testId) {
       return;
     }
-    
+
     if (!testId) {
       return;
     }
 
+    if (!auth?.user?._id) {
+      return;
+    }
+
+    if (!auth?.user?._id) {
+      return;
+    }
     const remembered = getRememberedTest(auth.user._id, testId);
 
     if (remembered && remembered.test?._id === testId) {

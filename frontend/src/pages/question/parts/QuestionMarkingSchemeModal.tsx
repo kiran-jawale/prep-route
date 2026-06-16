@@ -39,7 +39,7 @@ export default function QuestionMarkingSchemeModal({ test }: Props) {
     totalQuestions: test.totalQuestions,
   });
 
-  const totalMarks = Number(form.correctMarks) * Number(form.totalQuestions);
+  const totalMarks = Number(form.correctMarks || 0) * Number(form.totalQuestions);
 
   const handleSubmit = async () => {
     try {
@@ -65,6 +65,10 @@ export default function QuestionMarkingSchemeModal({ test }: Props) {
       setLoading(false);
     }
   };
+
+  if (!test) {
+  return null;
+}
 
   return (
     <div className="space-y-6">

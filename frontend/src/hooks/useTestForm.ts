@@ -1,5 +1,3 @@
-
-
 /**
  * useTestForm Hook
  *
@@ -11,7 +9,6 @@
  * Purpose:
  * Centralizes create/edit test form state management.
  */
-
 
 import { useEffect, useState } from "react";
 
@@ -28,24 +25,16 @@ interface Props {
   testId?: string | null;
 }
 
-export default function useTestForm({
-  testId,
-}: Props) {
+export default function useTestForm({ testId }: Props) {
   const [loading, setLoading] = useState(false);
 
-  const [initialLoading, setInitialLoading] =
-    useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
 
-  const [subjects, setSubjects] = useState<
-    Subject[]
-  >([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
 
-  const [topics, setTopics] = useState<Topic[]>(
-    []
-  );
+  const [topics, setTopics] = useState<Topic[]>([]);
 
-  const [subTopics, setSubTopics] =
-    useState<SubTopic[]>([]);
+  const [subTopics, setSubTopics] = useState<SubTopic[]>([]);
 
   const [form, setForm] = useState({
     category: "chapterWise",
@@ -80,19 +69,21 @@ export default function useTestForm({
 
   const initialize = async () => {
     try {
-      const subjectResponse =
-        await subjectService.getAll();
+      const subjectResponse = await subjectService.getAll();
 
-      setSubjects(subjectResponse.data.data);
+      setSubjects(subjectResponse?.data?.data ?? []);
 
       if (!testId) {
         return;
       }
 
-      const testResponse =
-        await testService.getById(testId);
+      const testResponse = await testService.getById(testId);
 
-      const test = testResponse.data.data;
+      const test = testResponse?.data?.data;
+
+      if (!test) {
+        return;
+      }
 
       setForm({
         category: test.category,
@@ -101,12 +92,10 @@ export default function useTestForm({
           typeof test.subjectId === "string"
             ? test.subjectId
             : test.subjectId._id,
-        topics: test.topics.map((topic: any) =>
-          typeof topic === "string"
-            ? topic
-            : topic._id
+        topics: (test.topics ?? []).map((topic: any) =>
+          typeof topic === "string" ? topic : topic._id
         ),
-        subTopics: test.subTopics,
+        subTopics: test.subTopics ?? [],
         difficulty: test.difficulty,
         correctMarks: test.correctMarks,
         wrongMarks: test.wrongMarks,
@@ -120,28 +109,19 @@ export default function useTestForm({
     }
   };
 
-  const loadTopics = async (
-    subjectId: string
-  ) => {
-    const response =
-      await topicService.getBySubject(subjectId);
+  const loadTopics = async (subjectId: string) => {
+    const response = await topicService.getBySubject(subjectId);
 
-    setTopics(response.data.data);
+    setTopics(response?.data?.data ?? []);
   };
 
-  const loadSubTopics = async (
-    topicId: string
-  ) => {
-    const response =
-      await subTopicService.getByTopic(topicId);
+  const loadSubTopics = async (topicId: string) => {
+    const response = await subTopicService.getByTopic(topicId);
 
-    setSubTopics(response.data.data);
+    setSubTopics(response?.data?.data ?? []);
   };
 
-  const updateField = (
-    field: string,
-    value: any
-  ) => {
+  const updateField = (field: string, value: any) => {
     setForm((prev) => ({
       ...prev,
       [field]: value,

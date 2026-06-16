@@ -1,5 +1,3 @@
-
-
 /**
  * Test publishing page.
  *
@@ -7,7 +5,6 @@
  * Manages publication mode, scheduling and availability
  * configuration before making a test live.
  */
-
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -59,7 +56,7 @@ export default function Publish() {
       return;
     }
 
-    if (test.publishMode) {
+    if (test?.publishMode) {
       setPublishMode(test.publishMode);
     }
 
@@ -138,13 +135,9 @@ export default function Publish() {
 
       await testService.update(id, {
         publishMode,
-
         status: publishMode === "immediate" ? "live" : "scheduled",
-
         scheduledAt,
-
         availableUntil: buildAvailableUntil(),
-
         publishedAt:
           publishMode === "immediate" ? new Date().toISOString() : null,
       });
@@ -172,7 +165,7 @@ export default function Publish() {
       <Breadcrumb items={["Test Creation", "Publish Test"]} />
 
       <PublishProgress
-        completed={questions.length}
+        completed={questions?.length ?? 0}
         total={test.totalQuestions}
       />
 

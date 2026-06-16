@@ -1,5 +1,3 @@
-
-
 /**
  * Test creation and editing page.
  *
@@ -7,7 +5,6 @@
  * Manages test configuration, workflow initialization,
  * creation and update operations.
  */
-
 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -100,14 +97,19 @@ export default function Test() {
     try {
       const subjectResponse = await subjectService.getAll();
 
-      setSubjects(subjectResponse.data.data);
-
+      setSubjects(subjectResponse?.data?.data ?? []);
       if (!testId) {
         return;
       }
 
       const testResponse = await testService.getById(testId);
-      const test = testResponse.data.data;
+      const test = testResponse?.data?.data;
+
+      if (!test) {
+        addToast("Test not found", "error");
+
+        return;
+      }
       if (currentTest && currentTest._id !== test._id) {
         resetTest();
       }
@@ -117,7 +119,7 @@ export default function Test() {
           ? test.subjectId
           : test.subjectId._id;
 
-      const topicIds: string[] = test.topics.map((topic: Topic) =>
+      const topicIds: string[] = (test.topics ?? []).map((topic: Topic) =>
         typeof topic === "string" ? topic : topic._id
       );
 
@@ -152,8 +154,9 @@ export default function Test() {
         name: test.name,
         subjectId,
         topics: topicIds,
-        subTopics: test.subTopics.map((subTopic: string | { _id: string }) =>
-          typeof subTopic === "string" ? subTopic : subTopic._id
+        subTopics: (test.subTopics ?? []).map(
+          (subTopic: string | { _id: string }) =>
+            typeof subTopic === "string" ? subTopic : subTopic._id
         ),
         difficulty: test.difficulty,
         correctMarks: test.correctMarks,
@@ -171,7 +174,7 @@ export default function Test() {
   const loadTopics = async () => {
     const response = await topicService.getBySubject(form.subjectId);
 
-    setTopics(response.data.data);
+    setTopics(response?.data?.data ?? []);
   };
 
   const loadSubTopics = async (topicIds: string[]) => {
@@ -183,8 +186,12 @@ export default function Test() {
     const responses = await Promise.all(
       topicIds.map((topicId: string) => subTopicService.getByTopic(topicId))
     );
-    const allSubTopics = responses.flatMap((response) => response.data.data);
+
+    const allSubTopics = responses.flatMap(
+      (response) => response?.data?.data ?? []
+    );
     const mapping: Record<string, string> = {};
+
     responses.forEach((response, index) => {
       response.data.data.forEach((subTopic: SubTopic) => {
         mapping[subTopic._id] = topicIds[index];
