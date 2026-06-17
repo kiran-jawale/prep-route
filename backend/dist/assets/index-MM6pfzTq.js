@@ -129,7 +129,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   disabled:cursor-wait
   disabled:opacity-60
 
-  ${{primary:`bg-[#6475F7] hover:bg-[#5B6CF2] text-white border border-[#6475F7]`,secondary:`bg-zinc-200 hover:bg-zinc-200 text-zinc-700 border border-zinc-200`,danger:`bg-red-50 hover:bg-red-600 text-gray-100 border border-red-200`}[n]}
+  ${{primary:`bg-[#6475F7] hover:bg-[#5B6CF2] text-white border border-[#6475F7]`,secondary:`bg-zinc-200 hover:bg-zinc-200 text-zinc-700 border border-zinc-200`,danger:`bg-red-500 hover:bg-red-600 text-gray-100 border border-red-200`}[n]}
   ${r}
 `,...a,children:[t&&(0,V.jsx)(`span`,{className:`\r
             h-4      w-4   animate-spin   border-2  border-white border-t-transparent\r
