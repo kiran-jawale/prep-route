@@ -1,5 +1,3 @@
-
-
 /**
  * Test filtering controls.
  *
@@ -20,7 +18,6 @@
  * Provides search and filtering controls for dashboard test listings.
  */
 
-
 import SearchBar from "../../../components/shared/SearchBar";
 import Select from "../../../components/ui/Select";
 import Button from "../../../components/ui/Button";
@@ -32,19 +29,12 @@ interface Subject {
 
 interface Props {
   search: string;
-
   status: string;
-
   subject: string;
-
   subjects: Subject[];
-
   onSearch: (value: string) => void;
-
   onStatusChange: (value: string) => void;
-
   onSubjectChange: (value: string) => void;
-
   onRefresh: () => void;
 }
 
@@ -59,8 +49,8 @@ export default function TestsFilters({
   onRefresh,
 }: Props) {
   return (
-    <div className="flex gap-4">
-      <div className="flex-1">
+    <div className="flex items-center gap-3">
+      <div className="flex-1 min-w-0">
         <SearchBar
           value={search}
           onChange={onSearch}
@@ -68,41 +58,25 @@ export default function TestsFilters({
         />
       </div>
 
-      <div className="w-48">
+      <div className="w-40 shrink-0">
         <Select
           value={status}
           onChange={onStatusChange}
           options={[
-            {
-              label: "All Status",
-              value: "all",
-            },
-            {
-              label: "Live",
-              value: "live",
-            },
-            {
-              label: "Draft",
-              value: "draft",
-            },
-            {
-              label: "Expired",
-              value: "expired",
-            },
+            { label: "All Status", value: "all" },
+            { label: "Live", value: "live" },
+            { label: "Draft", value: "draft" },
+            { label: "Expired", value: "expired" },
           ]}
         />
       </div>
 
-      <div className="w-56">
+      <div className="w-48 shrink-0">
         <Select
           value={subject}
           onChange={onSubjectChange}
           options={[
-            {
-              label: "All Subjects",
-              value: "all",
-            },
-
+            { label: "All Subjects", value: "all" },
             ...subjects.map((subject) => ({
               label: subject.name,
               value: subject._id,
@@ -111,7 +85,7 @@ export default function TestsFilters({
         />
       </div>
 
-      <Button variant="secondary" onClick={onRefresh}>
+      <Button variant="primary" onClick={onRefresh}>
         Refresh
       </Button>
     </div>
